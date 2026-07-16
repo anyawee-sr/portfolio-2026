@@ -1,0 +1,11 @@
+/* .sbdocs.sbdocs-wrapper is Storybook's own full-page Docs background
+   (from @storybook/addon-docs' DocsPageWrapper, min-height: 100vh) — we
+   don't control that element via JSX, so the surface-dotted pattern (see
+   globals.css) is repeated here as plain CSS against the same tokens,
+   rather than applied as a Tailwind utility. Two chained classes give
+   this a higher specificity than Storybook's own emotion-generated rule. */
+.sbdocs.sbdocs-wrapper {
+  background-color: var(--color-surface-dotted);
+  background-image: radial-gradient(var(--dot-tint) 1px, transparent 1px);
+  background-size: var(--spacing-dot-cell) var(--spacing-dot-cell);
+}

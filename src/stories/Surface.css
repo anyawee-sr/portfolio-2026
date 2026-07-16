@@ -1,0 +1,12 @@
+.surface-tokens-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-card-gap);
+}
+
+.surface-preview-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-card-gap);
+  padding: var(--spacing-card-gap);
+}
