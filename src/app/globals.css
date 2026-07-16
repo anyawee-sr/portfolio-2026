@@ -14,9 +14,8 @@
   --neutral-500: #6B615C; /* warm gray */
   --neutral-50: #FEF6F3; /* cream */
   --neutral-25: #FDFAF6; /* card white */
-  --neutral-20: #FCFCF8; /* graph-paper page base */
+  --neutral-20: #FCFCF8; /* dotted-surface base */
   --pink-100: #FDE6E0; /* pink tint */
-  --blue-100: #C9D6EA; /* graph-paper grid line tint */
 
   /* shadow primitives */
   --shadow-xs: 0 6px 14px rgba(90, 30, 20, 0.1);
@@ -24,6 +23,9 @@
   --shadow-md: 0 8px 16px rgba(90, 20, 10, 0.35);
   --shadow-lg: 0 18px 30px rgba(90, 30, 20, 0.22);
   --shadow-xl: 0 24px 48px rgba(120, 40, 25, 0.14);
+
+  /* pattern primitives */
+  --dot-tint: rgba(107, 97, 92, 0.35); /* neutral-500 at low opacity — surface-dotted fill */
 }
 
 /* ============================================================
@@ -40,9 +42,8 @@
   --color-text-secondary: var(--neutral-500);
   --color-surface-base: var(--neutral-50);
   --color-surface-card: var(--neutral-25);
-  --color-surface-paper: var(--neutral-20);
+  --color-surface-dotted: var(--neutral-20);
   --color-surface-accent: var(--pink-100);
-  --color-border-grid: var(--blue-100);
 
   /* shadow */
   --shadow-swatch: var(--shadow-xs);
@@ -72,6 +73,7 @@
   --spacing-section-y: 84px;
   --spacing-content-max: 1160px;
   --spacing-grid-cell: 46px;
+  --spacing-dot-cell: 20px;
 }
 
 /* ============================================================
@@ -165,6 +167,19 @@
   line-height: 1;
   letter-spacing: 0.16em;
   font-weight: 700;
+}
+
+/* ============================================================
+   SURFACE PATTERNS — custom `@utility surface-*` classes that
+   bundle a background-color with a repeating background-image,
+   the same "bundle related declarations into one class" approach
+   as `type-*` above. Components should reach for these instead of
+   pairing a bg-* color utility with a hand-rolled background-image.
+   ============================================================ */
+@utility surface-dotted {
+  background-color: var(--color-surface-dotted);
+  background-image: radial-gradient(var(--dot-tint) 1px, transparent 1px);
+  background-size: var(--spacing-dot-cell) var(--spacing-dot-cell);
 }
 
 body {

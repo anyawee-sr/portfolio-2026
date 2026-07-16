@@ -148,7 +148,7 @@ h1  Anyawee Sr. / Frontend Engineer     [type-display]
 | `<div>` NAVIGATION / LEGAL / SOCIAL | `<h3>`                          |
 | ลิงก์เมนู + ลิงก์ฟุตเตอร์ (ลอย ๆ)   | `<ul><li><a>`                   |
 | ไม่มี `<main>`                      | เพิ่ม `<main>`                  |
-| `<canvas>` (พื้นกราฟ)               | CSS `repeating-linear-gradient` |
+| `<canvas>` (พื้นกราฟ)               | `background-image` (asset)      |
 | `<helmet>` ใน body                  | ย้ายไป `<head>` / metadata API  |
 | `<br>` ในหัวข้อ                     | ลบทิ้ง ใช้ `max-w-[Nch]`        |
 
@@ -345,6 +345,11 @@ component นี้คนมักทำ "กดได้แต่ screen reader
 utility เดิมของ Tailwind (`font-bold`, `leading-tight`, `tracking-wide` ฯลฯ) **ยังใช้ได้ปกติ**
 เป็น escape hatch สำหรับกรณีที่ `type-*` ไม่ครอบคลุม — ไม่ต้องสร้างชุด utility คู่ขนานเอง
 ถ้าเจอ pattern ที่ใช้ซ้ำบ่อยจนควรมี token เฉพาะ ให้ไปเพิ่มใน `globals.css` แทนการ hand-roll
+
+เดิมพันเดียวกันนี้ใช้กับพื้นหลังแบบมีลาย: `surface-*` (`@utility` เช่นกัน) มัด `background-color` +
+`background-image` + `background-size` ไว้ในคลาสเดียว (เช่น `surface-dotted` = พื้นสี `--color-surface-dotted`
+บวกลายจุดจาก `--dot-tint`) — **ห้าม** เอา `bg-*` มาผสมกับ `background-image` เขียนเองใน component
+ถ้าต้องการพื้นลายแบบใหม่ที่ยังไม่มี ให้เพิ่ม `@utility surface-*` ตัวใหม่ใน `globals.css` ตามรูปแบบเดียวกัน
 
 ---
 
