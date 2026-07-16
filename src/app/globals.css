@@ -185,7 +185,13 @@
 body {
   background: var(--color-surface-base);
   color: var(--color-text-primary);
-  font-family: var(--font-sans);
+  /* NOT `font-family: var(--font-sans)` — --font-sans is a default
+     Tailwind v4 theme key; redefining it under `@theme inline` (above)
+     makes Tailwind inline the value into the `font-sans` utility but
+     never emit the custom property to :root. var(--font-sans) here
+     would then be invalid-at-computed-value-time and the whole
+     declaration drops, falling back to Tailwind's own default stack. */
+  @apply font-sans;
   -webkit-font-smoothing: antialiased;
 }
 
