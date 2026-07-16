@@ -1,26 +1,196 @@
 @import "tailwindcss";
 
+/* ============================================================
+   PRIMITIVES — raw values with no meaning attached. Never
+   reference these directly from a component; alias them via
+   the semantic layer below instead.
+   Source: design-ref/design-tokens-spec.dc.html
+   ============================================================ */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* color primitives */
+  --red-600: #B51D00; /* brand base — the one CI red */
+  --red-700: #8C1600; /* hover/pressed shade of red.600 */
+  --neutral-900: #16100D; /* near-black ink */
+  --neutral-500: #6B615C; /* warm gray */
+  --neutral-50: #FEF6F3; /* cream */
+  --neutral-25: #FDFAF6; /* card white */
+  --neutral-20: #FCFCF8; /* graph-paper page base */
+  --pink-100: #FDE6E0; /* pink tint */
+  --blue-100: #C9D6EA; /* graph-paper grid line tint */
+
+  /* shadow primitives */
+  --shadow-xs: 0 6px 14px rgba(90, 30, 20, 0.1);
+  --shadow-sm: 0 4px 8px rgba(90, 20, 10, 0.28);
+  --shadow-md: 0 8px 16px rgba(90, 20, 10, 0.35);
+  --shadow-lg: 0 18px 30px rgba(90, 30, 20, 0.22);
+  --shadow-xl: 0 24px 48px rgba(120, 40, 25, 0.14);
 }
 
+/* ============================================================
+   SEMANTIC TOKENS — alias a primitive to a purpose (what it's
+   *for*), exposed to Tailwind so components can consume them
+   as utilities (bg-surface-base, text-brand, shadow-card, ...).
+   Components should always reach for these, never a primitive.
+   ============================================================ */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* color */
+  --color-brand: var(--red-600);
+  --color-brand-hover: var(--red-700);
+  --color-text-primary: var(--neutral-900);
+  --color-text-secondary: var(--neutral-500);
+  --color-surface-base: var(--neutral-50);
+  --color-surface-card: var(--neutral-25);
+  --color-surface-paper: var(--neutral-20);
+  --color-surface-accent: var(--pink-100);
+  --color-border-grid: var(--blue-100);
+
+  /* shadow */
+  --shadow-swatch: var(--shadow-xs);
+  --shadow-sticker: var(--shadow-sm);
+  --shadow-button: var(--shadow-md);
+  --shadow-card: var(--shadow-lg);
+  --shadow-shell: var(--shadow-xl);
+
+  /* radius */
+  --radius-sm: 4px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --radius-pill: 999px;
+  --radius-circle: 50%;
+
+  /* font family — Montserrat primary, Bai Jamjuree (Thai) then
+     system fallbacks, in that order */
+  --font-sans:
+    var(--font-montserrat), var(--font-bai-jamjuree), ui-sans-serif, system-ui,
+    sans-serif;
+
+  /* spacing — named concepts, not plain N * 4px multiples (the
+     4px base scale itself is already covered by Tailwind's
+     default spacing multiplier, which equals our primitive scale) */
+  --spacing-nav-gap: 32px;
+  --spacing-card-gap: 14px;
+  --spacing-section-y: 84px;
+  --spacing-content-max: 1160px;
+  --spacing-grid-cell: 46px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ============================================================
+   TYPE SCALE — custom `@utility type-*` classes (not Tailwind's
+   `--text-*` namespace: that namespace has no `--text-wrap`
+   suffix, so it can't bundle `text-wrap: balance`). Each class
+   bundles size + weight + line-height + tracking (+ balance on
+   display–h4) into one utility — components should never write
+   font-size/font-weight/line-height by hand (see rule #2).
+
+   Fluid sizes (display, h1, h4) use clamp() interpolated between
+   320px and 1240px viewport — 320 is the a11y-standard minimum
+   target width, 1240 matches this design's real container width
+   (`--spacing-content-max`). All values are rem so they respect
+   the user's browser font-size preference.
+   ============================================================ */
+@utility type-display {
+  /* 48px -> 96px across 320px -> 1240px viewport */
+  font-size: clamp(3rem, 1.9565rem + 5.2174vw, 6rem);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  font-weight: 500;
+  text-wrap: balance;
+}
+
+@utility type-h1 {
+  /* 40px -> 54px across 320px -> 1240px viewport */
+  font-size: clamp(2.5rem, 2.1957rem + 1.5217vw, 3.375rem);
+  line-height: 1.1;
+  letter-spacing: 0.02em;
+  font-weight: 800;
+  text-wrap: balance;
+}
+
+@utility type-h2 {
+  font-size: 2.125rem; /* 34px */
+  line-height: 1.1;
+  letter-spacing: 0.02em;
+  font-weight: 800;
+  text-wrap: balance;
+}
+
+@utility type-h3 {
+  font-size: 1.5rem; /* 24px */
+  line-height: 1.08;
+  letter-spacing: 0.02em;
+  font-weight: 800;
+  text-wrap: balance;
+}
+
+@utility type-h4 {
+  /* 13px -> 17px across 320px -> 1240px viewport */
+  font-size: clamp(0.8125rem, 0.7255rem + 0.4348vw, 1.0625rem);
+  line-height: 1.2;
+  letter-spacing: 0.04em;
+  font-weight: 700;
+  text-wrap: balance;
+}
+
+@utility type-body-l {
+  font-size: 1.0625rem; /* 17px */
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+@utility type-body-m {
+  font-size: 0.9375rem; /* 15px */
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+@utility type-body-s {
+  /* mobile comp hand-tweaks this to 9px in a couple of spots, but
+     the spec table lists a single fixed 10px with no range — spec
+     wins, mobile comp treated as an unintentional pixel-push */
+  font-size: 0.625rem; /* 10px */
+  line-height: 1.55;
+  letter-spacing: 0.04em;
+  font-weight: 600;
+}
+
+@utility type-label {
+  font-size: 0.75rem; /* 12px */
+  line-height: 1;
+  letter-spacing: 0.18em;
+  font-weight: 700;
+}
+
+@utility type-caption {
+  font-size: 0.6875rem; /* 11px */
+  line-height: 1;
+  letter-spacing: 0.16em;
+  font-weight: 700;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-surface-base);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--color-brand);
+}
+
+::selection {
+  background: var(--color-brand);
+  color: var(--color-surface-base);
+}
+
+/* accessibility floor — every animation in this project must
+   respect this (googly eyes, hover transforms, menu transitions) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
