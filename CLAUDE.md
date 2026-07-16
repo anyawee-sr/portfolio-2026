@@ -334,6 +334,11 @@ component นี้คนมักทำ "กดได้แต่ screen reader
 - **ฟอนต์: โหลดผ่าน `next/font/google`** (Montserrat + Bai Jamjuree) — self-host จริงตอน build
   (ไฟล์ฟอนต์ถูก host จาก domain เราเอง ไม่มี request ไป Google ตอน runtime) `next/font` จัดการ
   `size-adjust` fallback ให้อัตโนมัติ ไม่ต้องเขียน `@font-face` เอง
+  ⚠️ `next/font` ติด font variable ไว้ที่ `<html>` ใน `layout.tsx` เท่านั้น — Storybook ไม่ได้ผ่าน
+  root layout นี้ จึงต้อง apply `fontVariables` (จาก `src/app/fonts.ts`) กับ `<body>` เองใน
+  `.storybook/preview.tsx` ด้วย ทั้งสองไฟล์ import การเรียก `Montserrat({...})`/
+  `Bai_Jamjuree({...})` จาก `fonts.ts` ที่เดียว — แก้ font weight/subset ที่นั่นที่เดียวพอ
+  ไม่ต้อง sync มือ
 - ภาษา: **อังกฤษเท่านั้น** ตอนนี้ — ภาษาไทยตามมาทีหลัง (Bai Jamjuree โหลด `thai` subset ไว้รอใน
   `layout.tsx` แล้ว แต่ยังไม่มี THAI MIGRATION LEDGER อย่างเป็นทางการ — เพิ่มใน `globals.css`
   เมื่อเริ่ม migration จริง)
