@@ -363,8 +363,9 @@ utility เดิมของ Tailwind (`font-bold`, `leading-tight`, `tracking-
 ใช้ [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) เสมอ:
 `<type>[optional scope]: <description>`
 
-**กระชับ ไม่เกิน 2 บรรทัด** — บรรทัดแรก (header) พอสำหรับเกือบทุกกรณี ถ้าจำเป็นต้องมีบรรทัดที่สอง
-ให้เป็นรายละเอียดสั้นๆ เสริม ไม่ใช่ paragraph อธิบายยาว
+**กระชับใน 1 บรรทัดเดียวเสมอ** — บรรทัด header อย่างเดียว ห้ามมีบรรทัดรายละเอียดเพิ่ม
+
+**ถามยืนยัน commit message กับ user ก่อน commit ทุกครั้ง** ห้าม commit เองโดยไม่ถาม
 
 type ที่ใช้บ่อยในโปรเจกต์นี้: `feat` `fix` `docs` `style` `refactor` `chore`
 
