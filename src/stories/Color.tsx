@@ -5,25 +5,18 @@ import './Color.css';
 export interface ColorToken {
   /** CSS custom property backing the token, e.g. "--color-brand" */
   cssVar: string;
-  /** Tailwind utility class used to paint this token as a background */
-  utility: string;
-  /** Tailwind utility class for this token's hover state, if it has one (e.g. "bg-brand-hover") */
-  hoverUtility?: string;
   /**
-   * The `hover:` variant of hoverUtility, written out in full (e.g. "hover:bg-brand-hover").
-   * Tailwind's scanner only detects class names that appear as one literal token in source —
-   * building this via `hover:${hoverUtility}` at render time is invisible to it.
+   * Tailwind utility class used to paint this token as a background. Written out in full
+   * (not derived from cssVar) because Tailwind's scanner only detects class names that
+   * appear as one literal token in source — building "bg-" + name at render time is
+   * invisible to it and the utility's CSS never gets generated.
    */
-  hoverClassName?: string;
+  utility: string;
 }
 
 export const SEMANTIC_COLOR_TOKENS: ColorToken[] = [
-  {
-    cssVar: '--color-brand',
-    utility: 'bg-brand',
-    hoverUtility: 'bg-brand-hover',
-    hoverClassName: 'hover:bg-brand-hover',
-  },
+  { cssVar: '--color-brand', utility: 'bg-brand' },
+  { cssVar: '--color-brand-hover', utility: 'bg-brand-hover' },
   { cssVar: '--color-text-primary', utility: 'bg-text-primary' },
   { cssVar: '--color-text-secondary', utility: 'bg-text-secondary' },
   { cssVar: '--color-surface-base', utility: 'bg-surface-base' },
@@ -34,6 +27,7 @@ export const SEMANTIC_COLOR_TOKENS: ColorToken[] = [
 function rgbToHex(rgb: string): string {
   const channels = rgb.match(/\d+/g);
   if (!channels) return rgb;
+
   const [r, g, b] = channels.map(Number);
   return `#${[r, g, b].map((channel) => channel.toString(16).padStart(2, '0').toUpperCase()).join('')}`;
 }
@@ -43,36 +37,25 @@ function useComputedHex(ref: RefObject<HTMLElement | null>): string {
 
   useEffect(() => {
     if (!ref.current) return;
+
     setHex(rgbToHex(getComputedStyle(ref.current).backgroundColor));
   }, [ref]);
 
   return hex;
 }
 
-function ColorRow({ cssVar, utility, hoverUtility, hoverClassName }: ColorToken) {
+function ColorRow({ cssVar, utility }: ColorToken) {
   const chipRef = useRef<HTMLDivElement>(null);
   const hex = useComputedHex(chipRef);
-  const hoverChipRef = useRef<HTMLDivElement>(null);
-  const hoverHex = useComputedHex(hoverChipRef);
   const name = cssVar.replace(/^--/, '');
-
-  const chipClassName = hoverClassName
-    ? `swatch-chip rounded-sm transition-colors ${utility} ${hoverClassName}`
-    : `swatch-chip rounded-sm ${utility}`;
 
   return (
     <tr className="color-token-row">
       <td className="color-token-cell">
-        <div ref={chipRef} aria-hidden="true" className={chipClassName} />
-        {hoverUtility && <div ref={hoverChipRef} aria-hidden="true" className={`swatch-chip-probe ${hoverUtility}`} />}
+        <div ref={chipRef} aria-hidden="true" className={`swatch-chip rounded-circle ${utility}`} />
       </td>
       <td className="color-token-cell type-body-m text-text-primary">{name}</td>
-      <td className="color-token-cell type-body-m text-text-primary">
-        {hex || '—'}
-        {hoverUtility && (
-          <span className="type-caption text-text-secondary"> → hover {hoverHex || '—'}</span>
-        )}
-      </td>
+      <td className="color-token-cell type-body-m text-text-primary">{hex || '—'}</td>
     </tr>
   );
 }
@@ -86,14 +69,14 @@ export function Palette({ tokens }: PaletteProps) {
     <table className="color-token-table">
       <thead>
         <tr>
-          <th scope="col" className="type-label text-brand">
-            SWATCH
+          <th scope="col" className="type-label text-brand uppercase">
+            Swatch
           </th>
-          <th scope="col" className="type-label text-brand">
-            NAME
+          <th scope="col" className="type-label text-brand uppercase">
+            Name
           </th>
-          <th scope="col" className="type-label text-brand">
-            HEX
+          <th scope="col" className="type-label text-brand uppercase">
+            Hex
           </th>
         </tr>
       </thead>
@@ -108,9 +91,10 @@ export function Palette({ tokens }: PaletteProps) {
 
 export function ColorTokens() {
   return (
+    // TODO: will update
     <section aria-labelledby="color-tokens-title" className="color-tokens-page">
       <h2 id="color-tokens-title" className="type-h2 text-text-primary">
-        Semantic Color Tokens
+        Colors
       </h2>
       <p className="type-body-m text-text-secondary max-w-[60ch]">
         Every swatch reads its color live from the token defined in globals.css — nothing here is a

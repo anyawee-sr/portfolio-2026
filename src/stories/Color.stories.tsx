@@ -1,3 +1,4 @@
+// TODO: will hide a title `Colors`
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 
 import { ColorTokens } from '@/stories/Color';
@@ -12,8 +13,9 @@ const meta = {
 } satisfies Meta<typeof ColorTokens>;
 
 export default meta;
+
 type Story = StoryObj<typeof meta>;
 
-export const Semantic: Story = {
+export const Color: Story = {
   tags: ['!dev'],
 };

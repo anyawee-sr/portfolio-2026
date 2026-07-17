@@ -12,6 +12,15 @@
 .color-token-table th {
   text-align: left;
   padding-block: var(--spacing-card-gap);
+  padding-inline-start: 1.5rem;
+  background-image: radial-gradient(
+    circle,
+    var(--color-brand) 0.5px,
+    transparent 0.5px
+  );
+  background-size: 8px 1px;
+  background-position: bottom;
+  background-repeat: repeat-x;
 }
 
 .color-token-cell {
@@ -19,15 +28,11 @@
   vertical-align: middle;
 }
 
-.swatch-chip {
-  width: 3rem;
-  height: 2rem;
+.color-token-cell:first-child {
+  padding-inline-start: 2.5rem;
 }
 
-.swatch-chip-probe {
-  position: absolute;
-  width: 0;
-  height: 0;
-  overflow: hidden;
-  pointer-events: none;
+.swatch-chip {
+  width: 2.5rem;
+  height: 2.5rem;
 }
