@@ -14,7 +14,7 @@ export interface ColorToken {
   utility: string;
 }
 
-export const SEMANTIC_COLOR_TOKENS: ColorToken[] = [
+export const COLOR_TOKENS: ColorToken[] = [
   { cssVar: '--color-brand', utility: 'bg-brand' },
   { cssVar: '--color-brand-hover', utility: 'bg-brand-hover' },
   { cssVar: '--color-text-primary', utility: 'bg-text-primary' },
@@ -60,11 +60,11 @@ function ColorRow({ cssVar, utility }: ColorToken) {
   );
 }
 
-export interface PaletteProps {
+export interface IColorTableProps {
   tokens: ColorToken[];
 }
 
-export function Palette({ tokens }: PaletteProps) {
+export function ColorTable({ tokens }: IColorTableProps) {
   return (
     <table className="color-token-table">
       <thead>
@@ -100,7 +100,7 @@ export function ColorTokens() {
         Every swatch reads its color live from the token defined in globals.css — nothing here is a
         hardcoded hex value.
       </p>
-      <Palette tokens={SEMANTIC_COLOR_TOKENS} />
+      <ColorTable tokens={COLOR_TOKENS} />
     </section>
   );
 }
