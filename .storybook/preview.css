@@ -1,3 +1,5 @@
+@import "../src/app/globals.css";
+
 /* .sbdocs.sbdocs-wrapper is Storybook's own full-page Docs background
    (from @storybook/addon-docs' DocsPageWrapper, min-height: 100vh) — we
    don't control that element via JSX, so the surface-dotted pattern (see
