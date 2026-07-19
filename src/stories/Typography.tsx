@@ -23,7 +23,7 @@ function TypographyRow({ className }: ITypographyToken) {
     <tr className="type-token-row">
       <td className="type-token-cell">
         <span className={`${className} text-text-primary`}>
-          Aa<span lang="th">กข</span>
+          {className.replace(/^type-/, '')}
         </span>
       </td>
       <td className="type-token-cell type-body-m text-text-primary">{className}</td>
