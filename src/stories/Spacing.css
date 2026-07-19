@@ -1,0 +1,28 @@
+.spacing-tokens-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-card-gap);
+}
+
+.spacing-token-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.spacing-token-table th {
+  text-align: left;
+  padding-block: var(--spacing-card-gap);
+  background-image: radial-gradient(
+    circle,
+    var(--color-brand) 0.5px,
+    transparent 0.5px
+  );
+  background-size: 8px 1px;
+  background-position: bottom;
+  background-repeat: repeat-x;
+}
+
+.spacing-token-cell {
+  padding-block: var(--spacing-card-gap);
+  vertical-align: middle;
+}

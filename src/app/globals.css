@@ -71,7 +71,6 @@
   --spacing-nav-gap: 32px;
   --spacing-card-gap: 14px;
   --spacing-section-y: 84px;
-  --spacing-content-max: 1160px;
   --spacing-grid-cell: 46px;
   --spacing-dot-cell: 20px;
 }
@@ -86,9 +85,9 @@
 
    Fluid sizes (display, h1, h4) use clamp() interpolated between
    320px and 1240px viewport — 320 is the a11y-standard minimum
-   target width, 1240 matches this design's real container width
-   (`--spacing-content-max`). All values are rem so they respect
-   the user's browser font-size preference.
+   target width, 1240 matches this design's real container width.
+   All values are rem so they respect the user's browser
+   font-size preference.
    ============================================================ */
 @utility type-display {
   /* 48px -> 96px across 320px -> 1240px viewport */
