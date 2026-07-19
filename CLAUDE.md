@@ -18,7 +18,7 @@
 
 ---
 
-## กฎเหล็ก 5 ข้อ
+## กฎเหล็ก 6 ข้อ
 
 ### 1. ห้าม arbitrary value เด็ดขาด
 
@@ -90,6 +90,18 @@ typography มาจาก `type-*` utility เท่านั้น ถ้า�
 ### 5. ห้ามแตะ `design-ref/`
 
 อ่านเป็นต้นแบบได้ **ห้าม import ห้าม copy โค้ดตรง ๆ** เขียนใหม่ตาม convention ของ repo เสมอ
+
+### 6. `interface` ทุกตัวต้องขึ้นต้นด้วย `I`
+
+```ts
+// ❌ ห้าม
+export interface CaseStudy { ... }
+
+// ✅ ถูก
+export interface ICaseStudy { ... }
+```
+
+กฎนี้ใช้กับ `interface` เท่านั้น — union `type` (เช่น `type Link = ... | ...`) **ไม่ติด** prefix นี้
 
 ---
 
