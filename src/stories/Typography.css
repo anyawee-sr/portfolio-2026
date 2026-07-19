@@ -12,7 +12,6 @@
 .type-token-table th {
   text-align: left;
   padding-block: var(--spacing-card-gap);
-  padding-inline-start: 1.5rem;
   background-image: radial-gradient(
     circle,
     var(--color-brand) 0.5px,
@@ -26,8 +25,4 @@
 .type-token-cell {
   padding-block: var(--spacing-card-gap);
   vertical-align: middle;
-}
-
-.type-token-cell:first-child {
-  padding-inline-start: 2.5rem;
 }
