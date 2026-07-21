@@ -2,49 +2,46 @@ import { useEffect, useRef, useState, type RefObject } from 'react';
 
 import './Spacing.css';
 
-export interface SpacingToken {
-  /** CSS custom property backing the token, e.g. "--spacing-card-gap" */
-  cssVar: string;
-  /**
-   * Tailwind utility class used to size this token's box as a width. Written out in full
-   * (not derived from cssVar) because Tailwind's scanner only detects class names that
-   * appear as one literal token in source — building "w-" + name at render time is
-   * invisible to it and the utility's CSS never gets generated.
-   */
+export interface ISpacingStep {
+  step: string;
   utility: string;
 }
 
-// Ascending by px so the box column reads as a growing staircase.
-export const SPACING_TOKENS: SpacingToken[] = [
-  { cssVar: '--spacing-card-gap', utility: 'w-card-gap' },
-  { cssVar: '--spacing-dot-cell', utility: 'w-dot-cell' },
-  { cssVar: '--spacing-nav-gap', utility: 'w-nav-gap' },
-  { cssVar: '--spacing-grid-cell', utility: 'w-grid-cell' },
-  { cssVar: '--spacing-section-y', utility: 'w-section-y' },
+export const SPACING_STEPS: ISpacingStep[] = [
+  { step: '0', utility: 'w-0' },
+  { step: '1', utility: 'w-1' },
+  { step: '2', utility: 'w-2' },
+  { step: '4', utility: 'w-4' },
+  { step: '6', utility: 'w-6' },
+  { step: '8', utility: 'w-8' },
+  { step: '12', utility: 'w-12' },
+  { step: '16', utility: 'w-16' },
 ];
 
-function useComputedWidth(ref: RefObject<HTMLElement | null>): string {
-  const [width, setWidth] = useState('');
+function useComputedRem(ref: RefObject<HTMLElement | null>): string {
+  const [rem, setRem] = useState('');
 
   useEffect(() => {
     if (!ref.current) return;
 
-    setWidth(getComputedStyle(ref.current).width);
+    const widthPx = parseFloat(getComputedStyle(ref.current).width);
+    const rootFontSizePx = parseFloat(getComputedStyle(document.documentElement).fontSize);
+
+    setRem(`${widthPx / rootFontSizePx}rem`);
   }, [ref]);
 
-  return width;
+  return rem;
 }
 
-function SpacingRow({ cssVar, utility }: SpacingToken) {
+function SpacingRow({ step, utility }: ISpacingStep) {
   const boxRef = useRef<HTMLDivElement>(null);
-  const width = useComputedWidth(boxRef);
-  const name = cssVar.replace(/^--/, '');
+  const rem = useComputedRem(boxRef);
 
   return (
     <tr className="spacing-token-row">
-      <td className="spacing-token-cell type-body-m text-text-primary">{name}</td>
-      <td className="spacing-token-cell type-body-m text-text-primary">{width || '—'}</td>
-      <td className="spacing-token-cell">
+      <td className="py-3.5 align-middle type-body-m text-text-primary">{`gap-${step}`}</td>
+      <td className="py-3.5 align-middle type-body-m text-text-primary">{rem || '—'}</td>
+      <td className="py-3.5 align-middle">
         <div ref={boxRef} aria-hidden="true" className={`${utility} h-4 rounded-sm bg-brand`} />
       </td>
     </tr>
@@ -52,28 +49,28 @@ function SpacingRow({ cssVar, utility }: SpacingToken) {
 }
 
 export interface ISpacingTableProps {
-  tokens: SpacingToken[];
+  steps: ISpacingStep[];
 }
 
-export function SpacingTable({ tokens }: ISpacingTableProps) {
+export function SpacingTable({ steps }: ISpacingTableProps) {
   return (
     <table className="spacing-token-table">
       <thead>
         <tr>
-          <th scope="col" className="type-label text-brand uppercase">
+          <th scope="col" className="py-3.5 type-label text-brand uppercase">
             Name
           </th>
-          <th scope="col" className="type-label text-brand uppercase">
+          <th scope="col" className="py-3.5 type-label text-brand uppercase">
             Value
           </th>
-          <th scope="col" className="type-label text-brand uppercase">
-            Box
+          <th scope="col" className="py-3.5 type-label text-brand uppercase">
+            Swatch
           </th>
         </tr>
       </thead>
       <tbody>
-        {tokens.map((token) => (
-          <SpacingRow key={token.cssVar} {...token} />
+        {steps.map((token) => (
+          <SpacingRow key={token.step} {...token} />
         ))}
       </tbody>
     </table>
@@ -82,15 +79,16 @@ export function SpacingTable({ tokens }: ISpacingTableProps) {
 
 export function SpacingTokens() {
   return (
-    <section aria-labelledby="spacing-tokens-title" className="spacing-tokens-page">
+    <section aria-labelledby="spacing-tokens-title" className="flex flex-col gap-3.5">
       <h2 id="spacing-tokens-title" className="type-h2 text-text-primary">
         Spacing
       </h2>
-      <p className="type-body-m text-text-secondary max-w-[60ch]">
-        Every box&apos;s width is read live from the --spacing-* token in globals.css — nothing
-        here is a hardcoded pixel value.
+      <p className="type-body-m text-text-secondary max-w-149">
+        This project has no custom spacing tokens — every gap, width, padding, and margin comes
+        straight from Tailwind&apos;s own scale, each step a multiple of --spacing (e.g. gap-4 is
+        calc(var(--spacing) * 4)). A handful of steps below, read live from the DOM.
       </p>
-      <SpacingTable tokens={SPACING_TOKENS} />
+      <SpacingTable steps={SPACING_STEPS} />
     </section>
   );
 }

@@ -65,14 +65,11 @@
     var(--font-montserrat), var(--font-bai-jamjuree), ui-sans-serif, system-ui,
     sans-serif;
 
-  /* spacing — named concepts, not plain N * 4px multiples (the
-     4px base scale itself is already covered by Tailwind's
-     default spacing multiplier, which equals our primitive scale) */
-  --spacing-nav-gap: 32px;
-  --spacing-card-gap: 14px;
-  --spacing-section-y: 84px;
-  --spacing-grid-cell: 46px;
-  --spacing-dot-cell: 20px;
+  /* spacing — no named tokens here: everything is a multiple of
+     Tailwind's own --spacing base (0.25rem), so gap, width, height,
+     max-width, min-height, and size utilities already cover any
+     value needed (e.g. max-w-290 = 1160px, size-93 = 372px) — see
+     Design Tokens/Spacing story. */
 }
 
 /* ============================================================
@@ -178,7 +175,7 @@
 @utility surface-dotted {
   background-color: var(--color-surface-dotted);
   background-image: radial-gradient(var(--dot-tint) 1px, transparent 1px);
-  background-size: var(--spacing-dot-cell) var(--spacing-dot-cell);
+  background-size: calc(var(--spacing) * 5) calc(var(--spacing) * 5);
 }
 
 body {
