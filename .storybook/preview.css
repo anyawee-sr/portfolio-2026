@@ -9,5 +9,5 @@
 .sbdocs.sbdocs-wrapper {
   background-color: var(--color-surface-dotted);
   background-image: radial-gradient(var(--dot-tint) 1px, transparent 1px);
-  background-size: var(--spacing-dot-cell) var(--spacing-dot-cell);
+  background-size: calc(var(--spacing) * 5) calc(var(--spacing) * 5);
 }

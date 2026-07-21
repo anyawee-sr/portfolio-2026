@@ -50,12 +50,12 @@ function ColorRow({ cssVar, utility }: ColorToken) {
   const name = cssVar.replace(/^--/, '');
 
   return (
-    <tr className="color-token-row">
-      <td className="color-token-cell">
-        <div ref={chipRef} aria-hidden="true" className={`swatch-chip rounded-circle ${utility}`} />
+    <tr>
+      <td className="color-token-cell py-3.5 align-middle">
+        <div ref={chipRef} aria-hidden="true" className={`swatch-chip rounded-full ${utility}`} />
       </td>
-      <td className="color-token-cell type-body-m text-text-primary">{name}</td>
-      <td className="color-token-cell type-body-m text-text-primary">{hex || '—'}</td>
+      <td className="color-token-cell py-3.5 align-middle type-body-m text-text-primary">{hex || '—'}</td>
+      <td className="color-token-cell py-3.5 align-middle type-body-m text-text-primary">{name}</td>
     </tr>
   );
 }
@@ -69,14 +69,14 @@ export function ColorTable({ tokens }: IColorTableProps) {
     <table className="color-token-table">
       <thead>
         <tr>
-          <th scope="col" className="type-label text-brand uppercase">
+          <th scope="col" className="py-3.5 type-label text-brand uppercase">
             Swatch
           </th>
-          <th scope="col" className="type-label text-brand uppercase">
-            Name
-          </th>
-          <th scope="col" className="type-label text-brand uppercase">
+          <th scope="col" className="py-3.5 type-label text-brand uppercase">
             Hex
+          </th>
+          <th scope="col" className="py-3.5 type-label text-brand uppercase">
+            Name
           </th>
         </tr>
       </thead>
@@ -92,11 +92,11 @@ export function ColorTable({ tokens }: IColorTableProps) {
 export function ColorTokens() {
   return (
     // TODO: will update
-    <section aria-labelledby="color-tokens-title" className="color-tokens-page">
+    <section aria-labelledby="color-tokens-title" className="flex flex-col gap-3.5">
       <h2 id="color-tokens-title" className="type-h2 text-text-primary">
         Colors
       </h2>
-      <p className="type-body-m text-text-secondary max-w-[60ch]">
+      <p className="type-body-m text-text-secondary max-w-149">
         Every swatch reads its color live from the token defined in globals.css — nothing here is a
         hardcoded hex value.
       </p>
