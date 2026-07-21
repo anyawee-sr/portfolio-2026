@@ -1,0 +1,21 @@
+.border-radius-token-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.border-radius-token-table th {
+  text-align: left;
+  background-image: radial-gradient(
+    circle,
+    var(--color-brand) 0.5px,
+    transparent 0.5px
+  );
+  background-size: 8px 1px;
+  background-position: bottom;
+  background-repeat: repeat-x;
+}
+
+.border-radius-token-table th:first-child,
+.border-radius-token-cell:first-child {
+  padding-inline-start: 1.5rem;
+}
