@@ -20,13 +20,13 @@ export const TYPOGRAPHY_TOKENS: ITypographyToken[] = [
 
 function TypographyRow({ className }: ITypographyToken) {
   return (
-    <tr className="type-token-row">
-      <td className="type-token-cell">
+    <tr>
+      <td className="py-3.5 align-middle">
         <span className={`${className} text-text-primary`}>
           {className.replace(/^type-/, '')}
         </span>
       </td>
-      <td className="type-token-cell type-body-m text-text-primary">{className}</td>
+      <td className="py-3.5 align-middle type-body-m text-text-primary">{className}</td>
     </tr>
   );
 }
@@ -36,10 +36,10 @@ export function TypographyTable() {
     <table className="type-token-table">
       <thead>
         <tr>
-          <th scope="col" className="type-label text-brand uppercase">
-            Sample
+          <th scope="col" className="py-3.5 type-label text-brand uppercase">
+            Swatch
           </th>
-          <th scope="col" className="type-label text-brand uppercase">
+          <th scope="col" className="py-3.5 type-label text-brand uppercase">
             Name
           </th>
         </tr>
@@ -55,11 +55,11 @@ export function TypographyTable() {
 
 export function TypographyTokens() {
   return (
-    <section aria-labelledby="typography-tokens-title" className="typography-tokens-page">
+    <section aria-labelledby="typography-tokens-title" className="flex flex-col gap-3.5">
       <h2 id="typography-tokens-title" className="type-h2 text-text-primary">
         Typography
       </h2>
-      <p className="type-body-m text-text-secondary max-w-[60ch]">
+      <p className="type-body-m text-text-secondary max-w-149">
         Every sample renders with the actual type-* utility class — nothing here is a hardcoded
         font-size or font-weight.
       </p>
