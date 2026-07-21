@@ -1,0 +1,24 @@
+.shadow-token-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.shadow-token-table th {
+  text-align: left;
+  background-image: radial-gradient(
+    circle,
+    var(--color-brand) 0.5px,
+    transparent 0.5px
+  );
+  background-size: 8px 1px;
+  background-position: bottom;
+  background-repeat: repeat-x;
+}
+
+.shadow-token-table th:first-child,
+.shadow-token-cell:first-child {
+  padding-inline-start: 1.5rem;
+  /* extra breathing room so the larger shadows (shadow-xl, shadow-2xl)
+     don't get visually clipped against the swatch cell's edge */
+  padding-block: 0.5rem;
+}
