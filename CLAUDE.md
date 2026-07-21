@@ -6,10 +6,10 @@
 
 ## Source of truth
 
-| สิ่งที่ต้องรู้            | อยู่ที่ไหน                                     |
-| ------------------------- | ---------------------------------------------- |
-| Design token ทั้งหมด      | `src/app/globals.css` ← **ที่เดียวเท่านั้น**   |
-| ต้นแบบทางสายตา (อ้างอิง)  | `design-ref/` ← **อ่านอย่างเดียว ห้าม import** |
+| สิ่งที่ต้องรู้           | อยู่ที่ไหน                                     |
+| ------------------------ | ---------------------------------------------- |
+| Design token ทั้งหมด     | `src/app/globals.css` ← **ที่เดียวเท่านั้น**   |
+| ต้นแบบทางสายตา (อ้างอิง) | `design-ref/` ← **อ่านอย่างเดียว ห้าม import** |
 
 **ถ้าไม่มี token ที่ต้องการ → ไปเพิ่มใน `globals.css` ห้าม hardcode ในไฟล์อื่น**
 
@@ -22,12 +22,15 @@
 
 ### 1. ห้าม arbitrary value เด็ดขาด
 
+**ห้ามใช้ syntax `-[<value>]` (bracket arbitrary value) กับ Tailwind utility ใดๆ ทั้งสิ้น ไม่มีข้อยกเว้น**
+— ครอบคลุมทุกหน่วย ไม่ใช่แค่ px/hex/em ในตัวอย่างด้านล่าง (รวมถึง `ch`, `deg`, `%`, ฯลฯ)
+
 ```jsx
 // ❌ ห้าม
-<div className="text-[32px] bg-[#B51D00] p-[14px] tracking-[.1em]">
+<div className="text-[32px] bg-[#B51D00] p-[14px] tracking-[.1em] max-w-[60ch] aspect-[16/9] rotate-[8deg]">
 
 // ✅ ถูก
-<div className="type-h2 bg-brand p-4 tracking-wide">
+<div className="type-h2 bg-brand p-4 tracking-wide max-w-149 aspect-video rotate-decor-asterisk">
 ```
 
 ### 2. ห้ามเขียน font-size / font-weight / line-height ใน component
@@ -83,9 +86,12 @@ typography มาจาก `type-*` utility เท่านั้น ถ้า�
 // ❌ ห้าม
 <h3 className="type-h3">FILL OUT<br />THE FORM 01.</h3>
 
-// ✅ ถูก — ปล่อยให้ balance จัดการ คุมความกว้างด้วย ch
-<h3 className="type-h3 max-w-[14ch]">FILL OUT THE FORM 01.</h3>
+// ✅ ถูก — ปล่อยให้ balance จัดการ คุมความกว้างด้วย max-w-N ที่วัดจริง (วิธีคำนวณดูกฎข้อ 1)
+<h3 className="type-h3 max-w-42">FILL OUT THE FORM 01.</h3>
 ```
+
+ตัวอย่างจริงที่ต้องระวังเรื่อง `clamp()` ตามกฎข้อ 1 ข้อ 3: footer wordmark ใน `Footer.tsx`
+(`type-h1` เป็น fluid font-size — ต้องวัดคำที่ยาวที่สุดกับข้อความเต็มที่ทั้งสองปลายของ clamp ก่อนเลือกค่า)
 
 ### 5. ห้ามแตะ `design-ref/`
 
@@ -154,15 +160,15 @@ h1  Anyawee Sr. / Frontend Engineer     [type-display]
 
 ### ตารางแปลง tag
 
-| ต้นแบบ                              | ต้องเปลี่ยนเป็น                 |
-| ----------------------------------- | ------------------------------- |
-| `<span>` FLUID DYNAMICS             | `<h2>`                          |
-| `<div>` NAVIGATION / LEGAL / SOCIAL | `<h3>`                          |
-| ลิงก์เมนู + ลิงก์ฟุตเตอร์ (ลอย ๆ)   | `<ul><li><a>`                   |
-| ไม่มี `<main>`                      | เพิ่ม `<main>`                  |
-| `<canvas>` (พื้นกราฟ)               | `background-image` (asset)      |
-| `<helmet>` ใน body                  | ย้ายไป `<head>` / metadata API  |
-| `<br>` ในหัวข้อ                     | ลบทิ้ง ใช้ `max-w-[Nch]`        |
+| ต้นแบบ                              | ต้องเปลี่ยนเป็น                                |
+| ----------------------------------- | ---------------------------------------------- |
+| `<span>` FLUID DYNAMICS             | `<h2>`                                         |
+| `<div>` NAVIGATION / LEGAL / SOCIAL | `<h3>`                                         |
+| ลิงก์เมนู + ลิงก์ฟุตเตอร์ (ลอย ๆ)   | `<ul><li><a>`                                  |
+| ไม่มี `<main>`                      | เพิ่ม `<main>`                                 |
+| `<canvas>` (พื้นกราฟ)               | `background-image` (asset)                     |
+| `<helmet>` ใน body                  | ย้ายไป `<head>` / metadata API                 |
+| `<br>` ในหัวข้อ                     | ลบทิ้ง ใช้ `max-w-N` ที่วัดจริง (ดูกฎข้อ 1, 4) |
 
 ### ลิงก์กับปุ่ม
 
@@ -251,7 +257,9 @@ breakpoint ใช้ default ของ Tailwind (`sm:640 md:768 lg:1024`) — �
   - แต่ละการ์ด**เอียง**เป็นลูกเล่น (rotate ±3–5deg ตามที่มีในระบบ)
   - เรียงบนลงล่างในแนว flow (ไม่ absolute ซ้อนกันแบบ desktop)
 - ⚠️ การ์ดเอียง + สลับข้าง ระวังขอบยื่นออกนอกจอ → `overflow-x-hidden` ที่ parent
-- ⚠️ ยังต้องล็อก `aspect-[..]` + `object-cover` กันรูปดันเลย์เอาต์ (รูปยังไม่มีจริง)
+- ⚠️ ยังต้องล็อก aspect ratio (เช่น `aspect-video` หรือเพิ่ม `@utility aspect-*` ใหม่ใน `globals.css`
+  ถ้ายังไม่มีอัตราส่วนที่ต้องการ — ห้าม `aspect-[..]` ตามกฎข้อ 1) + `object-cover` กันรูปดันเลย์เอาต์
+  (รูปยังไม่มีจริง)
 
 **Footer**
 
