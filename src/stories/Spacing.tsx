@@ -38,7 +38,7 @@ function SpacingRow({ step, utility }: ISpacingStep) {
   const rem = useComputedRem(boxRef);
 
   return (
-    <tr className="spacing-token-row">
+    <tr>
       <td className="py-3.5 align-middle type-body-m text-text-primary">{`gap-${step}`}</td>
       <td className="py-3.5 align-middle type-body-m text-text-primary">{rem || '—'}</td>
       <td className="py-3.5 align-middle">
