@@ -7,7 +7,7 @@ export const email: Extract<Link, { type: 'email' }> = {
 };
 
 export const links: Link[] = [
-  { type: 'external', label: 'GitHub', href: '#' },
-  { type: 'external', label: 'GitLab', href: '#' },
-  { type: 'external', label: 'LinkedIn', href: '#' },
+  { type: 'external', label: 'GitHub', href: 'https://github.com/anyawee-sr' },
+  { type: 'external', label: 'GitLab', href: 'https://gitlab.com/anyawee-sr' },
+  { type: 'external', label: 'LinkedIn', href: 'https://www.linkedin.com/in/anyawee-sr' },
 ];
