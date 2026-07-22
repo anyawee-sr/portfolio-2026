@@ -30,7 +30,7 @@
 <div className="text-[32px] bg-[#B51D00] p-[14px] tracking-[.1em] max-w-[60ch] aspect-[16/9] rotate-[8deg]">
 
 // ✅ ถูก
-<div className="type-h2 bg-brand p-4 tracking-wide max-w-149 aspect-video rotate-decor-asterisk">
+<div className="type-h2 bg-brand p-4 tracking-wide max-w-149 aspect-video rotate-8">
 ```
 
 ### 2. ห้ามเขียน font-size / font-weight / line-height ใน component
@@ -399,7 +399,9 @@ fix(header): trap focus inside mobile menu on Esc
 ## ลำดับการทำงาน
 
 1. token → `src/app/globals.css` ✅ (เสร็จแล้ว)
-2. asset → `public/`
+2. asset → `public/images/<section>/` (ตั้งชื่อโฟลเดอร์ตาม component ที่ใช้ เช่น `public/images/skills/`
+   คู่กับ `Skills.tsx`, `public/images/work/` คู่กับ `Work.tsx`) — ชื่อไฟล์ในโฟลเดอร์ไม่ต้องซ้ำคำกับ
+   ชื่อโฟลเดอร์ (เช่น `images/skills/background.webp` ไม่ใช่ `images/skills/skills-background.webp`)
 3. component ทีละตัว **สร้าง mobile-first + desktop พร้อมกันในตัวเดียว**
    (ไม่ใช่ทำ desktop ก่อนแล้วเติม breakpoint ทีหลัง):
    Hero → Header/Nav+Hamburger → PaperWall → Process → Exhibition → Footer
