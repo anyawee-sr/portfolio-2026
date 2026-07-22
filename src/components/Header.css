@@ -1,0 +1,38 @@
+/* Header.css — wired via @import in globals.css, not imported by
+   Header.tsx — see globals manifest.
+
+   Private choreography for <Header>'s mobile menu badges: the stagger
+   delay each badge waits before playing the shared `animate-pop-in` /
+   `animate-pop-out` utility (defined in globals.css). The delay is
+   always positional (badge 1 first, badge 2 shortly after, ...), so
+   `:nth-child` covers it with no JS lookup. */
+.menu-badge:nth-child(1) {
+  animation-delay: 0ms;
+}
+.menu-badge:nth-child(2) {
+  animation-delay: 80ms;
+}
+.menu-badge:nth-child(3) {
+  animation-delay: 160ms;
+}
+.menu-badge:nth-child(4) {
+  animation-delay: 240ms;
+}
+
+/* closing runs the stagger backwards — badge 1 waits longest, the last
+   badge starts first — so it reads as the opening sequence in reverse.
+   Scoped under `.is-closing` (set on the menu container by Header.tsx
+   while the exit animation plays) so this outranks the entrance-stagger
+   rules above (3 selector segments vs. 2) without touching them. */
+.is-closing .menu-badge:nth-child(1) {
+  animation-delay: 240ms;
+}
+.is-closing .menu-badge:nth-child(2) {
+  animation-delay: 160ms;
+}
+.is-closing .menu-badge:nth-child(3) {
+  animation-delay: 80ms;
+}
+.is-closing .menu-badge:nth-child(4) {
+  animation-delay: 0ms;
+}
