@@ -29,13 +29,6 @@
   --slate-800: #3E434C; /* pupil gradient inner stop */
   --slate-950: #14161B; /* pupil gradient outer stop */
 
-  /* shadow primitives */
-  --shadow-xs: 0 6px 14px rgba(90, 30, 20, 0.1);
-  --shadow-sm: 0 4px 8px rgba(90, 20, 10, 0.28);
-  --shadow-md: 0 8px 16px rgba(90, 20, 10, 0.35);
-  --shadow-lg: 0 18px 30px rgba(90, 30, 20, 0.22);
-  --shadow-xl: 0 24px 48px rgba(120, 40, 25, 0.14);
-
   /* pattern primitives */
   --dot-tint: rgba(107, 97, 92, 0.35); /* neutral-500 at low opacity — surface-dotted fill */
   --eye-shadow-inset-tint: rgba(110, 125, 145, 0.35); /* slate-ish inset shadow on eyeball rim */
@@ -46,7 +39,7 @@
 /* ============================================================
    SEMANTIC TOKENS — alias a primitive to a purpose (what it's
    *for*), exposed to Tailwind so components can consume them
-   as utilities (bg-surface-base, text-brand, shadow-card, ...).
+   as utilities (bg-surface-base, text-brand, shadow-xl, ...).
    Components should always reach for these, never a primitive.
    ============================================================ */
 @theme inline {
@@ -59,20 +52,6 @@
   --color-surface-card: var(--neutral-25);
   --color-surface-dotted: var(--neutral-20);
   --color-surface-accent: var(--pink-100);
-
-  /* shadow */
-  --shadow-swatch: var(--shadow-xs);
-  --shadow-sticker: var(--shadow-sm);
-  --shadow-button: var(--shadow-md);
-  --shadow-card: var(--shadow-lg);
-  --shadow-shell: var(--shadow-xl);
-
-  /* radius */
-  --radius-sm: 4px;
-  --radius-md: 14px;
-  --radius-lg: 22px;
-  --radius-pill: 999px;
-  --radius-circle: 50%;
 
   /* font family — Montserrat primary, Bai Jamjuree (Thai) then
      system fallbacks, in that order */
