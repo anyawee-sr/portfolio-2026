@@ -59,6 +59,15 @@
     var(--font-montserrat), var(--font-bai-jamjuree), ui-sans-serif, system-ui,
     sans-serif;
 
+  /* handwriting accent — Covered By Your Grace, for the About Me card's
+     "open to new opportunities" tagline only. Never a body/heading font. */
+  --font-handwriting: var(--font-covered-by-your-grace), cursive;
+
+  /* typewriter accent — Special Elite, for the About Me card's non-brand
+     (ink-colored) text: field values and contact-link URLs. Ships only
+     weight 400 — never pair with a bold type-* utility (faux-bold). */
+  --font-typewriter: var(--font-special-elite), monospace;
+
   /* spacing — no named tokens here: everything is a multiple of
      Tailwind's own --spacing base (0.25rem), so gap, width, height,
      max-width, min-height, and size utilities already cover any
