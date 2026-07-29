@@ -180,6 +180,13 @@
   font-weight: 700;
 }
 
+@utility type-chip {
+  font-size: 0.75rem; /* 12px */
+  line-height: 1;
+  letter-spacing: normal;
+  font-weight: 700;
+}
+
 /* ============================================================
    SURFACE PATTERNS — custom `@utility surface-*` classes that
    bundle a background-color with a repeating background-image,
