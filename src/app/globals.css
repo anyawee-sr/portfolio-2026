@@ -23,6 +23,11 @@
   --neutral-25: #FDFAF6; /* card white */
   --neutral-20: #FCFCF8; /* dotted-surface base */
   --pink-100: #FDE6E0; /* pink tint */
+  --white: #FFFFFF; /* pure white — eye highlights, distinct from cream neutral-50 */
+  --slate-100: #EEF1F5; /* eyeball gradient mid stop */
+  --slate-300: #C9D2DB; /* eyeball gradient outer stop */
+  --slate-800: #3E434C; /* pupil gradient inner stop */
+  --slate-950: #14161B; /* pupil gradient outer stop */
 
   /* shadow primitives */
   --shadow-xs: 0 6px 14px rgba(90, 30, 20, 0.1);
@@ -33,6 +38,9 @@
 
   /* pattern primitives */
   --dot-tint: rgba(107, 97, 92, 0.35); /* neutral-500 at low opacity — surface-dotted fill */
+  --eye-shadow-inset-tint: rgba(110, 125, 145, 0.35); /* slate-ish inset shadow on eyeball rim */
+  --eye-highlight-tint: rgba(255, 255, 255, 0.28); /* pupil inner highlight ring */
+  --eye-glint-tint: rgba(255, 255, 255, 0.9); /* pupil glint dot */
 }
 
 /* ============================================================
@@ -183,6 +191,34 @@
   background-color: var(--color-surface-dotted);
   background-image: radial-gradient(var(--dot-tint) 1px, transparent 1px);
   background-size: calc(var(--spacing) * 5) calc(var(--spacing) * 5);
+}
+
+@utility surface-eye {
+  /* googly eyeball — white-to-slate radial + ambient shadow. Reuses
+     shadow-xl (Tailwind's stock scale — closest existing value) rather
+     than a bespoke value. */
+  background: radial-gradient(
+    circle at 35% 28%,
+    var(--white) 0%,
+    var(--slate-100) 55%,
+    var(--slate-300) 100%
+  );
+  box-shadow:
+    var(--shadow-xl),
+    inset 0 -6px 12px var(--eye-shadow-inset-tint);
+}
+
+@utility surface-pupil {
+  background: radial-gradient(
+    circle at 34% 28%,
+    var(--slate-800) 0%,
+    var(--slate-950) 60%
+  );
+  box-shadow: inset 0 2px 3px var(--eye-highlight-tint);
+}
+
+@utility surface-eye-glint {
+  background: var(--eye-glint-tint);
 }
 
 /* POP-IN — generic drop-in-with-spring-overshoot entrance: fades in,

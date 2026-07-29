@@ -8,9 +8,9 @@ export interface IEyeProps {
 }
 
 const SIZE_CLASSES: Record<TEyeSize, string> = {
-  sm: 'size-10 md:size-14',
-  md: 'size-16 md:size-20',
-  lg: 'size-22 md:size-24',
+  sm: 'size-8 sm:size-10 md:size-14',
+  md: 'size-12 sm:size-16 md:size-20',
+  lg: 'size-18 sm:size-24 md:size-30',
 };
 
 /**
