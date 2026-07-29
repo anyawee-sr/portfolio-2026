@@ -193,6 +193,17 @@
   background-size: calc(var(--spacing) * 5) calc(var(--spacing) * 5);
 }
 
+@utility surface-graph {
+  /* graph-paper backdrop — skill wall. Crumpled graph-paper photo (asset)
+     replaces the old CSS-drawn grid + corner washes. background-color is
+     a fallback base while the image loads / if it fails to load. */
+  background-color: var(--color-surface-dotted);
+  background-image: url("/images/skills/background.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 @utility surface-eye {
   /* googly eyeball — white-to-slate radial + ambient shadow. Reuses
      shadow-xl (Tailwind's stock scale — closest existing value) rather
