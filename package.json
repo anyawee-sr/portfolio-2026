@@ -10,7 +10,9 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "dependencies": {
     "clsx": "^2.1.1",
@@ -35,6 +37,7 @@
     "eslint-config-next": "16.2.10",
     "eslint-plugin-storybook": "^10.5.0",
     "playwright": "^1.61.1",
+    "prettier": "^3.9.6",
     "storybook": "^10.5.0",
     "tailwindcss": "^4",
     "typescript": "^5",
