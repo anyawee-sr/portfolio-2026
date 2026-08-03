@@ -330,6 +330,10 @@
     color: var(--color-brand);
   }
 
+  svg {
+    fill: currentColor;
+  }
+
   ::selection {
     background: var(--color-brand);
     color: var(--color-surface-base);

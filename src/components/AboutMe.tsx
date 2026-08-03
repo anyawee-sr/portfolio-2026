@@ -139,7 +139,7 @@ export function AboutMe() {
                 className="type-body-l font-typewriter inline-flex items-center gap-1 whitespace-nowrap text-text-primary border-b border-text-primary leading-1 hover:border-brand hover:text-brand uppercase"
               >
                 {aboutMe.resume.label}
-                <ArrowRightIcon aria-hidden="true" focusable="false" />
+                <ArrowRightIcon />
               </a>
             </div>
           </div>

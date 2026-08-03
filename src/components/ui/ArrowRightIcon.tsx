@@ -3,7 +3,13 @@ import type { SVGProps } from 'react';
 // TODO: will update arrow
 export function ArrowRightIcon(props: SVGProps<SVGSVGElement>) {
   return (
-    <svg viewBox="0 0 20 20" className="size-4" {...props}>
+    <svg
+      viewBox="0 0 20 20"
+      className="size-4"
+      aria-hidden="true"
+      focusable="false"
+      {...props}
+    >
       <path
         fillRule="evenodd"
         clipRule="evenodd"
