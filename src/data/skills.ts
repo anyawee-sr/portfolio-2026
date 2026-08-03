@@ -6,10 +6,10 @@
 export const skills: string[] = [
   "JavaScript",
   "TypeScript",
+  "React",
+  "Git Version Control",
   "HTML5",
   "CSS3",
-  "React",
   "Tailwind CSS",
-  "Node.js",
-  "Figma",
+  "MUI",
 ];
