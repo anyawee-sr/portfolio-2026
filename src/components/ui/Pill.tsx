@@ -29,7 +29,7 @@ export function Pill({ link, arrow, className }: IPillProps) {
   );
 
   const base = cn(
-    "type-label inline-flex min-h-11 items-center justify-center gap-3 rounded-full bg-brand px-6 py-3.5 text-surface-base uppercase shadow-lg transition-colors duration-200 hover:bg-brand-hover",
+    "type-label inline-flex min-h-11 items-center justify-center gap-1 rounded-full bg-brand px-6 py-3.5 text-surface-base uppercase shadow-lg transition-colors duration-200 hover:bg-brand-hover",
     className,
   );
 
