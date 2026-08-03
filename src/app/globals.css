@@ -63,9 +63,11 @@
      "open to new opportunities" tagline only. Never a body/heading font. */
   --font-handwriting: var(--font-covered-by-your-grace), cursive;
 
-  /* typewriter accent — Special Elite, for the About Me card's non-brand
-     (ink-colored) text: field values and contact-link URLs. Ships only
-     weight 400 — never pair with a bold type-* utility (faux-bold). */
+  /* typewriter accent — Special Elite, for the About Me card's printed-form
+     text: field values, contact-link URLs, and non-CTA links like the
+     "or open here" resume link (brand-colored, but still styled as an
+     aside, not a button). Ships only weight 400 — never pair with a bold
+     type-* utility (faux-bold). */
   --font-typewriter: var(--font-special-elite), monospace;
 
   /* spacing — no named tokens here: everything is a multiple of
@@ -175,6 +177,13 @@
   font-weight: 700;
 }
 
+@utility type-tagline {
+  font-size: clamp(2.5rem, 1.6304rem + 4.3478vw, 5rem);
+  line-height: 1;
+  font-weight: 400;
+  text-wrap: balance;
+}
+
 /* ============================================================
    SURFACE PATTERNS — custom `@utility surface-*` classes that
    bundle a background-color with a repeating background-image,
@@ -194,6 +203,24 @@
      a fallback base while the image loads / if it fails to load. */
   background-color: var(--color-surface-dotted);
   background-image: url("/images/skills/background.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+@utility surface-texture {
+  /* crumpled paper photo — About Me card's backdrop, replacing the old
+     hairline-grid (surface-ruled) so the card reads as a lifted physical
+     sheet rather than a flat ruled surface. Photo lives on ::before (own
+     layer) so its opacity can be dimmed without touching the base
+     background-color underneath. */
+  position: relative;
+  overflow: hidden;
+  background-color: var(--color-surface-card);
+
+  /* TODO: will find better solution */
+  background-image: url("/images/about-me-tldr/texture.webp");
+  background-blend-mode: multiply;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
