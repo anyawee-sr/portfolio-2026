@@ -362,6 +362,11 @@ component นี้คนมักทำ "กดได้แต่ screen reader
 - ภาษา: **อังกฤษเท่านั้น** ตอนนี้ — ภาษาไทยตามมาทีหลัง (Bai Jamjuree โหลด `thai` subset ไว้รอใน
   `layout.tsx` แล้ว แต่ยังไม่มี THAI MIGRATION LEDGER อย่างเป็นทางการ — เพิ่มใน `globals.css`
   เมื่อเริ่ม migration จริง)
+- **string literal ใช้ double quote (`"..."`) เป็น default** บังคับด้วย Prettier (`.prettierrc`:
+  `singleQuote: false`) — เหตุผลคือเนื้อหา `src/data/*.ts` เป็นภาษาอังกฤษที่มี apostrophe บ่อย
+  (`don't`, `wasn't`) เขียนเป็น single quote แล้วพัง syntax ได้ง่าย รันฟอร์แมตด้วย
+  `npm run format` (เขียนทับ) หรือ `npm run format:check` (เช็กอย่างเดียว) — scope คุมด้วย
+  `.prettierignore`: ไม่แตะ `.css` `.md` `.html` `.json` และ `design-ref/` ทั้งโฟลเดอร์
 
 ### หมายเหตุ Tailwind v4
 
