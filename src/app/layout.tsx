@@ -15,10 +15,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${fontVariables} h-full antialiased`}
-    >
+    <html lang="en" className={`${fontVariables} h-full antialiased`}>
       <body className="min-h-full flex flex-col overflow-x-hidden">
         <Header />
         {children}

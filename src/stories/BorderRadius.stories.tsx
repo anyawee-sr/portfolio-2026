@@ -1,14 +1,14 @@
-import type { Meta, StoryObj } from '@storybook/nextjs-vite';
+import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 
-import { BorderRadiusTokens } from '@/stories/BorderRadius';
+import { BorderRadiusTokens } from "@/stories/BorderRadius";
 
 const meta = {
-  title: 'Design Tokens/Border Radius',
+  title: "Design Tokens/Border Radius",
   component: BorderRadiusTokens,
   parameters: {
-    layout: 'padded',
+    layout: "padded",
   },
-  tags: ['autodocs'],
+  tags: ["autodocs"],
 } satisfies Meta<typeof BorderRadiusTokens>;
 
 export default meta;
@@ -16,5 +16,5 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const BorderRadius: Story = {
-  tags: ['!dev'],
+  tags: ["!dev"],
 };

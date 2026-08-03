@@ -1,9 +1,9 @@
-import NextLink from 'next/link';
+import NextLink from "next/link";
 
-import { copyrightYear, footer } from '@/data/footer';
-import { routes } from '@/data/routes';
+import { copyrightYear, footer } from "@/data/footer";
+import { routes } from "@/data/routes";
 
-import { Eye } from './ui/Eye';
+import { Eye } from "./ui/Eye";
 
 export function Footer() {
   return (
@@ -25,12 +25,18 @@ export function Footer() {
         </div>
 
         <div className="md:col-span-2">
-          <h3 id="footer-nav-title" className="type-caption mb-3 text-surface-base/55">
+          <h3
+            id="footer-nav-title"
+            className="type-caption mb-3 text-surface-base/55"
+          >
             NAVIGATION
           </h3>
-          <ul aria-labelledby="footer-nav-title" className="flex flex-col gap-1">
+          <ul
+            aria-labelledby="footer-nav-title"
+            className="flex flex-col gap-1"
+          >
             {footer.navigation.map((link) =>
-              link.type === 'internal' ? (
+              link.type === "internal" ? (
                 <li key={link.label}>
                   <NextLink
                     href={routes[link.to]}
@@ -39,18 +45,24 @@ export function Footer() {
                     {link.label}
                   </NextLink>
                 </li>
-              ) : null
+              ) : null,
             )}
           </ul>
         </div>
 
         <div className="md:col-span-2">
-          <h3 id="footer-contact-title" className="type-caption mb-3 text-surface-base/55">
+          <h3
+            id="footer-contact-title"
+            className="type-caption mb-3 text-surface-base/55"
+          >
             CONTACT
           </h3>
-          <ul aria-labelledby="footer-contact-title" className="flex flex-col gap-1">
+          <ul
+            aria-labelledby="footer-contact-title"
+            className="flex flex-col gap-1"
+          >
             {footer.contact.map((link) => {
-              if (link.type === 'email') {
+              if (link.type === "email") {
                 return (
                   <li key={link.label}>
                     <a
@@ -63,9 +75,9 @@ export function Footer() {
                 );
               }
 
-              if (link.type !== 'external') {
-                return null
-              };
+              if (link.type !== "external") {
+                return null;
+              }
 
               return (
                 <li key={link.label}>
@@ -83,7 +95,10 @@ export function Footer() {
           </ul>
         </div>
 
-        <div aria-hidden="true" className="hidden md:col-span-3 md:flex md:justify-end relative mt-10">
+        <div
+          aria-hidden="true"
+          className="hidden md:col-span-3 md:flex md:justify-end relative mt-10"
+        >
           <Eye size="md" className="absolute right-22 -bottom-4" />
           <Eye size="md" className="absolute" />
         </div>

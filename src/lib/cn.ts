@@ -1,4 +1,4 @@
-import { clsx, type ClassValue } from 'clsx';
+import { clsx, type ClassValue } from "clsx";
 
 /**
  * Conditional className joiner. Wraps clsx so the whole app has a

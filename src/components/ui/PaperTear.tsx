@@ -1,12 +1,13 @@
-import Image from 'next/image';
+import Image from "next/image";
 
-export type TPaperTearVariant = 'hero-skills' | 'skills-work' | 'header-detail';
+export type TPaperTearVariant = "hero-skills" | "skills-work" | "header-detail";
 
 export interface IPaperTearProps {
   variant: TPaperTearVariant;
 }
 
-const variantSrc = (variant: TPaperTearVariant) => `/images/paper-tear/${variant}.webp`;
+const variantSrc = (variant: TPaperTearVariant) =>
+  `/images/paper-tear/${variant}.webp`;
 
 export function PaperTear({ variant }: IPaperTearProps) {
   return (

@@ -1,14 +1,25 @@
-import { skills } from '@/data/skills';
+import { skills } from "@/data/skills";
 
-import { Asterisk } from './ui/Asterisk';
-import { Sticker } from './ui/Sticker';
+import { Asterisk } from "./ui/Asterisk";
+import { Sticker } from "./ui/Sticker";
 
 /** Cycled per skill so neighboring stickers never share a tilt. */
-const SKILL_ROTATIONS = ['-rotate-2', 'rotate-2', '-rotate-6', 'rotate-6', '-rotate-1', 'rotate-3', '-rotate-3'];
+const SKILL_ROTATIONS = [
+  "-rotate-2",
+  "rotate-2",
+  "-rotate-6",
+  "rotate-6",
+  "-rotate-1",
+  "rotate-3",
+  "-rotate-3",
+];
 
 export function Skills() {
   return (
-    <section aria-labelledby="skills-title" className="surface-graph grid grid-cols-2 md:grid-cols-[1fr_2fr] relative overflow-x-hidden px-4 py-16 md:px-11">
+    <section
+      aria-labelledby="skills-title"
+      className="surface-graph grid grid-cols-2 md:grid-cols-[1fr_2fr] relative overflow-x-hidden px-4 py-16 md:px-11"
+    >
       <h2 id="skills-title" className="sr-only">
         Skills
       </h2>

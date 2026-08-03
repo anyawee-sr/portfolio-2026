@@ -1,4 +1,9 @@
-import { Montserrat, Bai_Jamjuree, Covered_By_Your_Grace, Special_Elite } from "next/font/google";
+import {
+  Montserrat,
+  Bai_Jamjuree,
+  Covered_By_Your_Grace,
+  Special_Elite,
+} from "next/font/google";
 
 export const montserrat = Montserrat({
   variable: "--font-montserrat",

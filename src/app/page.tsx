@@ -1,8 +1,8 @@
-import { AboutMe } from '@/components/AboutMe';
-import { Hero } from '@/components/Hero';
-import { Skills } from '@/components/Skills';
-import { PaperTear } from '@/components/ui/PaperTear';
-import { Work } from '@/components/Work';
+import { AboutMe } from "@/components/AboutMe";
+import { Hero } from "@/components/Hero";
+import { Skills } from "@/components/Skills";
+import { PaperTear } from "@/components/ui/PaperTear";
+import { Work } from "@/components/Work";
 
 export default function Home() {
   return (

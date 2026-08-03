@@ -1,8 +1,8 @@
-import type { JSX } from 'react';
+import type { JSX } from "react";
 
-import { cn } from '@/lib/cn';
+import { cn } from "@/lib/cn";
 
-export type TStickerVariant = 'tag' | 'skill';
+export type TStickerVariant = "tag" | "skill";
 
 export interface IStickerProps {
   label: string;
@@ -20,20 +20,26 @@ export interface IStickerProps {
 }
 
 const VARIANT_CLASSES: Record<TStickerVariant, string> = {
-  tag: 'bg-brand text-surface-base shadow-md',
-  skill: 'bg-surface-accent text-brand border border-brand shadow-sm',
+  tag: "bg-brand text-surface-base shadow-md",
+  skill: "bg-surface-accent text-brand border border-brand shadow-sm",
 };
 
-export function Sticker({ label, variant, rotationClass, as = 'span', className }: IStickerProps) {
+export function Sticker({
+  label,
+  variant,
+  rotationClass,
+  as = "span",
+  className,
+}: IStickerProps) {
   const Tag = as;
 
   return (
     <Tag
       className={cn(
-        'type-label inline-flex items-center whitespace-nowrap rounded-full px-4 py-2.5 transition-transform duration-200 ease-out hover:rotate-0 hover:scale-105',
+        "type-label inline-flex items-center whitespace-nowrap rounded-full px-4 py-2.5 transition-transform duration-200 ease-out hover:rotate-0 hover:scale-105",
         VARIANT_CLASSES[variant],
         rotationClass,
-        className
+        className,
       )}
     >
       {label}

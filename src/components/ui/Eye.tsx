@@ -1,6 +1,6 @@
-import { cn } from '@/lib/cn';
+import { cn } from "@/lib/cn";
 
-export type TEyeSize = 'sm' | 'md' | 'lg';
+export type TEyeSize = "sm" | "md" | "lg";
 
 export interface IEyeProps {
   size: TEyeSize;
@@ -8,9 +8,9 @@ export interface IEyeProps {
 }
 
 const SIZE_CLASSES: Record<TEyeSize, string> = {
-  sm: 'size-8 sm:size-10 md:size-14',
-  md: 'size-12 sm:size-16 md:size-20',
-  lg: 'size-18 sm:size-24 md:size-30',
+  sm: "size-8 sm:size-10 md:size-14",
+  md: "size-12 sm:size-16 md:size-20",
+  lg: "size-18 sm:size-24 md:size-30",
 };
 
 /**
@@ -28,12 +28,15 @@ export function Eye({ size, className }: IEyeProps) {
     <div
       aria-hidden="true"
       className={cn(
-        'surface-eye pointer-events-none rounded-full flex items-center justify-center',
+        "surface-eye pointer-events-none rounded-full flex items-center justify-center",
         SIZE_CLASSES[size],
-        className
+        className,
       )}
     >
-      <div data-pupil className="surface-pupil relative w-1/2 h-1/2 rounded-full translate-y-1">
+      <div
+        data-pupil
+        className="surface-pupil relative w-1/2 h-1/2 rounded-full translate-y-1"
+      >
         <span className="surface-eye-glint absolute top-1 left-1 w-1.5 h-1.5 rounded-full" />
       </div>
     </div>

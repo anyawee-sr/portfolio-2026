@@ -4,12 +4,12 @@
  * layout filler, not distinct data. Wall density is a component concern.
  */
 export const skills: string[] = [
-  'JavaScript',
-  'TypeScript',
-  'HTML5',
-  'CSS3',
-  'React',
-  'Tailwind CSS',
-  'Node.js',
-  'Figma',
+  "JavaScript",
+  "TypeScript",
+  "HTML5",
+  "CSS3",
+  "React",
+  "Tailwind CSS",
+  "Node.js",
+  "Figma",
 ];

@@ -1,11 +1,11 @@
-import NextLink from 'next/link';
+import NextLink from "next/link";
 
-import type { ICaseStudy } from '@/data/caseStudies';
-import { workDetailPath } from '@/data/routes';
-import { cn } from '@/lib/cn';
+import type { ICaseStudy } from "@/data/caseStudies";
+import { workDetailPath } from "@/data/routes";
+import { cn } from "@/lib/cn";
 
-import { CaseStudyChip } from './CaseStudyChip';
-import { ImagePlaceholder } from './ui/ImagePlaceholder';
+import { CaseStudyChip } from "./CaseStudyChip";
+import { ImagePlaceholder } from "./ui/ImagePlaceholder";
 
 export interface ICaseStudyCardProps {
   study: ICaseStudy;
@@ -16,8 +16,8 @@ export function CaseStudyCard({ study, className }: ICaseStudyCardProps) {
   return (
     <article
       className={cn(
-        'relative flex max-h-112.5 w-64 flex-col rounded-lg bg-surface-card p-5 shadow-xl transition-transform duration-200 hover:-translate-y-2 has-[a:focus-visible]:outline-2 has-[a:focus-visible]:outline-offset-2 has-[a:focus-visible]:outline-brand',
-        className
+        "relative flex max-h-112.5 w-64 flex-col rounded-lg bg-surface-card p-5 shadow-xl transition-transform duration-200 hover:-translate-y-2 has-[a:focus-visible]:outline-2 has-[a:focus-visible]:outline-offset-2 has-[a:focus-visible]:outline-brand",
+        className,
       )}
     >
       <CaseStudyChip variant={study.type} />
@@ -29,7 +29,9 @@ export function CaseStudyCard({ study, className }: ICaseStudyCardProps) {
           {study.title}
         </NextLink>
       </h3>
-      <p className="type-body-s line-clamp-3 mt-3 text-center uppercase text-text-secondary">{study.subTitle}</p>
+      <p className="type-body-s line-clamp-3 mt-3 text-center uppercase text-text-secondary">
+        {study.subTitle}
+      </p>
       <ImagePlaceholder
         alt={study.imageAlt}
         width={216}

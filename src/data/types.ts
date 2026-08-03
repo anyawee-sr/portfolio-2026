@@ -1,4 +1,4 @@
-import { routes } from './routes';
+import { routes } from "./routes";
 
 /**
  * Shared link shape for nav + footer content.
@@ -12,6 +12,6 @@ import { routes } from './routes';
  * project's `I`-prefix convention (see CLAUDE.md).
  */
 export type Link =
-  | { type: 'internal'; label: string; to: keyof typeof routes }
-  | { type: 'external'; label: string; href: string }
-  | { type: 'email'; label: string; email: string };
+  | { type: "internal"; label: string; to: keyof typeof routes }
+  | { type: "external"; label: string; href: string }
+  | { type: "email"; label: string; email: string };

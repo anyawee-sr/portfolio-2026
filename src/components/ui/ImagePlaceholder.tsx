@@ -1,6 +1,6 @@
-import Image from 'next/image';
+import Image from "next/image";
 
-import { cn } from '@/lib/cn';
+import { cn } from "@/lib/cn";
 
 export interface IImagePlaceholderProps {
   /** Omit to render the placeholder box; pass once a real asset exists. */
@@ -12,7 +12,7 @@ export interface IImagePlaceholderProps {
   /** Dev-facing hint shown only in the placeholder state, e.g. "illustration 01". */
   label: string;
   className?: string;
-  loading?: 'lazy' | 'eager';
+  loading?: "lazy" | "eager";
 }
 
 export function ImagePlaceholder({
@@ -22,7 +22,7 @@ export function ImagePlaceholder({
   height,
   label,
   className,
-  loading = 'lazy',
+  loading = "lazy",
 }: IImagePlaceholderProps) {
   if (src) {
     return (
@@ -32,21 +32,21 @@ export function ImagePlaceholder({
         width={width}
         height={height}
         loading={loading}
-        className={cn('object-cover', className)}
+        className={cn("object-cover", className)}
       />
     );
   }
 
-  const isDecorative = alt === '';
+  const isDecorative = alt === "";
 
   return (
     <div
       aria-hidden={isDecorative || undefined}
-      role={isDecorative ? undefined : 'img'}
+      role={isDecorative ? undefined : "img"}
       aria-label={isDecorative ? undefined : alt || label}
       className={cn(
-        'flex items-center justify-center rounded-sm border border-dashed border-text-secondary/40 bg-surface-accent/40 type-caption text-text-secondary text-center',
-        className
+        "flex items-center justify-center rounded-sm border border-dashed border-text-secondary/40 bg-surface-accent/40 type-caption text-text-secondary text-center",
+        className,
       )}
       style={{ aspectRatio: `${width} / ${height}` }}
     >

@@ -1,4 +1,4 @@
-import { cn } from '@/lib/cn';
+import { cn } from "@/lib/cn";
 
 export interface ICheckBoxProps {
   /**
@@ -24,10 +24,10 @@ export interface ICheckBoxProps {
    stops reading as an off-register strike and starts reading as a
    layout bug. */
 const X_JITTER = [
-  'translate-x-px -translate-y-px rotate-4',
-  '-translate-x-px rotate-2',
-  'translate-y-px -rotate-3',
-  '-translate-x-px translate-y-px -rotate-5',
+  "translate-x-px -translate-y-px rotate-4",
+  "-translate-x-px rotate-2",
+  "translate-y-px -rotate-3",
+  "-translate-x-px translate-y-px -rotate-5",
 ];
 
 /**
@@ -64,8 +64,8 @@ export function CheckBox({ checked, index = 0 }: ICheckBoxProps) {
       {checked ? (
         <span
           className={cn(
-            'type-h4 font-typewriter absolute inset-0 grid place-items-center font-normal text-text-primary',
-            X_JITTER[index % X_JITTER.length]
+            "type-h4 font-typewriter absolute inset-0 grid place-items-center font-normal text-text-primary",
+            X_JITTER[index % X_JITTER.length],
           )}
         >
           x

@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import Image from "next/image";
 
 /**
  * Red asterisk mark — decorative (skill wall backdrop), never

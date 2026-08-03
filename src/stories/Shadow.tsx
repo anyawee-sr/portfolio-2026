@@ -1,4 +1,4 @@
-import './Shadow.css';
+import "./Shadow.css";
 
 export interface IShadowStep {
   /** Tailwind box-shadow utility class, written in full (e.g. "shadow-xl"). */
@@ -9,14 +9,14 @@ export interface IShadowStep {
 // tokens (see globals.css), so every shadow-* class below resolves
 // straight from Tailwind's own defaults.
 export const SHADOW_STEPS: IShadowStep[] = [
-  { utility: 'shadow-none' },
-  { utility: 'shadow-2xs' },
-  { utility: 'shadow-xs' },
-  { utility: 'shadow-sm' },
-  { utility: 'shadow-md' },
-  { utility: 'shadow-lg' },
-  { utility: 'shadow-xl' },
-  { utility: 'shadow-2xl' },
+  { utility: "shadow-none" },
+  { utility: "shadow-2xs" },
+  { utility: "shadow-xs" },
+  { utility: "shadow-sm" },
+  { utility: "shadow-md" },
+  { utility: "shadow-lg" },
+  { utility: "shadow-xl" },
+  { utility: "shadow-2xl" },
 ];
 
 function ShadowRow({ utility }: IShadowStep) {
@@ -63,13 +63,17 @@ export function ShadowTable({ steps }: IShadowTableProps) {
 
 export function ShadowTokens() {
   return (
-    <section aria-labelledby="shadow-tokens-title" className="flex flex-col gap-3.5">
+    <section
+      aria-labelledby="shadow-tokens-title"
+      className="flex flex-col gap-3.5"
+    >
       <h2 id="shadow-tokens-title" className="type-h2 text-text-primary">
         Shadow
       </h2>
       <p className="type-body-m text-text-secondary max-w-149">
-        This project has no custom shadow tokens — every drop shadow comes straight from
-        Tailwind&apos;s own scale, from shadow-none through shadow-2xl.
+        This project has no custom shadow tokens — every drop shadow comes
+        straight from Tailwind&apos;s own scale, from shadow-none through
+        shadow-2xl.
       </p>
       <ShadowTable steps={SHADOW_STEPS} />
     </section>

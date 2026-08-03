@@ -1,15 +1,15 @@
 // TODO: will hide a title `Colors`
-import type { Meta, StoryObj } from '@storybook/nextjs-vite';
+import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 
-import { ColorTokens } from '@/stories/Color';
+import { ColorTokens } from "@/stories/Color";
 
 const meta = {
-  title: 'Design Tokens/Colors',
+  title: "Design Tokens/Colors",
   component: ColorTokens,
   parameters: {
-    layout: 'padded',
+    layout: "padded",
   },
-  tags: ['autodocs'],
+  tags: ["autodocs"],
 } satisfies Meta<typeof ColorTokens>;
 
 export default meta;
@@ -17,5 +17,5 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Color: Story = {
-  tags: ['!dev'],
+  tags: ["!dev"],
 };

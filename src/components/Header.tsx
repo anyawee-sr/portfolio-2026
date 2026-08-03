@@ -1,18 +1,18 @@
-'use client';
+"use client";
 
-import NextLink from 'next/link';
-import { useEffect, useId, useRef, useState } from 'react';
+import NextLink from "next/link";
+import { useEffect, useId, useRef, useState } from "react";
 
-import { email } from '@/data/links';
-import { nav } from '@/data/nav';
-import { routes } from '@/data/routes';
-import { cn } from '@/lib/cn';
+import { email } from "@/data/links";
+import { nav } from "@/data/nav";
+import { routes } from "@/data/routes";
+import { cn } from "@/lib/cn";
 
-import { Pill } from './ui/Pill';
+import { Pill } from "./ui/Pill";
 
 /** Alternating tilt for the mobile menu's hanging badges — ±3–5deg per CLAUDE.md,
  * via Tailwind's own built-in rotate scale (not a named globals.css utility). */
-const MENU_ROTATIONS = ['-rotate-6', 'rotate-3', '-rotate-3'];
+const MENU_ROTATIONS = ["-rotate-6", "rotate-3", "-rotate-3"];
 
 export function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -26,28 +26,29 @@ export function Header() {
 
   useEffect(() => {
     if (!isOpen) {
-      return
-    };
+      return;
+    }
 
     firstLinkRef.current?.focus();
 
     function onKeyDown(event: KeyboardEvent) {
-      if (event.key === 'Escape') {
+      if (event.key === "Escape") {
         setIsOpen(false);
         buttonRef.current?.focus();
 
         return;
       }
 
-      if (event.key !== 'Tab' || !menuRef.current) {
-        return
-      };
+      if (event.key !== "Tab" || !menuRef.current) {
+        return;
+      }
 
-      const focusableElements = menuRef.current.querySelectorAll<HTMLElement>('a, button');
+      const focusableElements =
+        menuRef.current.querySelectorAll<HTMLElement>("a, button");
 
       if (focusableElements.length === 0) {
-        return
-      };
+        return;
+      }
 
       const first = focusableElements[0];
       const last = focusableElements[focusableElements.length - 1];
@@ -61,8 +62,8 @@ export function Header() {
       }
     }
 
-    document.addEventListener('keydown', onKeyDown);
-    return () => document.removeEventListener('keydown', onKeyDown);
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
   }, [isOpen]);
 
   function handleClickMenu() {
@@ -95,7 +96,7 @@ export function Header() {
       <nav aria-label="Primary" className="hidden md:block">
         <ul className="flex items-center gap-8">
           {nav.map((link) =>
-            link.type === 'internal' ? (
+            link.type === "internal" ? (
               <li key={link.label}>
                 <NextLink
                   href={routes[link.to]}
@@ -104,7 +105,7 @@ export function Header() {
                   {link.label}
                 </NextLink>
               </li>
-            ) : null
+            ) : null,
           )}
         </ul>
       </nav>
@@ -116,7 +117,7 @@ export function Header() {
       <button
         ref={buttonRef}
         type="button"
-        aria-label={isOpen ? 'Close menu' : 'Open menu'}
+        aria-label={isOpen ? "Close menu" : "Open menu"}
         aria-expanded={isOpen}
         aria-controls={menuId}
         onClick={handleToggleMenu}
@@ -125,19 +126,22 @@ export function Header() {
         <span
           aria-hidden="true"
           className={cn(
-            'h-0.5 w-6 bg-brand transition-transform duration-200',
-            isOpen && 'translate-y-2 rotate-45'
+            "h-0.5 w-6 bg-brand transition-transform duration-200",
+            isOpen && "translate-y-2 rotate-45",
           )}
         />
         <span
           aria-hidden="true"
-          className={cn('h-0.5 w-6 bg-brand transition-opacity duration-200', isOpen && 'opacity-0')}
+          className={cn(
+            "h-0.5 w-6 bg-brand transition-opacity duration-200",
+            isOpen && "opacity-0",
+          )}
         />
         <span
           aria-hidden="true"
           className={cn(
-            'h-0.5 w-6 bg-brand transition-transform duration-200',
-            isOpen && '-translate-y-2 -rotate-45'
+            "h-0.5 w-6 bg-brand transition-transform duration-200",
+            isOpen && "-translate-y-2 -rotate-45",
           )}
         />
       </button>
@@ -148,26 +152,26 @@ export function Header() {
           ref={menuRef}
           onAnimationEnd={handleMenuAnimationEnd}
           className={cn(
-            'absolute right-4 top-full -mt-2 flex flex-col items-end gap-3 bg-transparent md:hidden',
-            !isOpen && 'is-closing pointer-events-none'
+            "absolute right-4 top-full -mt-2 flex flex-col items-end gap-3 bg-transparent md:hidden",
+            !isOpen && "is-closing pointer-events-none",
           )}
         >
           {nav.map((link, i) =>
-            link.type === 'internal' ? (
+            link.type === "internal" ? (
               <NextLink
                 key={link.label}
                 ref={i === 0 ? firstLinkRef : undefined}
                 href={routes[link.to]}
                 onClick={handleClickMenu}
                 className={cn(
-                  'menu-badge type-h4 uppercase flex min-h-11 items-center rounded-xl bg-brand px-4 text-surface-base shadow-md',
-                  isOpen ? 'animate-pop-in' : 'animate-pop-out',
-                  MENU_ROTATIONS[i % MENU_ROTATIONS.length]
+                  "menu-badge type-h4 uppercase flex min-h-11 items-center rounded-xl bg-brand px-4 text-surface-base shadow-md",
+                  isOpen ? "animate-pop-in" : "animate-pop-out",
+                  MENU_ROTATIONS[i % MENU_ROTATIONS.length],
                 )}
               >
                 {link.label}
               </NextLink>
-            ) : null
+            ) : null,
           )}
         </div>
       ) : null}

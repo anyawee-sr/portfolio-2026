@@ -11,9 +11,9 @@
  * CTA has a real (if 404-for-now) destination instead of `href="#"`.
  */
 export const routes = {
-  work: '/#work',
-  aboutMe: '/#about-me',
-  workAll: '/work',
+  work: "/#work",
+  aboutMe: "/#about-me",
+  workAll: "/work",
 } as const;
 
 /**

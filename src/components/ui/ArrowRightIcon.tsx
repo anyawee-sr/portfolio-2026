@@ -1,4 +1,4 @@
-import type { SVGProps } from 'react';
+import type { SVGProps } from "react";
 
 // TODO: will update arrow
 export function ArrowRightIcon(props: SVGProps<SVGSVGElement>) {
