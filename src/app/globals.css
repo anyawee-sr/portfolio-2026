@@ -277,26 +277,49 @@
   animation: pop-out 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) both;
 }
 
-body {
-  background: var(--color-surface-base);
-  color: var(--color-text-primary);
-  /* NOT `font-family: var(--font-sans)` — --font-sans is a default
-     Tailwind v4 theme key; redefining it under `@theme inline` (above)
-     makes Tailwind inline the value into the `font-sans` utility but
-     never emit the custom property to :root. var(--font-sans) here
-     would then be invalid-at-computed-value-time and the whole
-     declaration drops, falling back to Tailwind's own default stack. */
-  @apply font-sans;
-  -webkit-font-smoothing: antialiased;
+/* @layer base — plain element-selector defaults belong in Tailwind's
+   `base` layer, not left unlayered. Cascade layers rank strictly by
+   layer order regardless of selector specificity: an unlayered rule
+   beats *any* layered rule, including utility classes like
+   `text-surface-base`, no matter how specific. Without this `@layer`,
+   every `<a className="text-*">` in the app would be silently
+   overridden back to brand-red by the bare `a` rule below. */
+@layer base {
+  body {
+    background: var(--color-surface-base);
+    color: var(--color-text-primary);
+    /* NOT `font-family: var(--font-sans)` — --font-sans is a default
+       Tailwind v4 theme key; redefining it under `@theme inline` (above)
+       makes Tailwind inline the value into the `font-sans` utility but
+       never emit the custom property to :root. var(--font-sans) here
+       would then be invalid-at-computed-value-time and the whole
+       declaration drops, falling back to Tailwind's own default stack. */
+    @apply font-sans;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a {
+    color: var(--color-brand);
+  }
+
+  ::selection {
+    background: var(--color-brand);
+    color: var(--color-surface-base);
+  }
 }
 
-a {
-  color: var(--color-brand);
+/* accessibility floor — every focusable element needs a visible
+   ring (WCAG 2.4.7). Default ring reads on the cream/white surfaces
+   used everywhere except the footer; `.on-brand` (applied to the
+   footer, which sits on `--color-brand`) flips the ring color so it
+   still reads against red instead of disappearing into it. */
+:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 2px;
 }
 
-::selection {
-  background: var(--color-brand);
-  color: var(--color-surface-base);
+.on-brand :focus-visible {
+  outline-color: var(--color-surface-base);
 }
 
 /* accessibility floor — every animation in this project must
