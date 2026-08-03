@@ -1,0 +1,32 @@
+/* AboutMe.css — wired via @import in globals.css, not imported by
+   AboutMe.tsx — see globals manifest.
+
+   Layout for the Firstname/Lastname/Nickname/Address/Nationality
+   fields grid in <AboutMe>. Mirrors design-ref/about-me-tldr.dc.html's
+   own grid-template-areas approach on a 12-column grid (see CLAUDE.md
+   decision log) rather than the equal-width-column approximation this
+   replaced. Area names are deliberately two letters (not the full
+   IAboutMeField id) so all 12 columns line up and the strings below
+   read as pictures of the layout, not just a value to trust — the
+   .about-field-* rules underneath are the fn/ln/nk/ad/nt legend, each
+   pairing a token with the full id it belongs to. */
+.about-fields {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-areas:
+    "fn fn fn fn ln ln ln ln ln ln ln ln"
+    "nk nk nk nk nk nk nt nt nt nt nt nt"
+    "ad ad ad ad ad ad ad ad ad ad ad ad";
+
+  @variant md {
+    grid-template-areas:
+      "fn fn fn ln ln ln ln ln ln nk nk nk"
+      "ad ad ad ad ad ad ad ad ad nt nt nt";
+  }
+}
+
+.about-field-firstname   { grid-area: fn; }
+.about-field-lastname    { grid-area: ln; }
+.about-field-nickname    { grid-area: nk; }
+.about-field-address     { grid-area: ad; }
+.about-field-nationality { grid-area: nt; }

@@ -1,5 +1,10 @@
 import type { Link } from './types';
 
+/**
+ * NOTE:
+ * aboutMe.ts's contact.rows intentionally duplicates these values
+ * — update both if an email or handle changes.
+ */
 export const email: Extract<Link, { type: 'email' }> = {
   type: 'email',
   label: 'Email',
