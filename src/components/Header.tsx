@@ -222,8 +222,8 @@ export function Header() {
         <span
           aria-hidden="true"
           className={cn(
-            "h-0.5 w-6 bg-brand transition-opacity duration-200",
-            isOpen && "opacity-0",
+            "h-0.5 w-6 bg-brand",
+            isOpen ? "opacity-0" : "transition-opacity duration-100 ease-out",
           )}
         />
         <span
