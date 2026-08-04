@@ -17,12 +17,47 @@ const MENU_ROTATIONS = ["-rotate-6", "rotate-3", "-rotate-3"];
 export function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [isMenuMounted, setIsMenuMounted] = useState(false);
+  const [activeHash, setActiveHash] = useState<string | null>(null);
 
   const menuId = useId();
 
   const buttonRef = useRef<HTMLButtonElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
   const firstLinkRef = useRef<HTMLAnchorElement>(null);
+
+  // TODO: this is scroll-spy over hash anchors on a single-page layout —
+  // once nav links point to real pages instead of `/#work`/`/#about-me`,
+  // swap this for pathname-based active matching (usePathname) and delete
+  // the IntersectionObserver.
+  useEffect(() => {
+    const sectionIds = nav
+      .filter((link) => link.type === "internal")
+      .map((link) => routes[link.to].split("#")[1])
+      .filter((hash): hash is string => Boolean(hash));
+
+    const sections = sectionIds
+      .map((id) => document.getElementById(id))
+      .filter((section): section is HTMLElement => section !== null);
+
+    if (sections.length === 0) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries.find((entry) => entry.isIntersecting);
+
+        if (visible) {
+          setActiveHash(visible.target.id);
+        }
+      },
+      { rootMargin: "-96px 0px -60% 0px", threshold: 0 },
+    );
+
+    sections.forEach((section) => observer.observe(section));
+
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     if (!isOpen) {
@@ -72,6 +107,42 @@ export function Header() {
     buttonRef.current?.focus();
   }
 
+  // next/link skips its scroll-into-view when the target hash already
+  // matches the current URL (e.g. user scrolled away from #work by hand,
+  // then clicks "Work" again — URL never changed, so next/link no-ops).
+  // Scroll manually so the link always jumps, regardless of URL state.
+  function handleNavLinkClick(
+    event: React.MouseEvent<HTMLAnchorElement>,
+    hash: string,
+  ) {
+    if (
+      event.defaultPrevented ||
+      event.button !== 0 ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey
+    ) {
+      return;
+    }
+
+    const target = document.getElementById(hash);
+
+    if (!target) {
+      return;
+    }
+
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    target.scrollIntoView({
+      behavior: prefersReducedMotion ? "auto" : "smooth",
+      block: "start",
+    });
+    setActiveHash(hash);
+  }
+
   function handleToggleMenu() {
     const nextIsOpen = !isOpen;
     setIsOpen(nextIsOpen);
@@ -95,18 +166,36 @@ export function Header() {
 
       <nav aria-label="Primary" className="hidden md:block">
         <ul className="flex items-center gap-8">
-          {nav.map((link) =>
-            link.type === "internal" ? (
+          {nav.map((link) => {
+            if (link.type !== "internal") {
+              return null;
+            }
+
+            const hash = routes[link.to].split("#")[1];
+            const isActive = hash === activeHash;
+
+            return (
               <li key={link.label}>
                 <NextLink
                   href={routes[link.to]}
-                  className="type-label uppercase text-text-secondary transition-colors hover:text-brand"
+                  onClick={
+                    hash
+                      ? (event) => handleNavLinkClick(event, hash)
+                      : undefined
+                  }
+                  aria-current={isActive ? "true" : undefined}
+                  className={cn(
+                    "type-label uppercase transition-colors hover:text-brand",
+                    isActive
+                      ? "underline decoration-brand decoration-wavy decoration-2 underline-offset-4 text-brand"
+                      : "text-text-secondary",
+                  )}
                 >
                   {link.label}
                 </NextLink>
               </li>
-            ) : null,
-          )}
+            );
+          })}
         </ul>
       </nav>
 
@@ -156,13 +245,25 @@ export function Header() {
             !isOpen && "is-closing pointer-events-none",
           )}
         >
-          {nav.map((link, i) =>
-            link.type === "internal" ? (
+          {nav.map((link, i) => {
+            if (link.type !== "internal") {
+              return null;
+            }
+
+            const hash = routes[link.to].split("#")[1];
+
+            return (
               <NextLink
                 key={link.label}
                 ref={i === 0 ? firstLinkRef : undefined}
                 href={routes[link.to]}
-                onClick={handleClickMenu}
+                onClick={(event) => {
+                  if (hash) {
+                    handleNavLinkClick(event, hash);
+                  }
+
+                  handleClickMenu();
+                }}
                 className={cn(
                   "menu-badge type-h4 uppercase flex min-h-11 items-center rounded-xl bg-brand px-4 text-surface-base shadow-md",
                   isOpen ? "animate-pop-in" : "animate-pop-out",
@@ -171,8 +272,8 @@ export function Header() {
               >
                 {link.label}
               </NextLink>
-            ) : null,
-          )}
+            );
+          })}
         </div>
       ) : null}
     </header>
