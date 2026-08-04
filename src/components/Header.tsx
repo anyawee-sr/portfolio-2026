@@ -7,6 +7,7 @@ import { email } from "@/data/links";
 import { nav } from "@/data/nav";
 import { routes } from "@/data/routes";
 import { cn } from "@/lib/cn";
+import { smoothScrollTo } from "@/lib/smoothScrollTo";
 
 import { Pill } from "./ui/Pill";
 
@@ -132,14 +133,7 @@ export function Header() {
       return;
     }
 
-    const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-
-    target.scrollIntoView({
-      behavior: prefersReducedMotion ? "auto" : "smooth",
-      block: "start",
-    });
+    smoothScrollTo(target);
     setActiveHash(hash);
   }
 
