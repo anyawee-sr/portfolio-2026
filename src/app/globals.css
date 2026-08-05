@@ -71,6 +71,10 @@
      type-* utility (faux-bold). */
   --font-typewriter: var(--font-special-elite), monospace;
 
+  --font-mono:
+    ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
+    "Liberation Mono", monospace;
+
   /* spacing — no named tokens here: everything is a multiple of
      Tailwind's own --spacing base (0.25rem), so gap, width, height,
      max-width, min-height, and size utilities already cover any
@@ -183,6 +187,13 @@
   line-height: 1;
   font-weight: 400;
   text-wrap: balance;
+}
+
+@utility type-code {
+  font-family: var(--font-mono);
+  font-size: 0.825rem; /* 13.2px */
+  line-height: 1.7;
+  font-weight: 400;
 }
 
 /* ============================================================
