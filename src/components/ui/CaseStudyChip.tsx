@@ -2,13 +2,15 @@ import type { ICaseStudy } from "@/data/caseStudies";
 import { cn } from "@/lib/cn";
 
 /**
- * Discipline chip on each case study card — 'frontend' solid, 'editor' outline.
- * Lives alongside CaseStudyCard.tsx (not `ui/`) since only that card uses it.
+ * Discipline chip — 'frontend' solid, 'editor' outline. Shared between
+ * CaseStudyCard.tsx (Work section grid) and WorkDetailHero.tsx (/work/[slug]
+ * hero band), both driven by the same `study.type` value.
  */
 export interface ICaseStudyChipProps {
   variant: ICaseStudy["type"];
 }
 
+// TODO: maybe change name?
 export function CaseStudyChip({ variant }: ICaseStudyChipProps) {
   return (
     <span
