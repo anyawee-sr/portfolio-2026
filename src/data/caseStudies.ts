@@ -13,7 +13,7 @@ export interface ICaseStudy {
   imageAlt: string;
 }
 
-export const caseStudies: ICaseStudy[] = [
+export const caseStudies = [
   {
     slug: "data-layer-new-entity",
     type: "frontend",
@@ -26,7 +26,8 @@ export const caseStudies: ICaseStudy[] = [
     slug: "new-member-on-the-map",
     type: "frontend",
     title: "Section: A New Member on the Map",
-    subTitle: "This new entity needed a real life on the map — hidden until its moment, surfacing on highlight, clickable only when the venue allowed.",
+    subTitle:
+      "This new entity needed a real life on the map — hidden until its moment, surfacing on highlight, clickable only when the venue allowed.",
     imageId: "case-02",
     imageAlt: "",
   },
@@ -34,8 +35,17 @@ export const caseStudies: ICaseStudy[] = [
     slug: "buildings-refuse-to-fade",
     type: "frontend",
     title: "When Buildings Refuse to Fade ",
-    subTitle: "A 3D building model was supposed to fade on zoom, revealing the floor plan inside — but the fade fired inconsistently.",
+    subTitle:
+      "A 3D building model was supposed to fade on zoom, revealing the floor plan inside — but the fade fired inconsistently.",
     imageId: "case-03",
     imageAlt: "",
   },
-];
+] as const satisfies readonly ICaseStudy[];
+
+/**
+ * Union of every valid case study slug, derived from `caseStudies` itself —
+ * never hand-maintained. Used by the `/work/[slug]` body registry
+ * (`Record<TCaseStudySlug, ComponentType>`, see docs/adr/0001) so adding a
+ * case study without writing its body component fails at compile time.
+ */
+export type TCaseStudySlug = (typeof caseStudies)[number]["slug"];
