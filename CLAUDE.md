@@ -377,9 +377,16 @@ utility เดิมของ Tailwind (`font-bold`, `leading-tight`, `tracking-
 ถ้าเจอ pattern ที่ใช้ซ้ำบ่อยจนควรมี token เฉพาะ ให้ไปเพิ่มใน `globals.css` แทนการ hand-roll
 
 เดิมพันเดียวกันนี้ใช้กับพื้นหลังแบบมีลาย: `surface-*` (`@utility` เช่นกัน) มัด `background-color` +
-`background-image` + `background-size` ไว้ในคลาสเดียว (เช่น `surface-dotted` = พื้นสี `--color-surface-dotted`
-บวกลายจุดจาก `--dot-tint`) — **ห้าม** เอา `bg-*` มาผสมกับ `background-image` เขียนเองใน component
-ถ้าต้องการพื้นลายแบบใหม่ที่ยังไม่มี ให้เพิ่ม `@utility surface-*` ตัวใหม่ใน `globals.css` ตามรูปแบบเดียวกัน
+`background-image` + `background-size` ไว้ในคลาสเดียว (เช่น `surface-graph`, `surface-texture`) —
+**ห้าม** เอา `bg-*` มาผสมกับ `background-image` เขียนเองใน component ถ้าต้องการพื้นลายแบบใหม่ที่ยังไม่มี
+ให้เพิ่ม `@utility surface-*` ตัวใหม่ใน `globals.css` ตามรูปแบบเดียวกัน
+
+**ข้อยกเว้น: `surface-dotted`** ไม่มี `background-color` ของตัวเอง — มีแค่ลายจุดจาก `--dot-tint`
+เท่านั้น (`background-image` + `background-size`) เพราะลายจุดนี้ตั้งใจให้ใช้ซ้ำบนพื้นสีต่างกันได้
+(`bg-surface-base surface-dotted`, `bg-surface-accent surface-dotted` ฯลฯ) **ต้องคู่กับ `bg-*` เสมอ**
+ไม่งั้นจะไม่มีสีพื้นเลย — และห้ามเติม `background-color` กลับเข้าไปใน `@utility surface-dotted`
+เพราะ Tailwind v4 ไม่ได้ตัดสิน precedence ระหว่าง utility สองตัวที่ตั้ง CSS property เดียวกันจาก
+ลำดับ class ใน JSX ถ้า `surface-dotted` มีสีของตัวเองอยู่ด้วย จะชนกับ `bg-*` ที่ประกบมาแบบเดาผลไม่ได้
 
 ---
 

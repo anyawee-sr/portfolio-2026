@@ -22,7 +22,7 @@
   --neutral-500: #6B615C; /* warm gray */
   --neutral-50: #FEF6F3; /* cream */
   --neutral-25: #FDFAF6; /* card white */
-  --neutral-20: #FCFCF8; /* dotted-surface base */
+  --neutral-20: #FCFCF8; /* photo-surface fallback — surface-graph's bg-color while its background image loads */
   --pink-100: #FDE6E0; /* pink tint */
   --white: #FFFFFF; /* pure white — eye highlights, distinct from cream neutral-50 */
   --slate-100: #EEF1F5; /* eyeball gradient mid stop */
@@ -51,8 +51,8 @@
   --color-text-secondary: var(--neutral-500);
   --color-surface-base: var(--neutral-50);
   --color-surface-card: var(--neutral-25);
-  --color-surface-dotted: var(--neutral-20);
   --color-surface-accent: var(--pink-100);
+  --color-surface-photo-fallback: var(--neutral-20);
 
   /* font family — Montserrat primary, Bai Jamjuree (Thai) then
      system fallbacks, in that order */
@@ -193,8 +193,8 @@
    pairing a bg-* color utility with a hand-rolled background-image.
    ============================================================ */
 @utility surface-dotted {
-  background-color: var(--color-surface-dotted);
-  background-image: radial-gradient(var(--dot-tint) 1px, transparent 1px);
+  /* Pattern only — no background-color of its own.*/
+  background-image: radial-gradient(var(--dot-tint) 0.5px, transparent 1px);
   background-size: calc(var(--spacing) * 5) calc(var(--spacing) * 5);
 }
 
@@ -202,7 +202,7 @@
   /* graph-paper backdrop — skill wall. Crumpled graph-paper photo (asset)
      replaces the old CSS-drawn grid + corner washes. background-color is
      a fallback base while the image loads / if it fails to load. */
-  background-color: var(--color-surface-dotted);
+  background-color: var(--color-surface-photo-fallback);
   background-image: url("/images/skills/background.webp");
   background-size: cover;
   background-position: center;
