@@ -8,8 +8,11 @@ function easeInOutCubic(t: number): number {
 
 /** rAF-driven scroll with a custom easing curve. Falls back to an instant
  * jump under prefers-reduced-motion. Honors the target's scroll-margin-top
- * (e.g. `scroll-mt-20`) the same way native scrollIntoView does. */
-export function smoothScrollTo(target: HTMLElement) {
+ * (e.g. `scroll-mt-20`) the same way native scrollIntoView does.
+ * `onComplete` fires once the scroll settles (immediately in the
+ * reduced-motion branch), so callers can know when it's safe to resume
+ * anything that was suspended for the duration of the scroll. */
+export function smoothScrollTo(target: HTMLElement, onComplete?: () => void) {
   const prefersReducedMotion = window.matchMedia(
     "(prefers-reduced-motion: reduce)",
   ).matches;
@@ -22,6 +25,7 @@ export function smoothScrollTo(target: HTMLElement) {
 
   if (prefersReducedMotion) {
     window.scrollTo({ top: targetY });
+    onComplete?.();
     return;
   }
 
@@ -40,6 +44,8 @@ export function smoothScrollTo(target: HTMLElement) {
 
     if (progress < 1) {
       requestAnimationFrame(step);
+    } else {
+      onComplete?.();
     }
   }
 

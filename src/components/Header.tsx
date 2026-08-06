@@ -1,6 +1,7 @@
 "use client";
 
 import NextLink from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useId, useRef, useState } from "react";
 
 import { email } from "@/data/links";
@@ -21,15 +22,26 @@ export function Header() {
   const [activeHash, setActiveHash] = useState<string | null>(null);
 
   const menuId = useId();
+  const pathname = usePathname();
 
   const buttonRef = useRef<HTMLButtonElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
   const firstLinkRef = useRef<HTMLAnchorElement>(null);
+  // Suspended while a nav-click-triggered smooth scroll is in flight, so the
+  // observer doesn't flip activeHash to whatever section briefly passes
+  // under the viewport on the way to the target (e.g. clicking "About Me"
+  // from the hero shouldn't flash "Work" as it scrolls past #work).
+  const isProgrammaticScrollRef = useRef(false);
 
-  // TODO: this is scroll-spy over hash anchors on a single-page layout —
-  // once nav links point to real pages instead of `/#work`/`/#about-me`,
-  // swap this for pathname-based active matching (usePathname) and delete
-  // the IntersectionObserver.
+  // This is scroll-spy over hash anchors, which only exist on the landing
+  // page (`/#work`, `/#about-me`) — once nav links point to real pages
+  // instead of hash anchors, swap this for pathname-based active matching
+  // and delete the IntersectionObserver. `pathname` is a dependency purely
+  // to re-arm the observer when navigating back to `/` from a page (like
+  // `/work/[slug]`) where the target sections don't exist — Header lives in
+  // the root layout and never unmounts across client-side navigation, so
+  // without this the observer set up on first mount would never look for
+  // the sections again.
   useEffect(() => {
     const sectionIds = nav
       .filter((link) => link.type === "internal")
@@ -40,25 +52,47 @@ export function Header() {
       .map((id) => document.getElementById(id))
       .filter((section): section is HTMLElement => section !== null);
 
+    // Deliberately not resetting activeHash here. On pages without these
+    // sections (e.g. `/work/[slug]`), this lets activeHash keep whatever
+    // value it already had: still "work" if the user navigated in from a
+    // Work card on the landing page (so the highlight persists), or still
+    // null if they loaded the detail page directly (so nothing highlights).
     if (sections.length === 0) {
       return;
     }
 
+    let cancelled = false;
+    const visible = new Set<string>();
+
     const observer = new IntersectionObserver(
       (entries) => {
-        const visible = entries.find((entry) => entry.isIntersecting);
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            visible.add(entry.target.id);
+          } else {
+            visible.delete(entry.target.id);
+          }
+        });
 
-        if (visible) {
-          setActiveHash(visible.target.id);
+        if (cancelled || isProgrammaticScrollRef.current) {
+          return;
         }
+
+        // sectionIds is DOM order (work → about-me), so the first id still
+        // marked visible is the topmost section on screen; none visible
+        // means we're above them (hero/skills) — no active nav item.
+        setActiveHash(sectionIds.find((id) => visible.has(id)) ?? null);
       },
       { rootMargin: "-96px 0px -60% 0px", threshold: 0 },
     );
 
     sections.forEach((section) => observer.observe(section));
 
-    return () => observer.disconnect();
-  }, []);
+    return () => {
+      cancelled = true;
+      observer.disconnect();
+    };
+  }, [pathname]);
 
   useEffect(() => {
     if (!isOpen) {
@@ -133,8 +167,14 @@ export function Header() {
       return;
     }
 
-    smoothScrollTo(target);
+    // Set the destination as active immediately and suspend the observer
+    // for the duration of the scroll — see isProgrammaticScrollRef above.
+    isProgrammaticScrollRef.current = true;
     setActiveHash(hash);
+
+    smoothScrollTo(target, () => {
+      isProgrammaticScrollRef.current = false;
+    });
   }
 
   function handleToggleMenu() {
