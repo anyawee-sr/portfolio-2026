@@ -1,69 +1,62 @@
 import { WorkCode } from "../WorkCode";
-import { WorkImage } from "../WorkImage";
 import { WorkText } from "../WorkText";
 import { WorkSection } from "../WorkSection";
 
 export function NewMemberOnTheMap() {
   return (
     <>
-      <WorkSection heading="Overview">
+      <WorkSection heading="The problem">
         <WorkText
           paragraphs={[
-            "Once the new entity type existed in the data layer, it needed a real presence on the map — not just a row in a table.",
+            "A section behaves like nothing else on the platform: hidden by default, showing up only when highlighted instead of hanging around all the time, and clickable only if the venue says so. And when it does get highlighted (its active state), a marker pops up with it — and the marker itself is customizable, showing either a category icon or a logo. So getting the data model right was only half the job; the map also had to know how to show, hide, and style the thing.",
           ]}
         />
       </WorkSection>
 
-      <WorkSection heading="The Challenge">
+      <WorkSection heading="Hidden until highlighted">
         <WorkText
           paragraphs={[
-            "The marker had three states to respect: hidden by default, surfaced only when its parent venue was highlighted, and clickable only for venues that had opted in. Getting any one of those wrong meant either a map that felt cluttered, or a marker that looked interactive but silently did nothing.",
+            "Every section starts out backstage and only steps into the light when highlighted — whether the user taps it right on the map, or searches for it and selects it.",
+
+            "Along the way, a couple of unexpected freebies turned up — a little bug and a typo, both hiding in the code: first, a stale-opacity reset using .find, which only ever reset one object, when there could actually be more — swapped in .filter and done.",
+
+            "Second, a copy-paste typo in the highlight controller's function name itself. These two bombs had been buried there for ages without anyone knowing — just tiny things, but hey, cleaner code always feels nice."
           ]}
         />
       </WorkSection>
 
-      <WorkSection heading="Approach & Build">
+      <WorkSection heading="So, how should this look?">
         <WorkText
           paragraphs={[
-            "Visibility and interactivity were split into two independent flags instead of one combined state — so a marker could be visible-but-inert during a highlight preview, and only become clickable once the venue's settings allowed it.",
+            "Next problem: a section just didn't fit in with any existing marker. Some come with a logo, others have nothing at all — one design wasn't going to cut it for both. Instead of writing a renderer from scratch, I borrowed marker ideas from existing feature types and remixed them into two flavors: a sprite-based logo card, and a simple icon marker showing the category icon (also the fallback for sections without a logo). Each has its own material and altitude handling, so it floats above its zone just right, every time.",
+
+            "This part was nearly all the way there before a teammate jumped in to carry it across the finish line — credit where credit's due 🙏",
           ]}
         />
         <WorkCode
-          code={`function getMarkerState(venue: Venue, highlightedId: string | null) {
-  const isVisible = venue.id === highlightedId;
-  const isClickable = isVisible && venue.allowsDirectAccess;
-
-  return { isVisible, isClickable };
+          code={`// Illustrative — not the real code
+function buildSectionMarker(section: Section) {
+  return section?.Logo
+    ? createLogoMarker(section)
+    : createIconMarker(section);
 }`}
         />
       </WorkSection>
 
-      <WorkSection heading="Details & Variants">
+      <WorkSection heading="Bonus: refactoring the shared utilities">
         <WorkText
           paragraphs={[
-            "Two marker treatments were tested before landing on the current one — a solid pin that popped in immediately, and a fade-in ring that echoed the venue's own highlight color.",
+            "This work also opened a nice window to refactor a shared utility that draws outlines around extruded shapes on the map — a chance to put some maptalks.three know-how to work, getting the outline to hug the top or bottom face of a shape just right.",
+
+            "Previously, the top and bottom outlines lived under one flag: flip it on and you always got both, like it or not. It's now split into two independent options, with every existing configuration updated so everything behaves exactly as before — nothing old got shaken, but new flexibility came along for free."
           ]}
         />
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-          <WorkImage
-            alt=""
-            width={360}
-            height={240}
-            label="marker variant — solid pin"
-          />
-          <WorkImage
-            alt=""
-            width={360}
-            height={240}
-            label="marker variant — fade-in ring"
-          />
-        </div>
       </WorkSection>
 
       <WorkSection heading="Result">
         <WorkText
           paragraphs={[
-            "The fade-in ring shipped — it read as part of the highlight itself instead of a separate UI element competing for attention on an already busy map.",
+            "A section now hits every beat the way it should: lying low until its cue, stepping out through the same highlight mechanism the rest of the platform uses, running on its own renderer, and rocking a look of its own — icon marker or logo card, depending on render type."
           ]}
         />
       </WorkSection>

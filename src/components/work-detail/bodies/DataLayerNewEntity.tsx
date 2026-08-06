@@ -8,43 +8,57 @@ export function DataLayerNewEntity() {
       <WorkSection heading="Overview">
         <WorkText
           paragraphs={[
-            "Product wanted to list a new point-of-interest type on the map — one that didn't map cleanly onto any entity already in the schema.",
+            "A venue needed a new kind of point of interest — one that didn't fit any feature type we had on the platform. I figured the right move was to nail down the data contract first, before any UI existed, then build the admin tooling on top of a schema that wasn't going to move. Not the other way around.",
           ]}
         />
       </WorkSection>
 
-      <WorkSection heading="The Challenge">
+      <WorkSection heading="The problem">
         <WorkText
           paragraphs={[
-            "The existing entity table assumed a single set of opening hours and a single location per record. This new type could have several access points active on different schedules, and none of the current consumers of the schema were built to expect that.",
-            "Any change had to keep every existing entity — and every screen that already read from that table — working exactly as before.",
+            "We already had a bunch of feature types. Then one day a new requirement landed: show 'named zones' on the map — stuff like a food-court zone, a menswear zone, a womenswear zone. None of our existing models fit. And this thing didn't exist anywhere yet — not in the schema, not in the admin panel.",
           ]}
         />
       </WorkSection>
 
-      <WorkSection heading="Approach & Build">
+      <WorkSection heading="Why 'section'">
         <WorkText
           paragraphs={[
-            "Rather than widening the shared entity type, the new fields were modeled as an additive discriminated union member — invisible to code that only knew the old shape.",
+            "We talked it over as a team and went back to the Indoor Mapping Data Format (IMDF), which we'd been treating as our standard all along. Turns out it has a 'section' feature type, and the definition matched our problem almost perfectly. Sticking to the standard from day one meant the new entity had a proper home in the system — not some weird thing we made up and named ourselves.",
           ]}
+        />
+      </WorkSection>
+
+      <WorkSection heading="Schema first">
+        <WorkText
+          paragraphs={["Before touching any UI, the data contract had to exist. So schema and validator first. The fields came out of a team brainstorm — to name a few: a flag for whether the section shows up on the map, a flag for whether you can click it, a reference id for generating QR deep-links you can scan from a kiosk, and a keyword field for search. Everything gets validated with the same conventions as our existing content types, so the new entity just blends in with the rest of the system."]}
         />
         <WorkCode
-          code={`type Entity =
-  | { kind: "venue"; hours: Hours }
-  | { kind: "poi-multi-access"; accessPoints: AccessPoint[] };
+          code={`// Illustrative — not the real schema
+const sectionSchema = {
+  name: i18nText().required(),
+  level: number().required()
+  isClickable: boolean().default(true),
+  referenceId: string().optional(),   // powers a QR deep-link on kiosk
+  keywords: i18nText().optional(),    // searchable, distinct from display name
+};`}
+        />
+      </WorkSection>
 
-function isMultiAccess(
-  entity: Entity,
-): entity is Extract<Entity, { kind: "poi-multi-access" }> {
-  return entity.kind === "poi-multi-access";
-}`}
+      <WorkSection heading="Admin UI, once the contract was settled">
+        <WorkText
+          paragraphs={[
+            "Once the schema was in place, the CMS forms were honestly the easy part — just expose the contract to content editors. Same validation rules, same field shapes, no guessing what the API would accept.",
+
+            "I also took the chance to refactor and clean up the related code in the CMS repo while I was in there, so the existing structure could take on a new feature type without piling on copy-paste. Doing the service side first meant I never had to go back and redo the admin UI when the data model shifted. It was just integration, not discovery.",
+          ]}
         />
       </WorkSection>
 
       <WorkSection heading="Result">
         <WorkText
           paragraphs={[
-            "The new entity type shipped without touching a single existing query or component — every consumer that only handled the old shape kept compiling and kept working.",
+            "Sections are now manageable end to end: content editors create and edit them entirely from the admin panel, and the service enforces the same schema and permissions as every other content type on the platform. Exactly how it should be.",
           ]}
         />
       </WorkSection>
