@@ -12,7 +12,7 @@ export function WorkSection({ heading, children }: IWorkSectionProps) {
   return (
     <section
       aria-labelledby={headingId}
-      className="mx-auto max-w-160 px-4 py-10 md:px-0"
+      className="mx-auto max-w-180 px-4 py-10 md:px-0"
     >
       <h2 id={headingId} className="type-h2 text-brand">
         {heading}
