@@ -55,11 +55,13 @@ export function BuildingsRefuseToFade() {
 }
 `}
         />
+
+        {/* TODO: maybe remove technical content from this paragraph */}
         <WorkText
           paragraphs={[
             "Sounds like it should just work, right? Well.",
 
-            "Turns out the library evaluates those stops exactly once — when _prepareSymbol runs during symbol setup. Not on every zoom change. Once. After that, getUniforms() just keeps serving up the same stale number, frozen at whatever zoom the marker (3D model) was born at.",
+            "Turns out the library evaluates those stops exactly once — when `_prepareSymbol` runs during symbol setup. Not on every zoom change. Once. After that, `getUniforms()` just keeps serving up the same stale number, frozen at whatever zoom the marker (3D model) was born at.",
 
             "And that explains the one-way weirdness perfectly:",
           ]}
