@@ -1,4 +1,5 @@
 import { WorkCode } from "../WorkCode";
+import { WorkLink } from "../WorkLink";
 import { WorkText } from "../WorkText";
 import { WorkSection } from "../WorkSection";
 
@@ -46,7 +47,16 @@ function buildSectionMarker(section: Section) {
       <WorkSection heading="Bonus: refactoring the shared utilities">
         <WorkText
           paragraphs={[
-            "This work also opened a nice window to refactor a shared utility that draws outlines around extruded shapes on the map — a chance to put some maptalks.three know-how to work, getting the outline to hug the top or bottom face of a shape just right.",
+            <>
+              This work also opened a nice window to refactor a shared
+              utility that draws outlines around extruded shapes on the map —
+              a chance to put some{" "}
+              <WorkLink href="https://maptalks.org/maptalks.three/docs/dist/api/threelayer.html">
+                maptalks.three
+              </WorkLink>{" "}
+              know-how to work, getting the outline to hug the top or bottom
+              face of a shape just right.
+            </>,
 
             "Previously, the top and bottom outlines lived under one flag: flip it on and you always got both, like it or not. It's now split into two independent options, with every existing configuration updated so everything behaves exactly as before — nothing old got shaken, but new flexibility came along for free."
           ]}

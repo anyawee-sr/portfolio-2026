@@ -1,4 +1,5 @@
 import { WorkCode } from "../WorkCode";
+import { WorkLink } from "../WorkLink";
 import { WorkText } from "../WorkText";
 import { WorkSection } from "../WorkSection";
 
@@ -24,7 +25,18 @@ export function DataLayerNewEntity() {
       <WorkSection heading="Why 'section'">
         <WorkText
           paragraphs={[
-            "We talked it over as a team and went back to the Indoor Mapping Data Format (IMDF), which we'd been treating as our standard all along. Turns out it has a 'section' feature type, and the definition matched our problem almost perfectly. Sticking to the standard from day one meant the new entity had a proper home in the system — not some weird thing we made up and named ourselves.",
+            <>
+              We talked it over as a team and went back to the{" "}
+              <WorkLink href="https://register.apple.com/resources/imdf/">
+                Indoor Mapping Data Format (IMDF)
+              </WorkLink>
+              , which we&apos;d been treating as our standard all along. Turns
+              out it has a &apos;section&apos; feature type, and the
+              definition matched our problem almost perfectly. Sticking to
+              the standard from day one meant the new entity had a proper
+              home in the system — not some weird thing we made up and named
+              ourselves.
+            </>,
           ]}
         />
       </WorkSection>

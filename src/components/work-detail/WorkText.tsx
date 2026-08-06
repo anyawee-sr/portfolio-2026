@@ -1,5 +1,8 @@
+import type { ReactNode } from "react";
+
+// TODO: will refactor for stronger type safety in the future
 export interface IWorkTextProps {
-  paragraphs: readonly string[];
+  paragraphs: readonly ReactNode[];
 }
 
 export function WorkText({ paragraphs }: IWorkTextProps) {
