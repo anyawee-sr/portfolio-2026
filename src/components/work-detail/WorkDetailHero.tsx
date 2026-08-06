@@ -18,10 +18,10 @@ export function WorkDetailHero({ study }: IWorkDetailHeroProps) {
       className="surface-graph relative overflow-x-hidden px-4 pt-3 pb-4 md:px-11 md:pb-10"
     >
       <div className="relative flex flex-col mx-auto max-w-290">
-        <Eye size="md" className="absolute right-8 top-10" />
+        <Eye size="md" className="absolute right-8 top-10 md:top-4" />
         <Eye
           size="md"
-          className="absolute right-24 top-4 sm:right-30 md:right-36"
+          className="absolute right-24 top-4 sm:right-30 md:-top-2 md:right-36"
         />
 
         <NextLink
