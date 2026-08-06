@@ -40,6 +40,15 @@ export const caseStudies = [
     imageId: "case-03",
     imageAlt: "",
   },
+  {
+    slug: "editing-taught-me-timing",
+    type: "editor",
+    title: "What Editing Taught Me About Timing",
+    subTitle:
+      "Three years of YouTuber vlogs taught me timing — turns out UI runs on the same instinct.",
+    imageId: "case-04",
+    imageAlt: "",
+  },
 ] as const satisfies readonly ICaseStudy[];
 
 /**
