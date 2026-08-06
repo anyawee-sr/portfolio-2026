@@ -145,7 +145,15 @@ export function Header() {
   // next/link skips its scroll-into-view when the target hash already
   // matches the current URL (e.g. user scrolled away from #work by hand,
   // then clicks "Work" again — URL never changed, so next/link no-ops).
-  // Scroll manually so the link always jumps, regardless of URL state.
+  // Scroll manually so the link always jumps, regardless of URL state. When
+  // the target section exists on this page, we take over the click
+  // entirely (preventDefault) — leaving it to next/link's own navigation to
+  // also run alongside ours makes it double up the URL hash on a repeat
+  // click (e.g. `/#work#work`), so we sync the address bar ourselves via a
+  // plain history.pushState instead of routing the click through next/link.
+  // If the target doesn't exist (e.g. clicking "Work" from
+  // `/work/[slug]`), we leave the event alone so next/link can still
+  // navigate to the landing page normally.
   function handleNavLinkClick(
     event: React.MouseEvent<HTMLAnchorElement>,
     hash: string,
@@ -165,6 +173,12 @@ export function Header() {
 
     if (!target) {
       return;
+    }
+
+    event.preventDefault();
+
+    if (window.location.hash !== `#${hash}`) {
+      window.history.pushState(null, "", `#${hash}`);
     }
 
     // Set the destination as active immediately and suspend the observer
