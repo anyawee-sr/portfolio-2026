@@ -12,7 +12,7 @@ export function AboutMe() {
       className="scroll-mt-20 bg-surface-accent py-10 sm:px-4 overflow-x-clip"
     >
       {/* TODO: link to /about-me */}
-      <div className="surface-texture mx-auto sm:max-w-190 shadow-2xl -rotate-6 translate-x-4 translate-y-10">
+      <div className="surface-texture relative z-10 mx-auto sm:max-w-190 shadow-2xl -rotate-6 translate-x-4 translate-y-10">
         <div className="relative flex flex-col border border-brand/45 m-4 sm:m-10 sm:min-h-200 md:min-h-225">
           <div className="border-b border-brand/40 px-2 pt-14 text-center">
             <h2 id="about-me-title" className="type-h2 text-brand uppercase">
