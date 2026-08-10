@@ -325,6 +325,12 @@ component นี้คนมักทำ "กดได้แต่ screen reader
 }
 ```
 
+**block นี้คุมได้แค่ `animation-duration`/`transition-duration`** — ไม่ครอบคลุม motion ที่ JS
+เขียนค่าใส่ DOM ตรงๆ (เช่น googly eyes ตามเมาส์ — ดู `src/components/EyeTracker.tsx`) เพราะ
+`transition-duration: 0.01ms` แค่ทำให้ "การเคลื่อนจาก A ไป B" ไม่นุ่ม ไม่ได้หยุด "การเขียนค่า A/B"
+เอง motion แบบนี้ต้องเช็ค `matchMedia("(prefers-reduced-motion: reduce)")` ใน JS เอง แล้วไม่
+attach listener ใดๆ เลยเมื่อ true (ดู `docs/adr/0003-cursor-tracking-googly-eyes.md`)
+
 ### ห้าม horizontal scroll
 
 ไม่มี element ไหนล้นจอแนวนอนที่ 320px — เช็คด้วย `overflow-x-hidden` ที่ระดับ layout
