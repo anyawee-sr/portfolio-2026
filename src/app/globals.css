@@ -316,6 +316,36 @@
   animation: pop-out 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) both;
 }
 
+/* RISE-IN — pop-in's mirror: enters from below instead of above, for
+   things that surface as you scroll toward them (the back-to-top
+   bubble). Same spring-overshoot easing as pop-in so it reads as the
+   same motion language, just flipped in direction. */
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    translate: 0 24px;
+    scale: 0.85;
+  }
+  60% {
+    opacity: 1;
+    translate: 0 -6px;
+    scale: 1.05;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+    scale: 1;
+  }
+}
+@utility animate-rise-in {
+  /* `both` (fill-mode) holds the `from` keyframe — opacity 0,
+     translated down — for the 2s `animation-delay` too, not just
+     after the animation ends. That's what makes the bubble stay
+     hidden for a beat once the footer scrolls into view, instead of
+     sitting there statically before it bounces. */
+  animation: rise-in 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) 2s both;
+}
+
 /* @layer base — plain element-selector defaults belong in Tailwind's
    `base` layer, not left unlayered. Cascade layers rank strictly by
    layer order regardless of selector specificity: an unlayered rule

@@ -207,7 +207,11 @@ export function Header() {
   }
 
   return (
-    <header className="sticky top-0 z-50 flex items-center justify-between gap-8 border-b border-brand/10 bg-surface-base px-4 py-5 md:px-11">
+    <header
+      id="site-header"
+      tabIndex={-1}
+      className="sticky top-0 z-50 flex items-center justify-between gap-8 border-b border-brand/10 bg-surface-base px-4 py-5 md:px-11"
+    >
       <NextLink href="/" className="type-h3 text-brand">
         ANYAWEE SR.
       </NextLink>

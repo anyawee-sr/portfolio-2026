@@ -3,11 +3,14 @@ import NextLink from "next/link";
 import { copyrightYear, footer } from "@/data/footer";
 import { routes } from "@/data/routes";
 
+import { BackToTop } from "./BackToTop";
 import { Eye } from "./ui/Eye";
 
 export function Footer() {
   return (
-    <footer className="on-brand bg-brand px-4 py-10 text-surface-base md:px-11">
+    <footer className="on-brand relative bg-brand px-4 py-10 text-surface-base md:px-11">
+      <BackToTop />
+
       <div className="mx-auto grid max-w-290 grid-cols-2 gap-x-6 gap-y-10 md:grid-cols-10 md:gap-11">
         <div className="col-span-2 flex justify-between gap-4 md:col-span-3 md:block">
           <div>
