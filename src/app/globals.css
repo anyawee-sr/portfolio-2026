@@ -346,6 +346,72 @@
   animation: rise-in 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) 2s both;
 }
 
+/* SHAKE-X — periodic side-to-side wiggle that nudges the resting
+   back-to-top bubble to read as clickable. Uses `translate`, not
+   `rotate` — the bubble's static tilt is Tailwind's individual
+   `rotate` property (confirmed via computed styles, not `transform`),
+   so a rotate-based shake would fight it; translate is a separate
+   property and layers on top for free, same as rise-in's bounce
+   above. Each 4s loop packs the wiggle into its first half second,
+   then holds still — `2.45s` lines its first run up with the moment
+   rise-in's bounce finishes (2s delay + 0.45s duration), so the two
+   don't visually collide. */
+@keyframes shake-x {
+  0%,
+  12.5%,
+  100% {
+    translate: 0 0;
+  }
+  2.5% {
+    translate: -4px 0;
+  }
+  5% {
+    translate: 4px 0;
+  }
+  7.5% {
+    translate: -3px 0;
+  }
+  10% {
+    translate: 2px 0;
+  }
+}
+@utility animate-shake-x {
+  animation: shake-x 4s ease-in-out 2.45s infinite;
+}
+
+/* Pausing on hover/focus keeps the bubble still right when someone's
+   about to click it or is reading it via keyboard focus — shaking
+   under the cursor/focus ring reads as jittery, not playful. */
+.animate-shake-x:hover,
+.animate-shake-x:focus-visible {
+  animation-play-state: paused;
+}
+
+/* `animate-rise-in` and `animate-shake-x` are applied together on the
+   back-to-top bubble (see BackToTop.tsx). The `animation` shorthand
+   doesn't merge across separate rules — whichever class's rule comes
+   last in the cascade would otherwise replace the other's animation
+   entirely instead of combining with it. This compound selector
+   covers exactly that combined case with one explicit comma-separated
+   `animation` list, so both keep playing independently at their own
+   timing while each utility also still works fine used alone. */
+.animate-rise-in.animate-shake-x {
+  animation:
+    rise-in 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) 2s both,
+    shake-x 4s ease-in-out 2.45s infinite;
+}
+
+/* Same hover/focus pause as above, but scoped to beat the compound
+   rule's specificity (two classes vs. one) — the shorthand `animation`
+   above resets `animation-play-state` to its initial `running` since
+   it doesn't mention it, so without this the plain `.animate-shake-x`
+   pause rule would lose the cascade whenever both classes are
+   present, exactly the case that matters here. */
+.animate-rise-in.animate-shake-x:hover,
+.animate-rise-in.animate-shake-x:focus-visible {
+  animation-play-state: paused;
+}
+
 /* @layer base — plain element-selector defaults belong in Tailwind's
    `base` layer, not left unlayered. Cascade layers rank strictly by
    layer order regardless of selector specificity: an unlayered rule

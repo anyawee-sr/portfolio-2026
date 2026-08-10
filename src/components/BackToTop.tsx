@@ -63,7 +63,7 @@ export function BackToTop() {
         onClick={handleClick}
         className={cn(
           "type-caption relative inline-flex items-center rounded-full bg-brand p-3 -rotate-3 text-surface-base shadow-md",
-          isVisible && "animate-rise-in",
+          isVisible && "animate-rise-in animate-shake-x",
         )}
       >
         back to top?
