@@ -260,6 +260,14 @@
     var(--slate-950) 60%
   );
   box-shadow: inset 0 2px 3px var(--eye-highlight-tint);
+
+  /* Cursor tracking — EyeTracker (src/components/EyeTracker.tsx) writes
+     --pupil-x/--pupil-y per frame while the pointer moves; the fallback
+     (0, 0.25rem) is the resting look-down position, so SSR, no-JS, and
+     reduced-motion all render the same resting pupil without any JS
+     needing to run. See docs/adr/0003-cursor-tracking-googly-eyes.md. */
+  translate: var(--pupil-x, 0) var(--pupil-y, 0.25rem);
+  transition: translate 120ms ease-out;
 }
 
 @utility surface-eye-glint {
