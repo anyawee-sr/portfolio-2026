@@ -29,7 +29,11 @@ noindex อยู่
 
 **ระบบ / infra**
 
-- [ ] pin Node — อัปเกรด local เป็น 22 LTS + ใส่ `"engines": { "node": "22.x" }` (ดู ADR-0004)
+- [ ] pin Node — เช็คเวอร์ชันปัจจุบันที่ Vercel dashboard → Settings → Build & Deployment →
+      Node.js Version ก่อน (เช็คล่าสุด 2026-08-13 พบว่าเป็น **24.x** ไม่ใช่ 22.x ที่เคยคาดไว้ตอน
+      เขียนแผน — Vercel ขยับ default เองได้เรื่อยๆ อย่า hardcode เลขจากที่นี่ ให้เช็คของจริงหน้า
+      dashboard ทุกครั้งก่อนตั้ง `engines`) แล้วอัปเกรด local ให้ตรง + ใส่
+      `"engines": { "node": "<เวอร์ชันที่เช็คได้>" }` ใน `package.json` (ดู ADR-0004)
 - [ ] Vercel Analytics + Speed Insights
 - [ ] CI บน PR: `npm run build` + `npm run lint` + `npm run format:check`
       ⚠️ `npm test` เป็น vitest browser mode ผ่าน Playwright — runner ต้อง
