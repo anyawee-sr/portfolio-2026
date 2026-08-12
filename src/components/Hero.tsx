@@ -6,54 +6,54 @@ import { routes } from "@/data/routes";
 
 import { Eye } from "./ui/Eye";
 import { Sticker } from "./ui/Sticker";
+import { ArrowRightIcon } from "@/components/ui/ArrowRightIcon";
 
 /**
  * TODO: will update tag position later
  */
 const HERO_TAG_POSITIONS = [
-  "top-8 left-2/3", // TypeScript
-  "top-20 left-3/4", // Coding
-  "top-1/3 left-1/4", // Movie
-  "top-1/2 left-2/3", // Travel
-  "top-2/3 right-8", // Eating
-  "bottom-12 left-1/4", // Storyteller
+  "top-0 left-2/3", // TypeScript
+  "top-1/9 right-1/8 lg:right-1/5 xl:right-1/6", // Coding
+  "top-1/4 left-1/4", // Movie
+  "top-3/5 right-4/5 lg:right-3/4 xl:right-3/4", // Travel
+  "top-3/5 right-1/14 lg:right-1/8 xl:right-1/6", // Eating
+  "bottom-1/5 right-6/9", // Storyteller
 ];
 
 const HERO_TAG_ROTATIONS = [
+  "rotate-6",
+  "rotate-1",
+  "-rotate-7",
   "-rotate-3",
-  "rotate-3",
-  "-rotate-6",
+  "rotate-4",
   "rotate-2",
-  "-rotate-2",
-  "-rotate-1",
 ];
 
 export function Hero() {
   return (
     <section
       aria-labelledby="hero-name"
-      className="relative overflow-x-hidden px-4 py-16 md:px-11 md:py-20"
+      className="relative surface-dotted overflow-x-hidden px-4 py-18 md:px-11 md:py-20"
     >
       <div
         aria-hidden="true"
         className="mb-8 flex items-center justify-center gap-6 md:hidden"
       >
-        <Eye size="md" className="absolute right-18 top-4" />
-        <Eye size="lg" className="absolute top-4 left-4" />
-        <Eye size="md" className="absolute right-10 top-6" />
+        <Eye size="sm" className="absolute right-6 bottom-3 sm:right-1/7 sm:bottom-1/3" />
+        <Eye size="md" className="absolute left-3 top-1/5 sm:left-1/8" />
+        <Eye size="lg" className="absolute z-11 right-1/10 bottom-1/7 sm:bottom-4 sm:right-1/5" />
       </div>
 
-      {/* TODO: will remove `bg-yellow-100` */}
-      <div className="relative mx-auto max-w-290 md:min-h-140">
+      <div className="relative mx-auto max-w-290 md:min-h-100">
         <div aria-hidden="true" className="hidden md:contents">
+          <div className="absolute -bottom-4 right-1/8 lg:right-1/7 xl:right-1/5">
+            <Eye size="sm" />
+          </div>
           <div className="absolute top-0 left-1/8">
             <Eye size="md" />
           </div>
-          <div className="absolute top-3/5 right-1/5">
+          <div className="absolute z-11 top-3/5 right-1/6 lg:right-1/5 xl:right-1/4">
             <Eye size="lg" />
-          </div>
-          <div className="absolute bottom-8 right-1/7">
-            <Eye size="md" />
           </div>
         </div>
 
@@ -81,10 +81,9 @@ export function Hero() {
       <div className="mx-auto mt-8 flex max-w-290 items-center justify-between px-1 md:mt-12">
         <NextLink
           href={routes.work}
-          className="hidden type-body-m font-bold text-brand md:inline-flex md:items-center md:gap-2"
+          className="hidden type-body-m font-bold text-brand md:inline-flex md:items-center md:gap-1"
         >
-          {/* TODO: will update `↗` to use `<ArrowRightIcon />` */}
-          from my work logs <span aria-hidden="true">↗</span>
+          from my work logs <ArrowRightIcon />
         </NextLink>
         <ul
           className="hidden items-center gap-6 md:flex"
