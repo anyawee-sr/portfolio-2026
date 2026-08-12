@@ -469,6 +469,10 @@
   outline-color: var(--color-surface-base);
 }
 
+[tabindex="-1"]:focus-visible {
+  outline: none;
+}
+
 /* accessibility floor — every animation in this project must
    respect this (googly eyes, hover transforms, menu transitions) */
 @media (prefers-reduced-motion: reduce) {

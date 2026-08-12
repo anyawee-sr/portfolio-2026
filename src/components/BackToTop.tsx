@@ -49,7 +49,7 @@ export function BackToTop() {
     event.preventDefault();
 
     smoothScrollToTop(() => {
-      document.getElementById("site-header")?.focus();
+      document.getElementById("site-header")?.focus({ preventScroll: true });
     });
   }
 
