@@ -237,7 +237,7 @@ export function Header() {
                   }
                   aria-current={isActive ? "true" : undefined}
                   className={cn(
-                    "type-label uppercase transition-colors hover:text-brand",
+                    "type-label uppercase transition-colors hover:text-brand hover:underline hover:decoration-brand hover:decoration-wavy hover:decoration-2 hover:underline-offset-4",
                     isActive
                       ? "underline decoration-brand decoration-wavy decoration-2 underline-offset-4 text-brand"
                       : "text-text-secondary",
