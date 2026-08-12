@@ -45,3 +45,9 @@ storybook-static
 
 # design reference (read-only, not part of app source)
 /design-ref/
+
+# local troubleshooting notes (machine-specific)
+/TROUBLESHOOTING.md
+
+# claude code local settings (machine-specific permissions)
+/.claude/settings.json
