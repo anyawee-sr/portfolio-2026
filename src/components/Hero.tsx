@@ -74,7 +74,7 @@ export function Hero() {
           className="type-display relative z-0 text-center text-text-primary md:absolute md:inset-0 md:flex md:flex-col md:items-center md:justify-center"
         >
           Anyawee Sr.
-          <span className="block type-h1">Frontend Engineer</span>
+          <span className="block type-h3 md:type-h2">Frontend Engineer</span>
         </h1>
       </div>
 
