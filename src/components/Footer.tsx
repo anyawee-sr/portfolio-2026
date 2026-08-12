@@ -22,7 +22,7 @@ export function Footer() {
             </p>
           </div>
           <div aria-hidden="true" className="flex md:hidden relative">
-            <Eye size="md" className="absolute right-18 -bottom-4" />
+            <Eye size="md" className="absolute right-14 sm:right-20" />
             <Eye size="md" />
           </div>
         </div>
@@ -43,7 +43,7 @@ export function Footer() {
                 <li key={link.label}>
                   <NextLink
                     href={routes[link.to]}
-                    className="type-body-m text-surface-base uppercase"
+                    className="type-body-m text-surface-base uppercase hover:decoration-wavy hover:underline"
                   >
                     {link.label}
                   </NextLink>
@@ -70,7 +70,7 @@ export function Footer() {
                   <li key={link.label}>
                     <a
                       href={`mailto:${link.email}`}
-                      className="type-body-m text-surface-base uppercase"
+                      className="type-body-m text-surface-base uppercase hover:decoration-wavy hover:underline"
                     >
                       {link.label}
                     </a>
@@ -88,7 +88,7 @@ export function Footer() {
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="type-body-m text-surface-base uppercase"
+                    className="type-body-m text-surface-base uppercase hover:decoration-wavy hover:underline"
                   >
                     {link.label}
                   </a>
@@ -100,9 +100,9 @@ export function Footer() {
 
         <div
           aria-hidden="true"
-          className="hidden md:col-span-3 md:flex md:justify-end relative mt-10"
+          className="hidden md:col-span-3 md:flex md:justify-end relative mb-auto"
         >
-          <Eye size="md" className="absolute right-22 -bottom-4" />
+          <Eye size="md" className="absolute right-24" />
           <Eye size="md" className="absolute" />
         </div>
       </div>
