@@ -81,7 +81,7 @@ export function Hero() {
       <div className="mx-auto mt-8 flex max-w-290 items-center justify-between px-1 md:mt-12">
         <NextLink
           href={routes.work}
-          className="hidden type-body-m font-bold text-brand md:inline-flex md:items-center md:gap-1"
+          className="hidden type-body-m font-bold text-brand underline-offset-2 hover:underline md:inline-flex md:items-center md:gap-1"
         >
           from my work logs <ArrowRightIcon />
         </NextLink>
@@ -96,7 +96,7 @@ export function Hero() {
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="type-body-m font-bold text-brand"
+                  className="type-body-m font-bold text-brand underline-offset-2 hover:underline"
                 >
                   {link.label}
                 </a>
