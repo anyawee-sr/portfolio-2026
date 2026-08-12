@@ -11,6 +11,7 @@ import { cn } from "@/lib/cn";
 import { smoothScrollTo } from "@/lib/smoothScrollTo";
 
 import { Pill } from "./ui/Pill";
+import { PopSparks } from "./ui/PopSparks";
 
 /** Alternating tilt for the mobile menu's hanging badges — ±3–5deg per CLAUDE.md,
  * via Tailwind's own built-in rotate scale (not a named globals.css utility). */
@@ -251,8 +252,9 @@ export function Header() {
         </ul>
       </nav>
 
-      <div className="hidden md:block">
+      <div className="group relative hidden md:block">
         <Pill link={email} />
+        <PopSparks />
       </div>
 
       <button
