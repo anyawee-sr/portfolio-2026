@@ -31,11 +31,10 @@ export function DataLayerNewEntity() {
                 Indoor Mapping Data Format (IMDF)
               </WorkLink>
               , which we&apos;d been treating as our standard all along. Turns
-              out it has a &apos;section&apos; feature type, and the
-              definition matched our problem almost perfectly. Sticking to
-              the standard from day one meant the new entity had a proper
-              home in the system — not some weird thing we made up and named
-              ourselves.
+              out it has a &apos;section&apos; feature type, and the definition
+              matched our problem almost perfectly. Sticking to the standard
+              from day one meant the new entity had a proper home in the system
+              — not some weird thing we made up and named ourselves.
             </>,
           ]}
         />
@@ -43,7 +42,9 @@ export function DataLayerNewEntity() {
 
       <WorkSection heading="Schema first">
         <WorkText
-          paragraphs={["Before touching any UI, the data contract had to exist. So schema and validator first. The fields came out of a team brainstorm — to name a few: a flag for whether the section shows up on the map, a flag for whether you can click it, a reference id for generating QR deep-links you can scan from a kiosk, and a keyword field for search. Everything gets validated with the same conventions as our existing content types, so the new entity just blends in with the rest of the system."]}
+          paragraphs={[
+            "Before touching any UI, the data contract had to exist. So schema and validator first. The fields came out of a team brainstorm — to name a few: a flag for whether the section shows up on the map, a flag for whether you can click it, a reference id for generating QR deep-links you can scan from a kiosk, and a keyword field for search. Everything gets validated with the same conventions as our existing content types, so the new entity just blends in with the rest of the system.",
+          ]}
         />
         <WorkCode
           code={`// Illustrative — not the real schema

@@ -8,7 +8,8 @@ export interface IWorkLinkProps {
 }
 
 export function WorkLink({ href, children }: IWorkLinkProps) {
-  const className = "text-brand underline underline-offset-2 hover:text-brand-hover";
+  const className =
+    "text-brand underline underline-offset-2 hover:text-brand-hover";
 
   if (href.startsWith("/")) {
     return (

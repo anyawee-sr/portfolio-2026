@@ -21,7 +21,7 @@ export function NewMemberOnTheMap() {
 
             "Along the way, a couple of unexpected freebies turned up — a little bug and a typo, both hiding in the code: first, a stale-opacity reset using .find, which only ever reset one object, when there could actually be more — swapped in .filter and done.",
 
-            "Second, a copy-paste typo in the highlight controller's function name itself. These two bombs had been buried there for ages without anyone knowing — just tiny things, but hey, cleaner code always feels nice."
+            "Second, a copy-paste typo in the highlight controller's function name itself. These two bombs had been buried there for ages without anyone knowing — just tiny things, but hey, cleaner code always feels nice.",
           ]}
         />
       </WorkSection>
@@ -48,9 +48,9 @@ function buildSectionMarker(section: Section) {
         <WorkText
           paragraphs={[
             <>
-              This work also opened a nice window to refactor a shared
-              utility that draws outlines around extruded shapes on the map —
-              a chance to put some{" "}
+              This work also opened a nice window to refactor a shared utility
+              that draws outlines around extruded shapes on the map — a chance
+              to put some{" "}
               <WorkLink href="https://maptalks.org/maptalks.three/docs/dist/api/threelayer.html">
                 maptalks.three
               </WorkLink>{" "}
@@ -58,7 +58,7 @@ function buildSectionMarker(section: Section) {
               face of a shape just right.
             </>,
 
-            "Previously, the top and bottom outlines lived under one flag: flip it on and you always got both, like it or not. It's now split into two independent options, with every existing configuration updated so everything behaves exactly as before — nothing old got shaken, but new flexibility came along for free."
+            "Previously, the top and bottom outlines lived under one flag: flip it on and you always got both, like it or not. It's now split into two independent options, with every existing configuration updated so everything behaves exactly as before — nothing old got shaken, but new flexibility came along for free.",
           ]}
         />
       </WorkSection>
@@ -66,7 +66,7 @@ function buildSectionMarker(section: Section) {
       <WorkSection heading="Result">
         <WorkText
           paragraphs={[
-            "A section now hits every beat the way it should: lying low until its cue, stepping out through the same highlight mechanism the rest of the platform uses, running on its own renderer, and rocking a look of its own — icon marker or logo card, depending on render type."
+            "A section now hits every beat the way it should: lying low until its cue, stepping out through the same highlight mechanism the rest of the platform uses, running on its own renderer, and rocking a look of its own — icon marker or logo card, depending on render type.",
           ]}
         />
       </WorkSection>

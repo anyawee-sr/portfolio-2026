@@ -39,9 +39,15 @@ export function Hero() {
         aria-hidden="true"
         className="mb-8 flex items-center justify-center gap-6 md:hidden"
       >
-        <Eye size="sm" className="absolute right-6 bottom-3 sm:right-1/7 sm:bottom-1/3" />
+        <Eye
+          size="sm"
+          className="absolute right-6 bottom-3 sm:right-1/7 sm:bottom-1/3"
+        />
         <Eye size="md" className="absolute left-3 top-1/5 sm:left-1/8" />
-        <Eye size="lg" className="absolute z-11 right-1/10 bottom-1/7 sm:bottom-4 sm:right-1/5" />
+        <Eye
+          size="lg"
+          className="absolute z-11 right-1/10 bottom-1/7 sm:bottom-4 sm:right-1/5"
+        />
       </div>
 
       <div className="relative mx-auto max-w-290 md:min-h-100">

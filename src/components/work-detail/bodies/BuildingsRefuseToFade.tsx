@@ -33,7 +33,7 @@ export function BuildingsRefuseToFade() {
             {
               term: "Zooming out",
               text: "(high → low): frozen. Nothing. ✗",
-            }
+            },
           ]}
         />
       </WorkSection>
@@ -70,13 +70,12 @@ export function BuildingsRefuseToFade() {
           items={[
             {
               term: "Created at low zoom, then zooming in?",
-              text: "The marker might get marked dirty along the way and re-evaluate — so it seems fine. Basically working by accident"
+              text: "The marker might get marked dirty along the way and re-evaluate — so it seems fine. Basically working by accident",
             },
             {
-
               term: "At high zoom, then zooming out?",
               text: "The value's already locked in, and nothing ever pokes it to recalculate. Stuck forever.",
-            }
+            },
           ]}
         />
       </WorkSection>
@@ -119,13 +118,17 @@ export function BuildingsRefuseToFade() {
           ]}
         />
         <WorkCode code={`(hi - zoom) / (hi - lo)`} />
-        <WorkText
-          paragraphs={["Easy way to remember it:"]}
-        />
+        <WorkText paragraphs={["Easy way to remember it:"]} />
         <WorkList
           items={[
-            { term: "Bottom", text: "the width of the fade range (scales everything so it lands exactly at 1)" },
-            { term: "Top", text: "how far you are from the end that should be 0" },
+            {
+              term: "Bottom",
+              text: "the width of the fade range (scales everything so it lands exactly at 1)",
+            },
+            {
+              term: "Top",
+              text: "how far you are from the end that should be 0",
+            },
           ]}
         />
         <WorkText

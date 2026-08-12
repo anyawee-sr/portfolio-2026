@@ -3,7 +3,7 @@ import { cn } from "@/lib/cn";
 /**
  * Decorative comic "pop" burst — three flecks that spring out of a
  * button's top-right corner on hover, then scale up and fade.
- * 
+ *
  * The parent must be `group relative`: the burst is positioned against
  * it and only animates under `group-hover`/`group-focus-within`.
  */
