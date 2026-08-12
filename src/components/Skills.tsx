@@ -28,7 +28,7 @@ export function Skills() {
         <Asterisk />
       </div>
 
-      <ul className="relative z-10 mb-auto flex max-w-290 flex-wrap items-center justify-center gap-3">
+      <ul className="relative z-10 mt-auto flex max-w-290 flex-wrap items-center justify-center gap-3">
         {skills.map((skill, i) => (
           <Sticker
             key={skill}
