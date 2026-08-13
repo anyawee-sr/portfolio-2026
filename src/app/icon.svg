@@ -1,0 +1,22 @@
+<svg width="180" height="180" viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="dropShadow" x="-50%" y="-50%" width="200%" height="200%">
+      <!-- angle: 123°, distance: 7px, spread: 0%, size: 0px -->
+      <feOffset in="SourceAlpha" dx="3.81" dy="5.87" result="offsetAlpha"/>
+      <feComponentTransfer in="offsetAlpha" result="shadow">
+        <feFuncA type="linear" slope="0.17"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode in="shadow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- traced from the original artwork -->
+  <path
+    filter="url(#dropShadow)"
+    fill="#B51D00"
+    d="M94,1 L80,72 L24,26 L8,48 L69,87 L9,128 L28,151 L81,102 L102,172 L129,160 L99,97 L171,100 L171,71 L99,77 L124,9 Z"
+  />
+</svg>

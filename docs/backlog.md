@@ -9,18 +9,19 @@ git เก็บประวัติให้แล้ว พอไม่เห
 ## เมื่อ custom domain พร้อม — ทำทั้งก้อน ห้ามทำทีละข้อ
 
 - [ ] เอา `robots: { index: false, follow: false }` ออกจาก `src/app/layout.tsx:14`
-- [ ] เพิ่ม `metadataBase: new URL("https://<โดเมน>")` ใน metadata
+- [ ] เปลี่ยน `siteUrl` ใน `src/data/site.ts` เป็นโดเมนจริง (ตอนนี้ชี้
+      `https://portfolio-2026-tau-three.vercel.app` — `metadataBase` ใน `layout.tsx` +
+      `og:image` URL อ่านจากค่านี้จุดเดียว แก้ที่นี่ที่เดียวพอ)
 - [ ] เพิ่ม `src/app/sitemap.ts` — ครอบ `/` + `/work/<slug>` ทุกตัวจาก `src/data/caseStudies.ts`
+      import `siteUrl` จาก `src/data/site.ts` มาต่อ absolute URL (Next ไม่ให้ sitemap.ts
+      อ่าน `metadataBase` เอง ต้องประกอบ URL มือ)
 - [ ] ตั้ง redirect `*.vercel.app` → โดเมนจริง ใน Vercel dashboard (กัน duplicate content)
 
-ทำไมต้องทำพร้อมกันทั้งก้อน: ถ้าเอา noindex ออกโดยไม่ใส่ `metadataBase` + `sitemap.ts` ไปด้วย
-จะได้เว็บที่ Google เข้ามาเก็บแล้วแต่การ์ดแชร์พังและไม่มี sitemap ให้ไล่ ซึ่งแย่กว่าตอนที่ยัง
-noindex อยู่
+ทำไมต้องทำพร้อมกันทั้งก้อน: ถ้าเอา noindex ออกโดยไม่ใส่ `sitemap.ts` ไปด้วย จะได้เว็บที่ Google
+เข้ามาเก็บแล้วแต่ไม่มี sitemap ให้ไล่ ซึ่งแย่กว่าตอนที่ยัง noindex อยู่
 
 ## ก่อนส่งลิงก์ให้ recruiter
 
-- [ ] OG image + `openGraph` metadata — ตอนนี้แชร์ LinkedIn/LINE ขึ้นการ์ดเปล่า (ต้องมี
-      `metadataBase` ก่อน ไม่งั้น relative URL ไม่ resolve)
 - [ ] `src/app/not-found.tsx` ธีมแบรนด์ — ตอนนี้ `/work/<slug ผิด>` ได้ 404 ขาวดำของ Next
       คั่นกลางระหว่าง Header กับ Footer
 - [ ] เขียน README ใหม่ — ตอนนี้เป็น boilerplate ที่พูดถึง `pages/index.tsx` ซึ่งไม่มีอยู่จริง
@@ -41,6 +42,15 @@ noindex อยู่
       ⚠️ ห้ามใช้ `tsc --noEmit` เดี่ยวๆ ใน CI — `PageProps<>` ถูก generate ตอน `next build`
 - [ ] ทบทวน `allowedDevOrigins: ["192.168.1.34"]` ใน `next.config.ts:6` — ผูกกับ IP ของเน็ตบ้าน
       ย้ายเน็ต/เปลี่ยน router เมื่อไหร่ dev-on-phone พังเงียบ (หน้าโหลดได้แต่ไม่ hydrate)
+- [ ] แก้ trailing space ท้าย title ของ `buildings-refuse-to-fade` ใน
+      `src/data/caseStudies.ts` — `"When Buildings Refuse to Fade "` มีช่องว่างเกินมา 1 ตัว
+      หลุดไปโผล่ใน `<title>` และ `og:title` เป็นช่องว่างซ้อนก่อนคำว่า "— Anyawee Sr."
+- [ ] พิจารณาทำ script generate `src/app/favicon.ico` จาก `src/app/icon.svg` อัตโนมัติ (เช่น
+      npm script ที่รันก่อน `next build`) — ตอนนี้ `favicon.ico` เป็น multi-size ICO (16/32/48px)
+      ที่ pack มือจาก `icon.svg` เวอร์ชันปัจจุบันครั้งเดียว **ไม่ sync กันอัตโนมัติ** ถ้าแก้
+      `icon.svg` ทีหลังแล้วลืม regenerate `favicon.ico` ตาม จะได้ไอคอนคนละแบบระหว่าง Chrome/Edge
+      (ใช้ `icon.svg` เพราะ `sizes="any"` ชนะ) กับ Safari (ไม่รองรับ SVG favicon เลย fallback ไป
+      `.ico` เสมอ)
 
 **ดีไซน์ / UI**
 

@@ -23,8 +23,16 @@ export async function generateMetadata({
   }
 
   return {
-    title: `${study.title} — Anyawee Sr.`,
+    // เปล่าเฉยๆ พอ — root layout มี title.template ต่อ "— Anyawee Sr." ให้
+    title: study.title,
     description: study.subTitle,
+    // openGraph ต้องเขียนซ้ำที่นี่ ไม่งั้น Next รับก้อน openGraph ของ root
+    // มาทั้งดุ้น (title/description ของหน้าแรก) แทนที่จะเป็นของ case study นี้
+    openGraph: {
+      type: "article",
+      title: `${study.title} — Anyawee Sr.`,
+      description: study.subTitle,
+    },
   };
 }
 
