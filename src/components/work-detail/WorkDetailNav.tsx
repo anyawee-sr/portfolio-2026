@@ -14,7 +14,7 @@ export interface IWorkDetailNavProps {
 export function WorkDetailNav({ prev, next }: IWorkDetailNavProps) {
   return (
     <nav aria-label="Case studies" className="mx-auto max-w-180">
-      <div className="flex flex-col items-start justify-between gap-4 mx-4 py-10 border-t border-dashed border-text-secondary/60 sm:flex-row md:mx-0">
+      <div className="flex flex-col items-start justify-between gap-4 mx-4 pt-10 pb-20 border-t border-dashed border-text-secondary/60 sm:flex-row md:mx-0">
         {prev && (
           <NextLink
             href={workDetailPath(prev.slug)}
