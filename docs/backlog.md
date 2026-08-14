@@ -8,7 +8,7 @@ git เก็บประวัติให้แล้ว พอไม่เห
 
 ## เมื่อ custom domain พร้อม — ทำทั้งก้อน ห้ามทำทีละข้อ
 
-- [ ] เอา `robots: { index: false, follow: false }` ออกจาก `src/app/layout.tsx:14`
+- [ ] เอา `robots: { index: false, follow: false }` ออกจาก `src/app/layout.tsx:30`
 - [ ] เปลี่ยน `siteUrl` ใน `src/data/site.ts` เป็นโดเมนจริง (ตอนนี้ชี้
       `https://portfolio-2026-tau-three.vercel.app` — `metadataBase` ใน `layout.tsx` +
       `og:image` URL อ่านจากค่านี้จุดเดียว แก้ที่นี่ที่เดียวพอ)
@@ -22,8 +22,6 @@ git เก็บประวัติให้แล้ว พอไม่เห
 
 ## ก่อนส่งลิงก์ให้ recruiter
 
-- [ ] `src/app/not-found.tsx` ธีมแบรนด์ — ตอนนี้ `/work/<slug ผิด>` ได้ 404 ขาวดำของ Next
-      คั่นกลางระหว่าง Header กับ Footer
 - [ ] เขียน README ใหม่ — ตอนนี้เป็น boilerplate ที่พูดถึง `pages/index.tsx` ซึ่งไม่มีอยู่จริง
 
 ## ทำเมื่อไหร่ก็ได้ — ไม่มี trigger ผูก
@@ -55,10 +53,16 @@ git เก็บประวัติให้แล้ว พอไม่เห
 **ดีไซน์ / UI**
 
 - [ ] ออกแบบหน้า `loading` กับ `error` — `src/app/loading.tsx` + `src/app/error.tsx`
-      (ทำคู่กับ `not-found.tsx` ในกลุ่มข้างบนได้ ใช้ภาษาทางสายตาชุดเดียวกัน)
+      (ใช้ภาษาทางสายตาชุดเดียวกับ `src/app/not-found.tsx` ที่ทำเสร็จแล้ว — asterisk +
+      `font-handwriting` + `type-tagline`/`type-h1`)
       ⚠️ `error.tsx` **ต้องเป็น client component** (`"use client"`) เสมอ ตามข้อกำหนดของ Next
       — เป็นข้อยกเว้นของกติกา server-component-by-default ใน repo นี้ และรับ prop
       `{ error, reset }` ถ้าอยากกันพังทั้ง root layout ด้วยต้องมี `global-error.tsx` แยกอีกตัว
+      ⚠️ `loading.tsx`/`error.tsx` จะ render เป็นลูกของ root layout เดียวกับที่ `not-found.tsx`
+      ใช้ (Header/Footer อยู่ที่ root layout จุดเดียว ไม่มี route group แยก) จึงได้ Footer
+      พร้อม `BackToTop` ติดมาด้วยเสมอ — ถ้าอยากปิด `BackToTop` แบบหน้า 404 ต้องใส่
+      `data-notfound` ให้ `<main>` ของหน้านั้นด้วย (ดู rule ใน `globals.css` ที่คุม
+      `[data-back-to-top]`) แต่ปกติหน้าพวกนี้ยัง scroll ได้จริง ไม่น่าต้องปิด
       ⚠️ `loading.tsx` จะแทบไม่โผล่ เพราะทุกหน้าเป็น SSG ที่ prerender ไว้หมดแล้ว
       (`generateStaticParams()`) — เห็นได้แค่ตอน client-side navigation ที่เน็ตช้า
       อย่าลงแรงกับหน้านี้เท่ากับ 404 ที่คนเจอจริงบ่อยกว่ามาก

@@ -13,7 +13,16 @@ import { BubbleTail } from "./ui/BubbleTail";
  * itself is the IntersectionObserver target, and `animate-rise-in` is
  * only applied while visible, so there's nothing to "hide" up front:
  * the link is always real markup, always clickable, even before JS
- * hydrates. */
+ * hydrates.
+ *
+ * The `data-back-to-top` attribute is a CSS hook, not a component
+ * prop: it lets `globals.css` hide this bubble specifically on the
+ * 404 page (see the rule near `NotFoundSection`'s `data-notfound`)
+ * regardless of viewport height — a short screen still makes that
+ * page scroll, and a scroll-height check alone would let the bubble
+ * back in there. Footer can't do this with a prop instead because
+ * it's rendered by the root layout (`src/app/layout.tsx`) before the
+ * layout can know `children` resolved to `src/app/not-found.tsx`. */
 export function BackToTop() {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
@@ -56,6 +65,7 @@ export function BackToTop() {
   return (
     <div
       ref={wrapperRef}
+      data-back-to-top
       className="absolute z-11 inset-x-4 -top-14 mx-auto flex max-w-300 justify-end md:inset-x-11"
     >
       <a

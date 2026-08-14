@@ -3,6 +3,10 @@
  * Referenced via `keyof typeof routes` so a typo in a `to` field
  * fails at compile time instead of producing a dead link.
  *
+ * `home` exists for `Link`-typed CTAs (e.g. the 404 page's "Take me
+ * home" pill via `Pill`) that need a `keyof typeof routes` value —
+ * `Header.tsx`'s wordmark still hardcodes `href="/"` directly.
+ *
  * `work`/`aboutMe` are hash anchors into homepage sections, not
  * separate pages — this is a single-page site.
  *
@@ -11,6 +15,7 @@
  * CTA has a real (if 404-for-now) destination instead of `href="#"`.
  */
 export const routes = {
+  home: "/",
   work: "/#work",
   aboutMe: "/#about-me",
   workAll: "/work",
