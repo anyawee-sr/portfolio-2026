@@ -59,8 +59,14 @@ typography มาจาก `type-*` utility เท่านั้น ถ้า�
 | `type-body-s`  | 10px    | 600     | eyebrow                |
 | `type-label`   | 12px    | 700     | label (tracking กว้าง) |
 | `type-caption` | 11px    | 700     | คำบรรยาย               |
+| `type-scrawl` / `type-scrawl-l`     | 92px / 120px | 400 | 404 card ตัวเลข `404` |
+| `type-scribble` / `type-scribble-l` | 56px / 64px  | 400 | 404 card headline     |
 
 ขนาดที่เป็นช่วง (`48→96px` ฯลฯ) คือ `clamp()` ที่ฝังอยู่ **ในตัว utility เอง** — ไล่ตามความกว้างจอลื่นๆ อัตโนมัติ ไม่ต้องเติม `md:` ที่ component ทุกจุด ยังมี `text-wrap: balance` ผูกอยู่แล้วด้วย (ดูกฎข้อ 4)
+
+`type-scrawl`/`type-scribble` (และคู่ `-l`) เป็น**ข้อยกเว้น**ของกฎ clamp ข้างบน — ขนาดคงที่ 2 สเต็ป
+สลับกันที่ `lg:` ไม่ใช่ fluid เพราะล็อกกับความกว้างการ์ด 404 ที่เป็น step (card-mobile.webp →
+card.webp) ไม่ใช่ล็อกกับ viewport ใช้แบบ `type-scrawl lg:type-scrawl-l` ที่ component เสมอ
 
 ค่า px ในตารางคือ**ขนาดอ้างอิงตามดีไซน์** — โค้ดจริงใน `globals.css` เขียนเป็น **rem ทั้งหมด** (16px = 1rem)
 เพื่อให้ยืดตามการตั้งค่า "ขยายตัวอักษร" ของเบราว์เซอร์ (a11y) `clamp()` ของ `type-display`/`type-h1`/`type-h4`

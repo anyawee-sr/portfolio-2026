@@ -189,6 +189,43 @@
   text-wrap: balance;
 }
 
+/* SCRAWL / SCRIBBLE — 404 card's big handwritten numerals and headline.
+   Fixed sizes, not clamp(): unlike type-display/type-tagline (which track
+   viewport width), these track the 404 card's width, and the card itself
+   is a two-step image swap at `lg` (card-mobile.webp -> card.webp), not a
+   fluid element — so the type has to jump in lockstep at the same
+   breakpoint instead of interpolating against the viewport. See
+   NotFoundSection.tsx. */
+@utility type-scrawl {
+  /* 92px — "404" on card-mobile.webp (480px wide), used 320px through lg */
+  font-size: 5.75rem;
+  line-height: 1;
+  font-weight: 400;
+}
+
+@utility type-scrawl-l {
+  /* 120px — "404" on card.webp (931px wide), lg and up */
+  font-size: 7.5rem;
+  line-height: 0.8;
+  font-weight: 400;
+}
+
+@utility type-scribble {
+  /* 56px — headline on card-mobile.webp */
+  font-size: 3.5rem;
+  line-height: 0.9;
+  font-weight: 400;
+  text-wrap: balance;
+}
+
+@utility type-scribble-l {
+  /* 64px — headline on card.webp, lg and up */
+  font-size: 4rem;
+  line-height: 1.05;
+  font-weight: 400;
+  text-wrap: balance;
+}
+
 @utility type-code {
   font-family: var(--font-mono);
   font-size: 0.825rem; /* 13.2px */
