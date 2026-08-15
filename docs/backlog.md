@@ -53,8 +53,8 @@ git เก็บประวัติให้แล้ว พอไม่เห
 **ดีไซน์ / UI**
 
 - [ ] ออกแบบหน้า `loading` กับ `error` — `src/app/loading.tsx` + `src/app/error.tsx`
-      (ใช้ภาษาทางสายตาชุดเดียวกับ `src/app/not-found.tsx` ที่ทำเสร็จแล้ว — asterisk +
-      `font-handwriting` + `type-tagline`/`type-h1`)
+      (ใช้ภาษาทางสายตาชุดเดียวกับ `src/app/not-found.tsx` ที่ทำเสร็จแล้ว — การ์ดกระดาษฉีก
+      แปะเทป + `font-handwriting` + `type-scrawl`/`type-scribble`)
       ⚠️ `error.tsx` **ต้องเป็น client component** (`"use client"`) เสมอ ตามข้อกำหนดของ Next
       — เป็นข้อยกเว้นของกติกา server-component-by-default ใน repo นี้ และรับ prop
       `{ error, reset }` ถ้าอยากกันพังทั้ง root layout ด้วยต้องมี `global-error.tsx` แยกอีกตัว
