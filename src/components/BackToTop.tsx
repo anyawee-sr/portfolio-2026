@@ -10,8 +10,8 @@ import { BubbleTail } from "./ui/BubbleTail";
 /** A speech-bubble "back to top?" link that lives across the footer's
  * top edge, near the googly eyes. Plays its rise-in bounce every time
  * it re-enters the viewport (not just the first time) — the wrapper
- * itself is the IntersectionObserver target, and `animate-rise-in` is
- * only applied while visible, so there's nothing to "hide" up front:
+ * itself is the IntersectionObserver target, and `animate-rise-in-shake-x`
+ * is only applied while visible, so there's nothing to "hide" up front:
  * the link is always real markup, always clickable, even before JS
  * hydrates.
  *
@@ -73,7 +73,7 @@ export function BackToTop() {
         onClick={handleClick}
         className={cn(
           "type-caption relative inline-flex items-center rounded-full bg-brand p-3 -rotate-3 text-surface-base shadow-md",
-          isVisible && "animate-rise-in animate-shake-x",
+          isVisible && "animate-rise-in-shake-x",
         )}
       >
         back to top?

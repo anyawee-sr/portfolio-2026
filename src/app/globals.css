@@ -383,12 +383,11 @@
   }
 }
 @utility animate-rise-in {
-  /* `both` (fill-mode) holds the `from` keyframe — opacity 0,
-     translated down — for the 2s `animation-delay` too, not just
-     after the animation ends. That's what makes the bubble stay
-     hidden for a beat once the footer scrolls into view, instead of
-     sitting there statically before it bounces. */
-  animation: rise-in 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) 2s both;
+  /* No `animation-delay` — the bubble should start bouncing the
+     instant the footer scrolls into view, not after a beat. `both`
+     (fill-mode) still holds the `to` keyframe once the bounce ends,
+     so it doesn't snap back to an unanimated state between rerenders. */
+  animation: rise-in 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) both;
 }
 
 /* SHAKE-X — periodic side-to-side wiggle that nudges the resting
@@ -398,9 +397,9 @@
    so a rotate-based shake would fight it; translate is a separate
    property and layers on top for free, same as rise-in's bounce
    above. Each 4s loop packs the wiggle into its first half second,
-   then holds still — `2.45s` lines its first run up with the moment
-   rise-in's bounce finishes (2s delay + 0.45s duration), so the two
-   don't visually collide. */
+   then holds still — `0.45s` lines its first run up with the moment
+   rise-in's bounce finishes (rise-in has no delay of its own), so
+   the two don't visually collide. */
 @keyframes shake-x {
   0%,
   12.5%,
@@ -421,7 +420,7 @@
   }
 }
 @utility animate-shake-x {
-  animation: shake-x 4s ease-in-out 2.45s infinite;
+  animation: shake-x 4s ease-in-out 0.45s infinite;
 }
 
 /* Pausing on hover/focus keeps the bubble still right when someone's
@@ -432,28 +431,21 @@
   animation-play-state: paused;
 }
 
-/* `animate-rise-in` and `animate-shake-x` are applied together on the
-   back-to-top bubble (see BackToTop.tsx). The `animation` shorthand
-   doesn't merge across separate rules — whichever class's rule comes
-   last in the cascade would otherwise replace the other's animation
-   entirely instead of combining with it. This compound selector
-   covers exactly that combined case with one explicit comma-separated
-   `animation` list, so both keep playing independently at their own
-   timing while each utility also still works fine used alone. */
-.animate-rise-in.animate-shake-x {
+/* Dedicated utility for the back-to-top bubble (see BackToTop.tsx),
+   which needs rise-in and shake-x at once. Stacking the two separate
+   utility classes on one element doesn't work — the `animation`
+   shorthand doesn't merge across rules, so whichever class's rule
+   comes last in the cascade would replace the other's animation
+   entirely instead of combining with it, and Tailwind's own linter
+   flags two classes touching the same property as a conflict anyway.
+   One explicit comma-separated `animation` list sidesteps both. */
+@utility animate-rise-in-shake-x {
   animation:
-    rise-in 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) 2s both,
-    shake-x 4s ease-in-out 2.45s infinite;
+    rise-in 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) both,
+    shake-x 4s ease-in-out 0.45s infinite;
 }
-
-/* Same hover/focus pause as above, but scoped to beat the compound
-   rule's specificity (two classes vs. one) — the shorthand `animation`
-   above resets `animation-play-state` to its initial `running` since
-   it doesn't mention it, so without this the plain `.animate-shake-x`
-   pause rule would lose the cascade whenever both classes are
-   present, exactly the case that matters here. */
-.animate-rise-in.animate-shake-x:hover,
-.animate-rise-in.animate-shake-x:focus-visible {
+.animate-rise-in-shake-x:hover,
+.animate-rise-in-shake-x:focus-visible {
   animation-play-state: paused;
 }
 
