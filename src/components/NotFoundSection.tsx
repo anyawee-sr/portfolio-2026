@@ -101,7 +101,7 @@ export function NotFoundSection() {
       data-notfound
       className="flex flex-1 items-center justify-center overflow-x-clip bg-surface-accent surface-dotted px-4 md:px-11"
     >
-      <div className="relative z-60 w-135 shrink-0 -rotate-12 lg:w-180 lg:-rotate-6">
+      <div className="relative z-1 w-135 shrink-0 -rotate-12 lg:w-180 lg:-rotate-6">
         <Image
           src="/images/not-found/card-mobile.webp"
           alt=""
@@ -137,7 +137,7 @@ export function NotFoundSection() {
         ))}
         <div
           aria-hidden="true"
-          className="mx-auto w-30 absolute top-16 left-20 hidden md:block lg:-top-9 lg:left-16 lg:w-37"
+          className="mx-auto w-30 absolute top-16 left-20 lg:-top-9 lg:left-16 lg:w-37"
         >
           <Asterisk />
         </div>
@@ -148,7 +148,7 @@ export function NotFoundSection() {
           width={122}
           height={64}
           loading="lazy"
-          className="absolute w-25 h-auto top-30 left-7.5 -rotate-8 hidden md:block lg:w-30 lg:top-8 lg:left-2.5"
+          className="absolute w-25 h-auto top-30 left-7.5 -rotate-8 lg:w-30 lg:top-8 lg:left-2.5"
         />
 
         <div className="absolute inset-0 flex flex-col items-center justify-center px-10 text-center lg:px-10">
