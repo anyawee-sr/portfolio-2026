@@ -101,12 +101,12 @@ export function NotFoundSection() {
       data-notfound
       className="flex flex-1 items-center justify-center overflow-x-clip bg-surface-accent surface-dotted px-4 md:px-11"
     >
-      <div className="relative z-60 max-w-140 shrink-0 -rotate-12 lg:max-w-180 lg:-rotate-6">
+      <div className="relative z-60 w-135 shrink-0 -rotate-12 lg:w-180 lg:-rotate-6">
         <Image
           src="/images/not-found/card-mobile.webp"
           alt=""
-          width={480}
-          height={500}
+          width={540}
+          height={560}
           loading="lazy"
           className="h-auto w-full lg:hidden"
         />
