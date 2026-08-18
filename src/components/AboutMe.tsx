@@ -18,7 +18,8 @@ export function AboutMe() {
             <h2 id="about-me-title" className="type-h2 text-brand uppercase">
               {aboutMe.eyebrow}
             </h2>
-            <p className="type-body-s mx-auto mt-2 max-w-170 text-brand uppercase lg:text-nowrap">
+            {/* TODO: remove invisible class when `/about-me` page is live */}
+            <p className="type-body-s mx-auto mt-2 max-w-170 text-brand uppercase lg:text-nowrap invisible">
               {aboutMe.subcopy}
             </p>
           </div>
