@@ -39,6 +39,13 @@ Vercel รองรับทั้ง SSG และ image optimizer โดยไ
 ความเสี่ยงนี้ไว้ตรงๆ เพราะ build เป็น static ล้วน ไม่มี server runtime ที่พฤติกรรมต่างกันระหว่าง
 เวอร์ชัน Node จะกระทบผู้ใช้จริง แต่บันทึกไว้ชัดเจนว่านี่คือหนี้ที่ตั้งใจก่อ ไม่ใช่ความประมาท
 
+**Update (2026-08-13):** Node 20 EOL ผ่านมาแล้วจริงตามที่คาดไว้ข้างบน และ Vercel เตือนใน
+dashboard ว่ามี 3 projects ในบัญชีนี้ที่ใช้ Node 20 หรือเก่ากว่า build จะเริ่ม fail ตั้งแต่
+1 ต.ค. 2026 — เช็คแล้ว `portfolio-2026` ไม่ติดในลิสต์นั้น (Settings → Build & Deployment →
+Node.js Version ของ project นี้ขึ้น **24.x** ไปแล้ว ไม่ใช่ 22.x ที่เดาไว้ตอนเขียน ADR ฉบับนี้)
+ปิดหนี้นี้แล้ว: อัปเกรด local เป็น 24.x ให้ตรง + ใส่ `"engines": { "node": "24.x" }` ใน
+`package.json` (ยังไม่ใส่ `packageManager` เพราะไม่ใช่ scope ของรอบนี้)
+
 ### ทำไมเก็บ Vercel project เดิมไว้ ไม่ทับ
 
 `src/components/work-detail/bodies/EditingTaughtMeTiming.tsx:14` มีลิงก์ไป
@@ -70,8 +77,8 @@ custom domain, และไม่ pin Node version ในรอบนี้
   บน Vercel โดยไม่ต้องปิดฟีเจอร์ไหนทิ้งเหมือนถ้าเลือก static export
 - (+) `*.vercel.app` ที่ deploy รอบแรกจะไม่ถูก search engine เก็บไว้แข่งกับโดเมนจริงในอนาคต
 - (+) ลิงก์ archive เก่าใน `EditingTaughtMeTiming.tsx` ยังใช้งานได้ตามเดิม ไม่กลายเป็นลิงก์วนเข้าตัวเอง
-- (-) build บน Vercel รันด้วย Node เวอร์ชันที่ไม่ตรงกับเครื่อง dev เสมอไป (22.x vs 20.19.5 ในเครื่อง)
-  ความต่างนี้ยังไม่เคยเกิดปัญหาจริง เพราะไม่มี server runtime ให้พฤติกรรมต่างกัน แต่ต้องทบทวนอีกครั้ง
-  ถ้าวันหนึ่งเพิ่ม API route หรือ server action เข้ามา
+- (-) ~~build บน Vercel รันด้วย Node เวอร์ชันที่ไม่ตรงกับเครื่อง dev เสมอไป (22.x vs 20.19.5
+  ในเครื่อง)~~ **แก้แล้ว 2026-08-13** — local อัปเป็น 24.x + ตั้ง `engines` ตรงกับ Vercel แล้ว
+  (ดู Update ด้านบน)
 - (-) ต้องมาเอา noindex ออกเองตอนมี custom domain พร้อม (จดไว้ใน `../backlog.md` แล้ว) ถ้าลืม
   เว็บจะไม่ถูก Google เก็บต่อไปเรื่อยๆ ทั้งที่พร้อมส่งให้คนอื่นดูแล้ว
