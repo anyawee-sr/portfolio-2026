@@ -54,12 +54,12 @@ export function Work() {
           <br />
           notes, lessons, and small discoveries.
         </p>
-        {/* TODO: will implement later */}
-        <Pill
+        {/* TODO: will display when `/work` page is live */}
+        {/* <Pill
           link={viewAllLink}
           arrow={<ArrowRightIcon />}
           className="-rotate-3"
-        />
+        /> */}
       </div>
 
       <ul className="mx-auto mt-12 grid max-w-290 grid-cols-1 items-center justify-items-center gap-x-4 gap-y-0 sm:grid-cols-2 sm:gap-y-8 md:mt-14 md:flex md:flex-row md:flex-wrap md:justify-center md:gap-6 lg:flex-nowrap lg:gap-0">
