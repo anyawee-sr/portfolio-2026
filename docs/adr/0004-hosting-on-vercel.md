@@ -34,17 +34,15 @@ Vercel รองรับทั้ง SSG และ image optimizer โดยไ
 
 ### ทำไมยังไม่ pin Node version
 
-เครื่อง dev รัน Node v20.19.5 (LTS หมดอายุเมษายน 2026) ส่วน Vercel ใช้ default ของตัวเองซึ่ง
-ปัจจุบันคือ 22.x — `package.json` ไม่มีทั้ง `engines` และ `packageManager` field เลือกรับ
-ความเสี่ยงนี้ไว้ตรงๆ เพราะ build เป็น static ล้วน ไม่มี server runtime ที่พฤติกรรมต่างกันระหว่าง
-เวอร์ชัน Node จะกระทบผู้ใช้จริง แต่บันทึกไว้ชัดเจนว่านี่คือหนี้ที่ตั้งใจก่อ ไม่ใช่ความประมาท
+เครื่อง dev รัน Node v20.19.5 (EOL เมษายน 2026) ส่วน Vercel ใช้ default 22.x — `package.json`
+ไม่มีทั้ง `engines` และ `packageManager` field เลือกรับความเสี่ยงนี้ไว้ตรงๆ เพราะ build เป็น
+static ล้วน ไม่มี server runtime ที่พฤติกรรมต่างกันระหว่างเวอร์ชัน Node จะกระทบผู้ใช้จริง เป็นหนี้
+ที่ตั้งใจก่อ ไม่ใช่ความประมาท
 
-**Update (2026-08-13):** Node 20 EOL ผ่านมาแล้วจริงตามที่คาดไว้ข้างบน และ Vercel เตือนใน
-dashboard ว่ามี 3 projects ในบัญชีนี้ที่ใช้ Node 20 หรือเก่ากว่า build จะเริ่ม fail ตั้งแต่
-1 ต.ค. 2026 — เช็คแล้ว `portfolio-2026` ไม่ติดในลิสต์นั้น (Settings → Build & Deployment →
-Node.js Version ของ project นี้ขึ้น **24.x** ไปแล้ว ไม่ใช่ 22.x ที่เดาไว้ตอนเขียน ADR ฉบับนี้)
-ปิดหนี้นี้แล้ว: อัปเกรด local เป็น 24.x ให้ตรง + ใส่ `"engines": { "node": "24.x" }` ใน
-`package.json` (ยังไม่ใส่ `packageManager` เพราะไม่ใช่ scope ของรอบนี้)
+**Update (2026-08-13):** Node 20 EOL ผ่านมาแล้วจริง — Vercel เตือนว่า project ที่ใช้ Node 20
+หรือเก่ากว่า build จะเริ่ม fail ตั้งแต่ 1 ต.ค. 2026 เช็คแล้ว `portfolio-2026` ไม่ติดกลุ่มนั้น
+(Node.js Version ในหน้า Settings ขึ้น **24.x** ไปแล้ว ไม่ใช่ 22.x ที่เดาไว้ตอนเขียน ADR) ปิดหนี้
+นี้แล้ว: pin `engines` + `@types/node` เป็น 24.x ใน `package.json` ให้ตรงกับ local และ Vercel
 
 ### ทำไมเก็บ Vercel project เดิมไว้ ไม่ทับ
 
