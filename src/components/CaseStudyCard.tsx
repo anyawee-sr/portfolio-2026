@@ -4,8 +4,8 @@ import type { ICaseStudy } from "@/data/caseStudies";
 import { workDetailPath } from "@/data/routes";
 import { cn } from "@/lib/cn";
 
-import { CaseStudyChip } from "./ui/CaseStudyChip";
-import { ImagePlaceholder } from "./ui/ImagePlaceholder";
+import { CaseStudyChip } from "@/components/ui/CaseStudyChip";
+import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder";
 
 export interface ICaseStudyCardProps {
   study: ICaseStudy;

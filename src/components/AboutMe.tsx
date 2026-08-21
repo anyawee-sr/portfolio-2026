@@ -1,8 +1,8 @@
 import Image from "next/image";
 
 import { aboutMe } from "@/data/aboutMe";
-import { ArrowRightIcon } from "./ui/ArrowRightIcon";
-import { CheckBox } from "./ui/CheckBox";
+import { ArrowRightIcon } from "@/components/ui/ArrowRightIcon";
+import { CheckBox } from "@/components/ui/CheckBox";
 
 export function AboutMe() {
   return (

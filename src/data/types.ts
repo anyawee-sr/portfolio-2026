@@ -1,4 +1,4 @@
-import { routes } from "./routes";
+import { routes } from "@/data/routes";
 
 /**
  * Shared link shape for nav + footer content.

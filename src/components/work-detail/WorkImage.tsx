@@ -1,4 +1,4 @@
-import { ImagePlaceholder } from "../ui/ImagePlaceholder";
+import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder";
 
 export interface IWorkFigureProps {
   /** Omit to render the placeholder box; pass once a real asset exists. */

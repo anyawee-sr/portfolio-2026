@@ -1,7 +1,7 @@
-import { WorkCode } from "../WorkCode";
-import { WorkList } from "../WorkList";
-import { WorkText } from "../WorkText";
-import { WorkSection } from "../WorkSection";
+import { WorkCode } from "@/components/work-detail/WorkCode";
+import { WorkList } from "@/components/work-detail/WorkList";
+import { WorkText } from "@/components/work-detail/WorkText";
+import { WorkSection } from "@/components/work-detail/WorkSection";
 
 export function BuildingsRefuseToFade() {
   return (

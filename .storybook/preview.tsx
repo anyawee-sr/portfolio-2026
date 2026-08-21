@@ -1,5 +1,5 @@
 import type { Preview } from "@storybook/nextjs-vite";
-import { fontVariables } from "../src/app/fonts";
+import { fontVariables } from "@/app/fonts";
 
 import "./preview.css";
 

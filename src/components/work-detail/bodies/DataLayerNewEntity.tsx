@@ -1,7 +1,7 @@
-import { WorkCode } from "../WorkCode";
-import { WorkLink } from "../WorkLink";
-import { WorkText } from "../WorkText";
-import { WorkSection } from "../WorkSection";
+import { WorkCode } from "@/components/work-detail/WorkCode";
+import { WorkLink } from "@/components/work-detail/WorkLink";
+import { WorkText } from "@/components/work-detail/WorkText";
+import { WorkSection } from "@/components/work-detail/WorkSection";
 
 export function DataLayerNewEntity() {
   return (

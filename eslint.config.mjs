@@ -21,6 +21,22 @@ const eslintConfig = defineConfig([
     "design-ref/**",
   ]),
   ...storybook.configs["flat/recommended"],
+  {
+    rules: {
+      "no-restricted-imports": [
+        "error",
+        {
+          patterns: [
+            {
+              group: ["./*", "../*", "!./*.css", "!../*.css", "!**/*.css"],
+              message:
+                'Use the "@/*" alias import instead of a relative import.',
+            },
+          ],
+        },
+      ],
+    },
+  },
 ]);
 
 export default eslintConfig;

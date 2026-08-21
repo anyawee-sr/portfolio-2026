@@ -1,4 +1,4 @@
-import type { Link } from "./types";
+import type { Link } from "@/data/types";
 
 /** Top nav — also mirrored by footer navigation. */
 export const nav: Link[] = [

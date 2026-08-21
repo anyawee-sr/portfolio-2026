@@ -1,4 +1,4 @@
-import type { Link } from "./types";
+import type { Link } from "@/data/types";
 
 /**
  * Content for `src/app/not-found.tsx`. Kept in natural case like every
