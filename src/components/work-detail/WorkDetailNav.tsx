@@ -3,7 +3,7 @@ import NextLink from "next/link";
 import type { ICaseStudy } from "@/data/caseStudies";
 import { workDetailPath } from "@/data/routes";
 
-import { ArrowLeftIcon } from "../ui/ArrowLeftIcon";
+import { ArrowLeftIcon } from "@/components/ui/ArrowLeftIcon";
 import { ArrowRightIcon } from "@/components/ui/ArrowRightIcon";
 
 export interface IWorkDetailNavProps {

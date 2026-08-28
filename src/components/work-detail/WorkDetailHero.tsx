@@ -3,9 +3,9 @@ import NextLink from "next/link";
 import type { ICaseStudy } from "@/data/caseStudies";
 import { routes } from "@/data/routes";
 
-import { ArrowLeftIcon } from "../ui/ArrowLeftIcon";
-import { CaseStudyChip } from "../ui/CaseStudyChip";
-import { Eye } from "../ui/Eye";
+import { ArrowLeftIcon } from "@/components/ui/ArrowLeftIcon";
+import { CaseStudyChip } from "@/components/ui/CaseStudyChip";
+import { Eye } from "@/components/ui/Eye";
 
 export interface IWorkDetailHeroProps {
   study: ICaseStudy;

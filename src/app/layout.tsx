@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { fontVariables } from "./fonts";
+import { fontVariables } from "@/app/fonts";
 import "./globals.css";
 import { siteUrl } from "@/data/site";
 import { EyeTracker } from "@/components/EyeTracker";

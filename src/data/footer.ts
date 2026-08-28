@@ -1,5 +1,5 @@
-import { nav } from "./nav";
-import { email, links } from "./links";
+import { nav } from "@/data/nav";
+import { email, links } from "@/data/links";
 
 export const footer = {
   navigation: nav,

@@ -1,7 +1,7 @@
 import { skills } from "@/data/skills";
 
-import { Asterisk } from "./ui/Asterisk";
-import { Sticker } from "./ui/Sticker";
+import { Asterisk } from "@/components/ui/Asterisk";
+import { Sticker } from "@/components/ui/Sticker";
 
 /** Cycled per skill so neighboring stickers never share a tilt. */
 const SKILL_ROTATIONS = [

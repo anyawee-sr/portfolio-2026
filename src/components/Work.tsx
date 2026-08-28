@@ -3,9 +3,9 @@ import type { Link } from "@/data/types";
 
 import { cn } from "@/lib/cn";
 
-import { CaseStudyCard } from "./CaseStudyCard";
-import { ArrowRightIcon } from "./ui/ArrowRightIcon";
-import { Pill } from "./ui/Pill";
+import { CaseStudyCard } from "@/components/CaseStudyCard";
+import { ArrowRightIcon } from "@/components/ui/ArrowRightIcon";
+import { Pill } from "@/components/ui/Pill";
 
 const viewAllLink: Link = {
   type: "internal",

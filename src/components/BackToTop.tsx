@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/cn";
 import { smoothScrollToTop } from "@/lib/smoothScrollTo";
 
-import { BubbleTail } from "./ui/BubbleTail";
+import { BubbleTail } from "@/components/ui/BubbleTail";
 
 /** A speech-bubble "back to top?" link that lives across the footer's
  * top edge, near the googly eyes. Plays its rise-in bounce every time

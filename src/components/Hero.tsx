@@ -4,8 +4,8 @@ import { heroTags } from "@/data/heroTags";
 import { links } from "@/data/links";
 import { routes } from "@/data/routes";
 
-import { Eye } from "./ui/Eye";
-import { Sticker } from "./ui/Sticker";
+import { Eye } from "@/components/ui/Eye";
+import { Sticker } from "@/components/ui/Sticker";
 import { ArrowRightIcon } from "@/components/ui/ArrowRightIcon";
 
 /**

@@ -10,8 +10,8 @@ import { routes } from "@/data/routes";
 import { cn } from "@/lib/cn";
 import { smoothScrollTo } from "@/lib/smoothScrollTo";
 
-import { Pill } from "./ui/Pill";
-import { PopSparks } from "./ui/PopSparks";
+import { Pill } from "@/components/ui/Pill";
+import { PopSparks } from "@/components/ui/PopSparks";
 
 /** Alternating tilt for the mobile menu's hanging badges — ±3–5deg per CLAUDE.md,
  * via Tailwind's own built-in rotate scale (not a named globals.css utility). */

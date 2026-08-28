@@ -1,11 +1,11 @@
 import type { Link } from "@/data/types";
 
-import { Pill } from "../../ui/Pill";
-import { ArrowRightIcon } from "../../ui/ArrowRightIcon";
-import { WorkEmbed } from "../WorkEmbed";
-import { WorkList } from "../WorkList";
-import { WorkText } from "../WorkText";
-import { WorkSection } from "../WorkSection";
+import { Pill } from "@/components/ui/Pill";
+import { ArrowRightIcon } from "@/components/ui/ArrowRightIcon";
+import { WorkEmbed } from "@/components/work-detail/WorkEmbed";
+import { WorkList } from "@/components/work-detail/WorkList";
+import { WorkText } from "@/components/work-detail/WorkText";
+import { WorkSection } from "@/components/work-detail/WorkSection";
 
 const archive: Link[] = [
   {

@@ -3,8 +3,8 @@ import NextLink from "next/link";
 import { copyrightYear, footer } from "@/data/footer";
 import { routes } from "@/data/routes";
 
-import { BackToTop } from "./BackToTop";
-import { Eye } from "./ui/Eye";
+import { BackToTop } from "@/components/BackToTop";
+import { Eye } from "@/components/ui/Eye";
 
 export function Footer() {
   return (

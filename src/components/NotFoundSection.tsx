@@ -2,9 +2,8 @@ import Image from "next/image";
 
 import { notFound } from "@/data/notFound";
 import { cn } from "@/lib/cn";
-
-import { Pill } from "./ui/Pill";
-import { PopSparks } from "./ui/PopSparks";
+import { Pill } from "@/components/ui/Pill";
+import { PopSparks } from "@/components/ui/PopSparks";
 import { Asterisk } from "@/components/ui/Asterisk";
 
 /**
@@ -26,7 +25,8 @@ const TAPES = [
     width: 247,
     height: 79,
     size: "w-49 lg:w-56",
-    position: "top-10 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-10 lg:top-0 lg:rotate-0",
+    position:
+      "top-10 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-10 lg:top-0 lg:rotate-0",
   },
   {
     side: "right",
@@ -40,7 +40,8 @@ const TAPES = [
     width: 462,
     height: 131,
     size: "w-88 lg:w-90",
-    position: "bottom-6 left-1/2 -translate-x-1/2 translate-y-1/2 rotate-4 lg:bottom-2",
+    position:
+      "bottom-6 left-1/2 -translate-x-1/2 translate-y-1/2 rotate-4 lg:bottom-2",
   },
   {
     side: "left",
@@ -128,11 +129,7 @@ export function NotFoundSection() {
             width={tape.width}
             height={tape.height}
             loading="lazy"
-            className={cn(
-              "absolute h-auto",
-              tape.size,
-              tape.position,
-            )}
+            className={cn("absolute h-auto", tape.size, tape.position)}
           />
         ))}
         <div
