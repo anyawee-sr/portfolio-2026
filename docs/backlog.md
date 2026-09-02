@@ -12,8 +12,19 @@ git เก็บประวัติให้แล้ว พอไม่เห
 เหลือกันไม่ให้ URL เก่าติดอันดับแข่งกับโดเมนจริง:
 
 - [ ] Vercel preview domain เดิม (`portfolio-2026-tau-three.vercel.app`) — redirect ไปโดเมนจริง
-      หรือปิด Vercel project ทิ้งถ้าเลิก deploy ผ่าน Vercel แล้ว (ตอนนี้ deploy ไป S3 ผ่าน
-      `.github/workflows/deploy.yml` — ADR-0004 "Hosting on Vercel" ยังไม่ถูก supersede)
+      หรือปิด Vercel project ทิ้ง ตอนนี้ deploy ไป S3 ผ่าน `.github/workflows/deploy.yml` แล้ว
+      (ดู [`adr/0005-hosting-on-s3.md`](adr/0005-hosting-on-s3.md)) แต่ Vercel project เดิมยัง
+      ค้างอยู่ ยังเสิร์ฟ `*.vercel.app` ที่แข่ง SEO กับโดเมนจริง
+
+## เมื่อ AWS ปิด case account verify
+
+ตอนนี้ CloudFront เปิดไม่ได้ (ติด account verify — เปิด case support แล้ว) ระหว่างรอใช้ Cloudflare
+คั่นหน้า S3 แทน (ดู [`adr/0005-hosting-on-s3.md`](adr/0005-hosting-on-s3.md))
+
+- [ ] ย้าย CDN จาก Cloudflare → CloudFront ตามแผนเดิม — ตั้ง distribution (origin = S3, TLS จาก
+      ACM), ชี้ DNS ของ `anyawee-sr.com` มาที่ CloudFront, บันทึก distribution id ไว้ใน repo
+- [ ] เพิ่ม cache purge หลัง `s3 sync` ใน `deploy.yml` — ตอนนี้ต้อง purge Cloudflare, หลังย้ายเป็น
+      `aws cloudfront create-invalidation` (distribution id เป็น repo variable)
 
 ## ก่อนส่งลิงก์ให้ recruiter
 

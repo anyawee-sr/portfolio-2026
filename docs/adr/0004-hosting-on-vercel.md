@@ -2,7 +2,10 @@
 
 ## Status
 
-Accepted
+Superseded by [ADR-0005](0005-hosting-on-s3.md) (2026-09-02)
+
+> ย้าย hosting จาก Vercel ไป static export บน S3 + CloudFront — เหตุผลและ setup ใหม่อยู่ใน
+> ADR-0005 ฉบับนี้เก็บไว้เป็นบันทึกประวัติของการตัดสินใจเดิม ไม่แก้เนื้อหาส่วนล่างเพิ่ม
 
 ## Context
 
