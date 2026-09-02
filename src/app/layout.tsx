@@ -25,11 +25,6 @@ export const metadata: Metadata = {
     description,
     locale: "en_US",
   },
-  // ยังไม่ให้ search engine เก็บ *.vercel.app — กันไม่ให้โดเมนชั่วคราวติดอันดับ
-  // แล้วแข่งกับ custom domain ทีหลัง (ดู docs/adr/0004-hosting-on-vercel.md)
-  // เอาออกเมื่อ domain จริงพร้อม (ดู docs/backlog.md) — ไม่กระทบการ์ดแชร์
-  // LinkedIn/LINE เพราะ crawler พวกนั้นอ่านแค่ og: tag ไม่สน robots meta
-  robots: { index: false, follow: false },
 };
 
 export default function RootLayout({

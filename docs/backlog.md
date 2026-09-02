@@ -6,19 +6,14 @@
 **ไฟล์นี้หดลงเรื่อยๆ** — ข้อไหนทำเสร็จให้ลบทิ้งทั้งบรรทัด/section ไม่ต้องเก็บ `- [x]` ค้างไว้
 git เก็บประวัติให้แล้ว พอไม่เหลือข้อไหนก็ลบไฟล์นี้ได้เลย
 
-## เมื่อ custom domain พร้อม — ทำทั้งก้อน ห้ามทำทีละข้อ
+## custom domain — เหลือปิด duplicate content
 
-- [ ] เอา `robots: { index: false, follow: false }` ออกจาก `src/app/layout.tsx:30`
-- [ ] เปลี่ยน `siteUrl` ใน `src/data/site.ts` เป็นโดเมนจริง (ตอนนี้ชี้
-      `https://portfolio-2026-tau-three.vercel.app` — `metadataBase` ใน `layout.tsx` +
-      `og:image` URL อ่านจากค่านี้จุดเดียว แก้ที่นี่ที่เดียวพอ)
-- [ ] เพิ่ม `src/app/sitemap.ts` — ครอบ `/` + `/work/<slug>` ทุกตัวจาก `src/data/caseStudies.ts`
-      import `siteUrl` จาก `src/data/site.ts` มาต่อ absolute URL (Next ไม่ให้ sitemap.ts
-      อ่าน `metadataBase` เอง ต้องประกอบ URL มือ)
-- [ ] ตั้ง redirect `*.vercel.app` → โดเมนจริง ใน Vercel dashboard (กัน duplicate content)
+`anyawee-sr.com` พร้อมแล้ว — `siteUrl`, noindex, `sitemap.ts`, `robots.ts` แก้เสร็จหมดแล้ว
+เหลือกันไม่ให้ URL เก่าติดอันดับแข่งกับโดเมนจริง:
 
-ทำไมต้องทำพร้อมกันทั้งก้อน: ถ้าเอา noindex ออกโดยไม่ใส่ `sitemap.ts` ไปด้วย จะได้เว็บที่ Google
-เข้ามาเก็บแล้วแต่ไม่มี sitemap ให้ไล่ ซึ่งแย่กว่าตอนที่ยัง noindex อยู่
+- [ ] Vercel preview domain เดิม (`portfolio-2026-tau-three.vercel.app`) — redirect ไปโดเมนจริง
+      หรือปิด Vercel project ทิ้งถ้าเลิก deploy ผ่าน Vercel แล้ว (ตอนนี้ deploy ไป S3 ผ่าน
+      `.github/workflows/deploy.yml` — ADR-0004 "Hosting on Vercel" ยังไม่ถูก supersede)
 
 ## ก่อนส่งลิงก์ให้ recruiter
 
