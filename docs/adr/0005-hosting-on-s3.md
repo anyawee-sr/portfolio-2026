@@ -63,12 +63,12 @@ Deploy static export ขึ้น S3 ผ่าน GitHub Actions
 purge CDN cache หลัง deploy ยังทำมือที่ Cloudflare (ดู `docs/backlog.md`) — ไม่ทำใน workflow
 เพราะ CDN เป็นของชั่วคราว จะทำ invalidation อัตโนมัติตอนย้าย CloudFront
 
-**IAM** — 2 ไฟล์นิยาม policy ตอนนี้ยังลอยอยู่ที่ root ของ repo ยังไม่ commit เข้าที่อยู่ถาวร เป็น
-snapshot ของสิ่งที่ตั้งด้วยมือบน AWS ไม่ใช่ IaC ที่ apply อัตโนมัติ:
+**IAM** — 2 ไฟล์นิยาม policy อยู่ที่ `infra/` เป็น snapshot ของสิ่งที่ตั้งด้วยมือบน AWS ไม่ใช่
+IaC ที่ apply อัตโนมัติ (วิธี apply กลับ + หมายเหตุเรื่อง format `sub` ดู `infra/README.md`):
 
-- `s3-policy.json` — `PutObject`/`GetObject`/`ListBucket`/`DeleteObject` เฉพาะ bucket `anyawee-sr.com`
-- `trust-policy.json` — trust `token.actions.githubusercontent.com` (OIDC) จำกัดให้ assume role
-  ได้เฉพาะจาก repo นี้ branch `main`
+- `infra/s3-policy.json` — `PutObject`/`GetObject`/`ListBucket`/`DeleteObject` เฉพาะ bucket `anyawee-sr.com`
+- `infra/trust-policy.json` — trust `token.actions.githubusercontent.com` (OIDC) จำกัดให้ assume
+  role ได้เฉพาะจาก repo นี้ branch `main`
 
 **TLS + CDN** — โดเมน `anyawee-sr.com` เสิร์ฟผ่าน HTTPS ซึ่ง S3 website endpoint ทำเองไม่ได้ (HTTP
 อย่างเดียว) จึงต้องมี CDN คั่นหน้า bucket ทำ TLS + edge cache
@@ -92,7 +92,7 @@ proxy ทำ TLS ที่ edge, origin ชี้กลับมาที่ buc
 - (-) เสีย `next/image` optimizer — รูปทุกใบเสิร์ฟตามขนาด/format ต้นฉบับ (`unoptimized: true`)
   รับได้ตอนนี้เพราะรูปน้อย ถ้า section งานโตจนรูปหนักต้องกลับมาคิด (image CDN หรือ resize ตอน build)
 - (-) ของที่ต้องดูแลด้วยมือเพิ่มขึ้น — bucket policy, IAM role + trust, CDN, DNS ยังไม่มีอันไหน
-  เป็น code (`s3-policy.json`/`trust-policy.json` เป็น draft ลอย ๆ)
+  เป็น code (`infra/*.json` เป็น snapshot อ้างอิง ต้อง sync มือกับ AWS)
 - (-) ชั้น CDN เป็นของชั่วคราว — Cloudflare คั่นหน้า S3 ระหว่างรอ AWS เคลียร์ account verify เพื่อ
   เปิด CloudFront ต้องย้ายอีกรอบเมื่อ support ปิด case (จดไว้ใน `docs/backlog.md`)
 - (-) `deploy.yml` ไม่ purge CDN ให้ — หลัง deploy ที่แตะ asset ไม่ hash-named (favicon, og-image,

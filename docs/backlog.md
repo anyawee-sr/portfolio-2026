@@ -31,7 +31,7 @@ JS/CSS เปลี่ยนชื่อทุก build)
       distribution id
 - [ ] เมื่อ CloudFront ขึ้นแล้ว: เพิ่ม step `aws cloudfront create-invalidation --paths "/*"` ใน
       `deploy.yml` (distribution id เป็น repo variable) + เพิ่ม `cloudfront:CreateInvalidation`
-      ใน `s3-policy.json` — เลิก purge มือ
+      ใน `infra/s3-policy.json` (แล้ว apply กลับ) — เลิก purge มือ
 
 ## ก่อนส่งลิงก์ให้ recruiter
 
