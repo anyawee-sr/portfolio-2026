@@ -16,15 +16,22 @@ git เก็บประวัติให้แล้ว พอไม่เห
       (ดู [`adr/0005-hosting-on-s3.md`](adr/0005-hosting-on-s3.md)) แต่ Vercel project เดิมยัง
       ค้างอยู่ ยังเสิร์ฟ `*.vercel.app` ที่แข่ง SEO กับโดเมนจริง
 
-## เมื่อ AWS ปิด case account verify
+## Cloudflare (ชั่วคราว) → CloudFront
 
-ตอนนี้ CloudFront เปิดไม่ได้ (ติด account verify — เปิด case support แล้ว) ระหว่างรอใช้ Cloudflare
-คั่นหน้า S3 แทน (ดู [`adr/0005-hosting-on-s3.md`](adr/0005-hosting-on-s3.md))
+CloudFront เปิดไม่ได้ตอนนี้ (ติด account verify — เปิด case support แล้ว) ระหว่างรอใช้ Cloudflare
+คั่นหน้า S3 (ดู [`adr/0005-hosting-on-s3.md`](adr/0005-hosting-on-s3.md))
 
-- [ ] ย้าย CDN จาก Cloudflare → CloudFront ตามแผนเดิม — ตั้ง distribution (origin = S3, TLS จาก
-      ACM), ชี้ DNS ของ `anyawee-sr.com` มาที่ CloudFront, บันทึก distribution id ไว้ใน repo
-- [ ] เพิ่ม cache purge หลัง `s3 sync` ใน `deploy.yml` — ตอนนี้ต้อง purge Cloudflare, หลังย้ายเป็น
-      `aws cloudfront create-invalidation` (distribution id เป็น repo variable)
+`deploy.yml` ไม่ purge CDN ให้ — หลัง deploy ที่แตะ asset ไม่ hash-named (favicon, og-image,
+`/images/*`, sitemap.xml, robots.txt) ต้อง **purge มือ**ที่ Cloudflare dashboard
+(Caching → Configuration → Purge Everything) HTML/JS/CSS ไม่ต้อง (HTML ไม่ถูก edge-cache,
+JS/CSS เปลี่ยนชื่อทุก build)
+
+- [ ] เมื่อ AWS ปิด case: ย้าย CDN Cloudflare → CloudFront — ตั้ง distribution (origin = S3, TLS
+      จาก ACM ที่ region `us-east-1`), ชี้ DNS `anyawee-sr.com` มาที่ CloudFront, บันทึก
+      distribution id
+- [ ] เมื่อ CloudFront ขึ้นแล้ว: เพิ่ม step `aws cloudfront create-invalidation --paths "/*"` ใน
+      `deploy.yml` (distribution id เป็น repo variable) + เพิ่ม `cloudfront:CreateInvalidation`
+      ใน `s3-policy.json` — เลิก purge มือ
 
 ## ก่อนส่งลิงก์ให้ recruiter
 

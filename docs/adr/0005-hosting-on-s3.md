@@ -51,12 +51,17 @@ Deploy static export ขึ้น S3 ผ่าน GitHub Actions
 
 **Pipeline** — `.github/workflows/deploy.yml` trigger ที่ `push` เข้า `main`:
 
-1. `npm ci` → `npm run build`
+1. `actions/setup-node` (อ่าน Node version จาก `engines` ใน `package.json` จุดเดียว) → `npm ci` →
+   `npm run build`
 2. `aws-actions/configure-aws-credentials` แลก GitHub OIDC token เป็น session ชั่วคราวของ role
    `arn:aws:iam::891376940165:role/GitHubActionsS3Role` — **ไม่มี AWS access key ค้างใน repo
    secret** workflow ขอสิทธิ์ `id-token: write` เท่านั้น
-3. `aws s3 sync ./out s3://anyawee-sr.com --delete` (region `ap-southeast-1`) — bucket ตั้งชื่อ
-   ตรงกับโดเมน (เปลี่ยนจากชื่อ generated เดิมเมื่อ 2026-09-01)
+3. `aws s3 sync ./out s3://anyawee-sr.com --delete` (region `ap-southeast-1`, bucket ตั้งชื่อ
+   ตรงกับโดเมน เปลี่ยนจากชื่อ generated เดิมเมื่อ 2026-09-01) — `Cache-Control:
+   max-age=300, must-revalidate` เท่ากันทุกไฟล์
+
+purge CDN cache หลัง deploy ยังทำมือที่ Cloudflare (ดู `docs/backlog.md`) — ไม่ทำใน workflow
+เพราะ CDN เป็นของชั่วคราว จะทำ invalidation อัตโนมัติตอนย้าย CloudFront
 
 **IAM** — 2 ไฟล์นิยาม policy ตอนนี้ยังลอยอยู่ที่ root ของ repo ยังไม่ commit เข้าที่อยู่ถาวร เป็น
 snapshot ของสิ่งที่ตั้งด้วยมือบน AWS ไม่ใช่ IaC ที่ apply อัตโนมัติ:
@@ -82,15 +87,16 @@ proxy ทำ TLS ที่ edge, origin ชี้กลับมาที่ buc
 - (+) hosting อยู่บน AWS account เดิมที่มีอยู่แล้ว — vendor เดียว
 - (+) ปัญหา `*.vercel.app` preview domain แข่ง SEO กับโดเมนจริง (ADR-0004) หายไปเมื่อปิด Vercel
   project (ยังเป็น backlog item — ดู `docs/backlog.md`)
+- (+) `deploy.yml` เรียบ — pin Node ผ่าน `node-version-file` + ตั้ง `Cache-Control` ตอน sync
+  นอกนั้นเป็น `s3 sync --delete` ตรง ๆ
 - (-) เสีย `next/image` optimizer — รูปทุกใบเสิร์ฟตามขนาด/format ต้นฉบับ (`unoptimized: true`)
   รับได้ตอนนี้เพราะรูปน้อย ถ้า section งานโตจนรูปหนักต้องกลับมาคิด (image CDN หรือ resize ตอน build)
-- (-) ของที่ต้องดูแลด้วยมือเพิ่มขึ้น — bucket policy, IAM role + trust, CDN + cache purge, DNS
-  ยังไม่มีอันไหนเป็น code (`s3-policy.json`/`trust-policy.json` เป็น draft ลอย ๆ)
+- (-) ของที่ต้องดูแลด้วยมือเพิ่มขึ้น — bucket policy, IAM role + trust, CDN, DNS ยังไม่มีอันไหน
+  เป็น code (`s3-policy.json`/`trust-policy.json` เป็น draft ลอย ๆ)
 - (-) ชั้น CDN เป็นของชั่วคราว — Cloudflare คั่นหน้า S3 ระหว่างรอ AWS เคลียร์ account verify เพื่อ
   เปิด CloudFront ต้องย้ายอีกรอบเมื่อ support ปิด case (จดไว้ใน `docs/backlog.md`)
-- (-) `deploy.yml` ยังมีช่องโหว่ค้าง — ไม่มี `actions/setup-node` (`npm ci` รันบน Node default ของ
-  runner ไม่ใช่ `engines: 24.x` ที่ pin ไว้), ไม่มี CDN cache purge หลัง `s3 sync` (deploy แล้ว
-  เว็บไม่อัปจนกว่า cache หมดอายุ), ไม่มี `Cache-Control` แยกระหว่าง HTML กับ hashed asset — จดไว้ใน
-  `docs/backlog.md`
+- (-) `deploy.yml` ไม่ purge CDN ให้ — หลัง deploy ที่แตะ asset ไม่ hash-named (favicon, og-image,
+  `/images/*`, sitemap, robots) ต้อง purge Cloudflare มือ (จดไว้ใน `docs/backlog.md`) จะทำอัตโนมัติ
+  ตอนย้าย CloudFront
 - (-) ฟีเจอร์ Next ที่ต้อง server (ISR, on-demand revalidation, route handler, middleware) ตัดออก
   หมด — รับได้เพราะเว็บไม่มีสักอย่าง และ ADR-0004 ยืนยันไว้แล้วว่าเป็น SSG ล้วน
