@@ -98,6 +98,6 @@ export const aboutMe: IAboutMe = {
   resume: {
     prefix: "Not a scanner?",
     label: "Click here to open",
-    href: "https://drive.google.com/file/d/1uzlZxiFAhzyiq15frnz-UEOLwApRBne2/view",
+    href: "https://drive.google.com/file/d/1GlCmxKA-Uxvd2mcoLBm3lxVuWjJ3LSYN/view",
   },
 };
