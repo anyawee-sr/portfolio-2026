@@ -1,0 +1,7 @@
+{
+  "Name": "portfolio-2026-oac",
+  "Description": "Created by CloudFront",
+  "SigningProtocol": "sigv4",
+  "SigningBehavior": "always",
+  "OriginAccessControlOriginType": "s3"
+}

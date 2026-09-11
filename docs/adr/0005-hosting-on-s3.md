@@ -73,10 +73,11 @@ IaC ที่ apply อัตโนมัติ (วิธี apply กลับ
 **TLS + CDN** — โดเมน `anyawee-sr.com` เสิร์ฟผ่าน HTTPS ซึ่ง S3 website endpoint ทำเองไม่ได้ (HTTP
 อย่างเดียว) จึงต้องมี CDN คั่นหน้า bucket ทำ TLS + edge cache
 
-แผนเดิมคือ CloudFront แต่ตอนนี้ยังเปิดใช้ไม่ได้ — ติดขั้นตอน account verify ของ AWS เปิด case ให้
+แผนเดิมคือ CloudFront แต่ตอนนั้นยังเปิดใช้ไม่ได้ — ติดขั้นตอน account verify ของ AWS เปิด case ให้
 ฝ่าย support แล้ว อยู่ระหว่างรอดำเนินการ **ระหว่างรอใช้ Cloudflare คั่นหน้า S3 แทน** (Cloudflare
-proxy ทำ TLS ที่ edge, origin ชี้กลับมาที่ bucket) พอ account verify ผ่านค่อยย้ายมา CloudFront ตาม
-แผนเดิม — config ของทั้ง Cloudflare ตอนนี้และ CloudFront ในอนาคต **ยังไม่ถูกบันทึกใน repo**
+proxy ทำ TLS ที่ edge, origin ชี้กลับมาที่ bucket) — **อัปเดต 2026-09:** account verify ปลดแล้ว
+ย้ายมา CloudFront ตามแผนเดิมเรียบร้อย ดู [ADR-0006](0006-cloudfront-cdn-in-front-of-s3.md) สำหรับ
+CDN config ชุดใหม่ (Cloudflare ตอนนี้เหลือแค่ DNS ไม่ proxy อะไรแล้ว)
 
 ## Consequences
 

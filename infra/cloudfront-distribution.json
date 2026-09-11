@@ -1,0 +1,122 @@
+{
+  "CallerReference": "c361d8a5-02d8-45c4-b247-b2faf0b97d79",
+  "Aliases": {
+    "Quantity": 1,
+    "Items": ["anyawee-sr.com"]
+  },
+  "DefaultRootObject": "",
+  "Origins": {
+    "Quantity": 1,
+    "Items": [
+      {
+        "Id": "anyawee-sr.com.s3.ap-southeast-1.amazonaws.com-mtst9vkchg1",
+        "DomainName": "anyawee-sr.com.s3.ap-southeast-1.amazonaws.com",
+        "OriginPath": "",
+        "CustomHeaders": {
+          "Quantity": 0
+        },
+        "S3OriginConfig": {
+          "OriginAccessIdentity": "",
+          "OriginReadTimeout": 30
+        },
+        "ConnectionAttempts": 3,
+        "ConnectionTimeout": 10,
+        "OriginShield": {
+          "Enabled": false
+        },
+        "OriginAccessControlId": "E3K2202W1OHZX0"
+      }
+    ]
+  },
+  "OriginGroups": {
+    "Quantity": 0
+  },
+  "DefaultCacheBehavior": {
+    "TargetOriginId": "anyawee-sr.com.s3.ap-southeast-1.amazonaws.com-mtst9vkchg1",
+    "TrustedSigners": {
+      "Enabled": false,
+      "Quantity": 0
+    },
+    "TrustedKeyGroups": {
+      "Enabled": false,
+      "Quantity": 0
+    },
+    "ViewerProtocolPolicy": "redirect-to-https",
+    "AllowedMethods": {
+      "Quantity": 2,
+      "Items": ["HEAD", "GET"],
+      "CachedMethods": {
+        "Quantity": 2,
+        "Items": ["HEAD", "GET"]
+      }
+    },
+    "SmoothStreaming": false,
+    "Compress": true,
+    "LambdaFunctionAssociations": {
+      "Quantity": 0
+    },
+    "FunctionAssociations": {
+      "Quantity": 1,
+      "Items": [
+        {
+          "FunctionARN": "arn:aws:cloudfront::891376940165:function/portfolio-2026-rewrite",
+          "EventType": "viewer-request"
+        }
+      ]
+    },
+    "FieldLevelEncryptionId": "",
+    "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
+    "ResponseHeadersPolicyId": "67f7725c-6f97-4210-82d7-5512b31e9d03",
+    "GrpcConfig": {
+      "Enabled": false
+    }
+  },
+  "CacheBehaviors": {
+    "Quantity": 0
+  },
+  "CustomErrorResponses": {
+    "Quantity": 2,
+    "Items": [
+      {
+        "ErrorCode": 403,
+        "ResponsePagePath": "/404.html",
+        "ResponseCode": "404",
+        "ErrorCachingMinTTL": 10
+      },
+      {
+        "ErrorCode": 404,
+        "ResponsePagePath": "/404.html",
+        "ResponseCode": "404",
+        "ErrorCachingMinTTL": 10
+      }
+    ]
+  },
+  "Comment": "",
+  "Logging": {
+    "Enabled": false,
+    "IncludeCookies": false,
+    "Bucket": "",
+    "Prefix": ""
+  },
+  "PriceClass": "PriceClass_All",
+  "Enabled": true,
+  "ViewerCertificate": {
+    "CloudFrontDefaultCertificate": false,
+    "ACMCertificateArn": "arn:aws:acm:us-east-1:891376940165:certificate/1eae3a17-ec16-4763-9f9e-779b329875f7",
+    "SSLSupportMethod": "sni-only",
+    "MinimumProtocolVersion": "TLSv1.2_2021",
+    "Certificate": "arn:aws:acm:us-east-1:891376940165:certificate/1eae3a17-ec16-4763-9f9e-779b329875f7",
+    "CertificateSource": "acm"
+  },
+  "Restrictions": {
+    "GeoRestriction": {
+      "RestrictionType": "none",
+      "Quantity": 0
+    }
+  },
+  "WebACLId": "arn:aws:wafv2:us-east-1:891376940165:global/webacl/CreatedByCloudFront-4c7ece60/856ffe83-2ca4-49e4-8689-29f870098676",
+  "HttpVersion": "http2and3",
+  "IsIPV6Enabled": true,
+  "ContinuousDeploymentPolicyId": "",
+  "Staging": false
+}

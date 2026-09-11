@@ -16,23 +16,6 @@ git เก็บประวัติให้แล้ว พอไม่เห
       (ดู [`adr/0005-hosting-on-s3.md`](adr/0005-hosting-on-s3.md)) แต่ Vercel project เดิมยัง
       ค้างอยู่ ยังเสิร์ฟ `*.vercel.app` ที่แข่ง SEO กับโดเมนจริง
 
-## Cloudflare (ชั่วคราว) → CloudFront
-
-CloudFront เปิดไม่ได้ตอนนี้ (ติด account verify — เปิด case support แล้ว) ระหว่างรอใช้ Cloudflare
-คั่นหน้า S3 (ดู [`adr/0005-hosting-on-s3.md`](adr/0005-hosting-on-s3.md))
-
-`deploy.yml` ไม่ purge CDN ให้ — หลัง deploy ที่แตะ asset ไม่ hash-named (favicon, og-image,
-`/images/*`, sitemap.xml, robots.txt) ต้อง **purge มือ**ที่ Cloudflare dashboard
-(Caching → Configuration → Purge Everything) HTML/JS/CSS ไม่ต้อง (HTML ไม่ถูก edge-cache,
-JS/CSS เปลี่ยนชื่อทุก build)
-
-- [ ] เมื่อ AWS ปิด case: ย้าย CDN Cloudflare → CloudFront — ตั้ง distribution (origin = S3, TLS
-      จาก ACM ที่ region `us-east-1`), ชี้ DNS `anyawee-sr.com` มาที่ CloudFront, บันทึก
-      distribution id
-- [ ] เมื่อ CloudFront ขึ้นแล้ว: เพิ่ม step `aws cloudfront create-invalidation --paths "/*"` ใน
-      `deploy.yml` (distribution id เป็น repo variable) + เพิ่ม `cloudfront:CreateInvalidation`
-      ใน `infra/s3-policy.json` (แล้ว apply กลับ) — เลิก purge มือ
-
 ## ก่อนส่งลิงก์ให้ recruiter
 
 - [ ] เขียน README ใหม่ — ตอนนี้เป็น boilerplate ที่พูดถึง `pages/index.tsx` ซึ่งไม่มีอยู่จริง
@@ -41,6 +24,21 @@ JS/CSS เปลี่ยนชื่อทุก build)
 
 **ระบบ / infra**
 
+- [ ] เปิด `www.anyawee-sr.com` — ตอนนี้เข้าไม่ได้เลย (ไม่เคยได้อยู่แล้วตั้งแต่ก่อนย้าย CloudFront
+      ไม่ใช่ regression) ACM cert มี SAN ครอบไว้ล่วงหน้าแล้วฟรี (ดู `infra/acm-cert.md`) เหลือ:
+      เพิ่ม DNS record `www` (CNAME &rarr; CloudFront domain, grey-cloud) + เพิ่ม
+      `www.anyawee-sr.com` เป็น alternate domain name ที่ distribution + (แนะนำด้าน SEO) เพิ่ม
+      host-based 301 branch ใน CloudFront Function `portfolio-2026-rewrite` redirect `www` &rarr;
+      apex กันเสิร์ฟ duplicate content สองชื่อโดเมน
+- [ ] cleanup hashed asset เก่าที่ไม่มี build ไหนอ้างถึงแล้วใน `_next/static/` บน S3 — deploy
+      pipeline (ดู `docs/adr/0006-cloudfront-cdn-in-front-of-s3.md`) ตั้งใจไม่ลบอัตโนมัติกัน race
+      กับ HTML เก่าที่ยัง cache ค้างอยู่ ปล่อยสะสมไปก่อนได้เพราะ cost ต่ำมากที่สเกลนี้ ถ้าจะทำจริง
+      **ห้ามใช้ S3 Lifecycle rule แบบ age-based** (ไฟล์ที่เนื้อหาไม่เปลี่ยนนานจะมี `LastModified`
+      เก่าทั้งที่ยัง live จริงอยู่ — ลบตาม age เฉย ๆ จะพังเว็บแบบไม่มีสัญญาณเตือน) ต้องเทียบกับ
+      manifest ของ build ปัจจุบันแทน
+- [ ] CSP / Permissions-Policy header ที่ CloudFront — เจตนาแยกออกจาก security headers ชุดแรก (ดู
+      `docs/adr/0006-cloudfront-cdn-in-front-of-s3.md`) เพราะ CSP ต้องจูนกับ Next.js inline
+      style/RSC ก่อน ใส่ตรง ๆ จะพังหน้าเว็บ
 - [ ] Vercel Analytics + Speed Insights
 - [ ] CI บน PR: `npm run build` + `npm run lint` + `npm run format:check`
       ⚠️ `npm test` เป็น vitest browser mode ผ่าน Playwright — runner ต้อง

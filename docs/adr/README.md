@@ -7,3 +7,4 @@
 | [0003](0003-cursor-tracking-googly-eyes.md)          | Cursor-Tracking Googly Eyes          | Accepted             |
 | [0004](0004-hosting-on-vercel.md)                    | Hosting on Vercel                    | Superseded by 0005   |
 | [0005](0005-hosting-on-s3.md)                        | Hosting on S3                        | Accepted             |
+| [0006](0006-cloudfront-cdn-in-front-of-s3.md)        | CloudFront CDN in Front of S3        | Accepted             |

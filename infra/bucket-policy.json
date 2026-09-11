@@ -1,0 +1,26 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "PublicReadOnly",
+      "Effect": "Allow",
+      "Principal": "*",
+      "Action": "s3:GetObject",
+      "Resource": "arn:aws:s3:::anyawee-sr.com/*"
+    },
+    {
+      "Sid": "AllowCloudFrontServicePrincipal",
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "cloudfront.amazonaws.com"
+      },
+      "Action": "s3:GetObject",
+      "Resource": "arn:aws:s3:::anyawee-sr.com/*",
+      "Condition": {
+        "ArnLike": {
+          "AWS:SourceArn": "arn:aws:cloudfront::891376940165:distribution/E3GWIH89OUPTH2"
+        }
+      }
+    }
+  ]
+}
