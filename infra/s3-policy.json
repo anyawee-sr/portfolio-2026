@@ -13,6 +13,11 @@
         "arn:aws:s3:::anyawee-sr.com",
         "arn:aws:s3:::anyawee-sr.com/*"
       ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": "cloudfront:CreateInvalidation",
+      "Resource": "arn:aws:cloudfront::891376940165:distribution/E3GWIH89OUPTH2"
     }
   ]
 }
