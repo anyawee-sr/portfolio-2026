@@ -6,16 +6,6 @@
 **ไฟล์นี้หดลงเรื่อยๆ** — ข้อไหนทำเสร็จให้ลบทิ้งทั้งบรรทัด/section ไม่ต้องเก็บ `- [x]` ค้างไว้
 git เก็บประวัติให้แล้ว พอไม่เหลือข้อไหนก็ลบไฟล์นี้ได้เลย
 
-## custom domain — เหลือปิด duplicate content
-
-`anyawee-sr.com` พร้อมแล้ว — `siteUrl`, noindex, `sitemap.ts`, `robots.ts` แก้เสร็จหมดแล้ว
-เหลือกันไม่ให้ URL เก่าติดอันดับแข่งกับโดเมนจริง:
-
-- [ ] Vercel preview domain เดิม (`portfolio-2026-tau-three.vercel.app`) — redirect ไปโดเมนจริง
-      หรือปิด Vercel project ทิ้ง ตอนนี้ deploy ไป S3 ผ่าน `.github/workflows/deploy.yml` แล้ว
-      (ดู [`adr/0005-hosting-on-s3.md`](adr/0005-hosting-on-s3.md)) แต่ Vercel project เดิมยัง
-      ค้างอยู่ ยังเสิร์ฟ `*.vercel.app` ที่แข่ง SEO กับโดเมนจริง
-
 ## ก่อนส่งลิงก์ให้ recruiter
 
 - [ ] เขียน README ใหม่ — ตอนนี้เป็น boilerplate ที่พูดถึง `pages/index.tsx` ซึ่งไม่มีอยู่จริง
