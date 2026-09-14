@@ -30,6 +30,12 @@ git เก็บประวัติให้แล้ว พอไม่เห
       ⚠️ `npm test` เป็น vitest browser mode ผ่าน Playwright — runner ต้อง
       `npx playwright install chromium` ก่อน ไม่ใช่ node test ธรรมดา
       ⚠️ ห้ามใช้ `tsc --noEmit` เดี่ยวๆ ใน CI — `PageProps<>` ถูก generate ตอน `next build`
+      ⚠️ ต่อให้มี CI บน PR แล้ว ต้องเปิด branch protection บน `main` (require status check
+      ก่อน merge) ด้วย ไม่งั้น CI รันแต่ไม่ block การ merge จริง
+- [ ] pre-commit hook (เช่น Husky + lint-staged) รัน lint/format เฉพาะไฟล์ staged ก่อน commit —
+      เป็นด่านเสริมให้ feedback เร็วกว่า CI (ไม่ต้องรอ push+รอ Actions) แต่**ไม่ใช่ตัวแทน CI**
+      เพราะ bypass ได้ด้วย `git commit --no-verify` และไม่ auto-install ให้ทุกเครื่องที่ clone
+      ไปเอง ยังต้องมี CI บน PR ควบคู่กันเสมอ
 - [ ] ทบทวน `allowedDevOrigins: ["192.168.1.34"]` ใน `next.config.ts:6` — ผูกกับ IP ของเน็ตบ้าน
       ย้ายเน็ต/เปลี่ยน router เมื่อไหร่ dev-on-phone พังเงียบ (หน้าโหลดได้แต่ไม่ hydrate)
 - [ ] แก้ trailing space ท้าย title ของ `buildings-refuse-to-fade` ใน
