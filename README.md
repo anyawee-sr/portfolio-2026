@@ -8,7 +8,6 @@ It's a Next.js site showcasing selected case studies, built and deployed as a st
 
 ## Highlights
 
-- **Accessibility-first** — focus-visible states, 44×44px touch targets, `prefers-reduced-motion` support, and an a11y checklist enforced before every merge.
 - **Decisions on record** — architecture and hosting calls are documented as ADRs in [`docs/adr/`](docs/adr/README.md), with the reasoning kept alongside the decision.
 - **Credential-free deploys** — GitHub Actions assumes an AWS IAM role over OIDC on every push to `main`; no long-lived AWS keys live in this repo.
 - **AI-assisted** — implemented with Claude Code and Claude Design.
