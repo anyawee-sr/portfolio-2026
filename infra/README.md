@@ -31,8 +31,8 @@ aws iam put-role-policy \
 
 | ไฟล์ | คืออะไร |
 | --- | --- |
-| `bucket-policy.json` | policy ปัจจุบัน (Phase 6 soak) — **dual-mode**: `PublicReadOnly` (ของเดิม, ยังไว้เป็น rollback) + `AllowCloudFrontServicePrincipal` (ให้ OAC อ่านได้) จะลด `PublicReadOnly` ออกตอน Phase 7 harden แล้วต้องมาอัปเดตไฟล์นี้อีกรอบ |
-| `s3-website-config.json` | static website hosting config **เดิม** — เก็บไว้เป็นสูตร rollback ของ Phase 7 (ตอนนั้นจะปิด hosting นี้ทิ้ง) |
+| `bucket-policy.json` | policy ปัจจุบัน — เหลือแค่ `AllowCloudFrontServicePrincipal` เข้าได้ทาง CloudFront/OAC เท่านั้น bucket ปิดสนิทแล้ว (ตัด `PublicReadOnly` ออกแล้วหลัง soak ผ่าน) |
+| `s3-website-config.json` | static website hosting config **เดิม** (ปิดไปแล้ว) — เก็บไว้เป็นสูตร rollback เท่านั้น |
 
 ```bash
 aws s3api put-bucket-policy --bucket anyawee-sr.com --policy file://infra/bucket-policy.json
