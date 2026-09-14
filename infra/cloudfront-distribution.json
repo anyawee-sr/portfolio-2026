@@ -1,8 +1,8 @@
 {
   "CallerReference": "c361d8a5-02d8-45c4-b247-b2faf0b97d79",
   "Aliases": {
-    "Quantity": 1,
-    "Items": ["anyawee-sr.com"]
+    "Quantity": 2,
+    "Items": ["anyawee-sr.com", "www.anyawee-sr.com"]
   },
   "DefaultRootObject": "",
   "Origins": {

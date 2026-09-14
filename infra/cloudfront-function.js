@@ -3,11 +3,20 @@
 //
 // encode `trailingSlash: true` ของ next.config.ts — ถ้าค่านั้นเปลี่ยน ต้องแก้ไฟล์นี้ตาม
 // หน้าที่: แทนพฤติกรรม index-document + trailing-slash redirect ที่ S3 website endpoint เคยทำ
-// (REST endpoint + OAC ไม่ทำให้)
+// (REST endpoint + OAC ไม่ทำให้) + redirect www -> apex (canonical host กัน duplicate content)
+// www ไม่ normalize uri ก่อน redirect (ตั้งใจ, ลดความเสี่ยงต่อ apex path ที่ live อยู่แล้ว) —
+// เคส www ที่ไม่มี "/" ท้ายจะโดน redirect 2 ครั้ง (www->apex, แล้ว apex เติม "/") ยอมรับได้เพราะ
+// ลิงก์จริงในเว็บใช้ trailing slash หมดอยู่แล้ว เคสนี้เกิดแค่ตอนคนพิมพ์ URL เอง
 
 function handler(event) {
   var request = event.request;
   var uri = request.uri;
+
+  // 0. www -> apex (canonical host)
+  var host = request.headers.host && request.headers.host.value;
+  if (host === "www.anyawee-sr.com") {
+    return redirect(uri, request, "https://anyawee-sr.com");
+  }
 
   // 1. ยุบ slash ซ้ำ -> 301 ไป path สะอาด
   if (uri.indexOf("//") !== -1) {
@@ -36,7 +45,7 @@ function handler(event) {
   return redirect(uri + "/", request);
 }
 
-function redirect(location, request) {
+function redirect(location, request, origin) {
   var q = "";
   var qs = request.querystring;
   if (qs) {
@@ -57,7 +66,7 @@ function redirect(location, request) {
     statusCode: 301,
     statusDescription: "Moved Permanently",
     headers: {
-      location: { value: location + q },
+      location: { value: (origin || "") + location + q },
       "cache-control": { value: "public, max-age=3600" },
     },
   };

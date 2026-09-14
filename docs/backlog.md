@@ -10,12 +10,6 @@ git เก็บประวัติให้แล้ว พอไม่เห
 
 **ระบบ / infra**
 
-- [ ] เปิด `www.anyawee-sr.com` — ตอนนี้เข้าไม่ได้เลย (ไม่เคยได้อยู่แล้วตั้งแต่ก่อนย้าย CloudFront
-      ไม่ใช่ regression) ACM cert มี SAN ครอบไว้ล่วงหน้าแล้วฟรี (ดู `infra/acm-cert.md`) เหลือ:
-      เพิ่ม DNS record `www` (CNAME &rarr; CloudFront domain, grey-cloud) + เพิ่ม
-      `www.anyawee-sr.com` เป็น alternate domain name ที่ distribution + (แนะนำด้าน SEO) เพิ่ม
-      host-based 301 branch ใน CloudFront Function `portfolio-2026-rewrite` redirect `www` &rarr;
-      apex กันเสิร์ฟ duplicate content สองชื่อโดเมน
 - [ ] cleanup hashed asset เก่าที่ไม่มี build ไหนอ้างถึงแล้วใน `_next/static/` บน S3 — deploy
       pipeline (ดู `docs/adr/0006-cloudfront-cdn-in-front-of-s3.md`) ตั้งใจไม่ลบอัตโนมัติกัน race
       กับ HTML เก่าที่ยัง cache ค้างอยู่ ปล่อยสะสมไปก่อนได้เพราะ cost ต่ำมากที่สเกลนี้ ถ้าจะทำจริง
