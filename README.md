@@ -1,36 +1,58 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+![Anyawee Sr. — Frontend Engineer portfolio](src/app/opengraph-image.png)
 
-## Getting Started
+# Anyawee Sr. — Portfolio
 
-First, run the development server:
+Source code for my personal portfolio site, live at **[anyawee-sr.com](https://anyawee-sr.com)**.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+It's a Next.js site showcasing selected case studies, built and deployed as a static export to S3 behind CloudFront.
+
+## Highlights
+
+- **Accessibility-first** — focus-visible states, 44×44px touch targets, `prefers-reduced-motion` support, and an a11y checklist enforced before every merge.
+- **Decisions on record** — architecture and hosting calls are documented as ADRs in [`docs/adr/`](docs/adr/README.md), with the reasoning kept alongside the decision.
+- **Credential-free deploys** — GitHub Actions assumes an AWS IAM role over OIDC on every push to `main`; no long-lived AWS keys live in this repo.
+- **AI-assisted** — implemented with Claude Code and Claude Design.
+
+## Tech stack
+
+- [Next.js](https://nextjs.org) 16 (App Router, static export)
+- [React](https://react.dev) 19 + TypeScript 5
+- [Tailwind CSS](https://tailwindcss.com) v4 — custom design-token system via `@theme`/`@utility`
+- [Claude Code](https://claude.com/claude-code) + Claude Design — AI-assisted implementation and visual design
+- ESLint 9 + Prettier 3
+
+## Project structure
+
+```
+src/
+  app/            Next.js App Router routes
+  components/     Reusable UI and page sections
+  data/           Content (case studies, links, copy)
+  lib/            Utilities
+docs/             ADRs and project notes
+infra/            AWS config snapshots (S3, CloudFront, IAM) — not IaC
+design-ref/       Read-only visual reference, not imported by the app
+public/           Static assets
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Getting started
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Requires Node `24.x` (see `engines` in `package.json`).
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+git clone git@github.com:anyawee-sr/portfolio-2026.git
+cd portfolio-2026
+npm install
+npm run dev
+```
 
-## Learn More
+Open [http://localhost:3000](http://localhost:3000)
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Architecture decisions
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Non-trivial technical decisions — hosting, component structure, interaction patterns — are recorded as ADRs in [`docs/adr/`](docs/adr/README.md)
 
-## Deploy on Vercel
+## Contact
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+anyawee.sr@gmail.com · [GitHub](https://github.com/anyawee-sr) · [GitLab](https://gitlab.com/anyawee-sr) · [LinkedIn](https://www.linkedin.com/in/anyawee-sr)
