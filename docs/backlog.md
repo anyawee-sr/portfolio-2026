@@ -20,12 +20,17 @@ git เก็บประวัติให้แล้ว พอไม่เห
       `docs/adr/0006-cloudfront-cdn-in-front-of-s3.md`) เพราะ CSP ต้องจูนกับ Next.js inline
       style/RSC ก่อน ใส่ตรง ๆ จะพังหน้าเว็บ
 - [ ] Vercel Analytics + Speed Insights
-- [ ] CI บน PR: `npm run build` + `npm run lint` + `npm run format:check`
-      ⚠️ `npm test` เป็น vitest browser mode ผ่าน Playwright — runner ต้อง
-      `npx playwright install chromium` ก่อน ไม่ใช่ node test ธรรมดา
-      ⚠️ ห้ามใช้ `tsc --noEmit` เดี่ยวๆ ใน CI — `PageProps<>` ถูก generate ตอน `next build`
-      ⚠️ ต่อให้มี CI บน PR แล้ว ต้องเปิด branch protection บน `main` (require status check
-      ก่อน merge) ด้วย ไม่งั้น CI รันแต่ไม่ block การ merge จริง
+- [ ] เปิด branch protection บน `main` (require CI status check ก่อน merge) — `.github/workflows/ci.yml`
+      รัน `npm run lint` + `npm run format:check` + `npm run build` บน `pull_request` แล้ว
+      (2026-09-15) แต่**เปิด required status check ไม่ได้ตอนนี้** เพราะ repo เป็น private บน
+      GitHub free plan — ทั้ง classic branch protection API และ rulesets API ขึ้น 403
+      `"Upgrade to GitHub Pro or make this repository public to enable this feature"`
+      รอ user ตัดสินใจ upgrade plan หรือเปลี่ยน repo เป็น public ก่อน แล้วค่อยเปิดผ่าน
+      `gh api repos/anyawee-sr/portfolio-2026/branches/main/protection` — ก่อนหน้านั้น CI รัน
+      แต่ไม่ block การ merge จริง (ใครก็ merge ทับได้แม้ check แดง)
+      ⚠️ `npm test` (vitest browser mode ผ่าน Playwright) **ยังไม่อยู่ใน CI** ตอนนี้ (ตัดสินใจ
+      2026-09-15 ให้ตรง scope เดิม) — ถ้าจะเพิ่มทีหลังต้อง `npx playwright install chromium`
+      ก่อนรัน ไม่ใช่ node test ธรรมดา
 - [ ] pre-commit hook (เช่น Husky + lint-staged) รัน lint/format เฉพาะไฟล์ staged ก่อน commit —
       เป็นด่านเสริมให้ feedback เร็วกว่า CI (ไม่ต้องรอ push+รอ Actions) แต่**ไม่ใช่ตัวแทน CI**
       เพราะ bypass ได้ด้วย `git commit --no-verify` และไม่ auto-install ให้ทุกเครื่องที่ clone
