@@ -53,7 +53,8 @@ function redirect(location, request, origin) {
     for (var k in qs) {
       var v = qs[k];
       if (v.multiValue) {
-        for (var i = 0; i < v.multiValue.length; i++) parts.push(k + "=" + v.multiValue[i].value);
+        for (var i = 0; i < v.multiValue.length; i++)
+          parts.push(k + "=" + v.multiValue[i].value);
       } else if (v.value === "") {
         parts.push(k);
       } else {
