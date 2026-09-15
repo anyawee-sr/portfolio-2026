@@ -1,3 +1,5 @@
+<!-- If you edit this file, also regenerate ../favicon.ico by hand (packed manually, not auto-synced) — Safari ignores this SVG and always falls back to favicon.ico -->
+<!-- If the brand mark changes, also update ../apple-icon.png by hand — it's an independent PNG (not derived from this file), used for the iOS "Add to Home Screen" icon -->
 <svg width="180" height="180" viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <filter id="dropShadow" x="-50%" y="-50%" width="200%" height="200%">

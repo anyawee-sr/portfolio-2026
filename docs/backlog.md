@@ -33,12 +33,6 @@ git เก็บประวัติให้แล้ว พอไม่เห
       ก่อนรัน ไม่ใช่ node test ธรรมดา
 - [ ] ทบทวน `allowedDevOrigins: ["192.168.1.34"]` ใน `next.config.ts:6` — ผูกกับ IP ของเน็ตบ้าน
       ย้ายเน็ต/เปลี่ยน router เมื่อไหร่ dev-on-phone พังเงียบ (หน้าโหลดได้แต่ไม่ hydrate)
-- [ ] พิจารณาทำ script generate `src/app/favicon.ico` จาก `src/app/icon.svg` อัตโนมัติ (เช่น
-      npm script ที่รันก่อน `next build`) — ตอนนี้ `favicon.ico` เป็น multi-size ICO (16/32/48px)
-      ที่ pack มือจาก `icon.svg` เวอร์ชันปัจจุบันครั้งเดียว **ไม่ sync กันอัตโนมัติ** ถ้าแก้
-      `icon.svg` ทีหลังแล้วลืม regenerate `favicon.ico` ตาม จะได้ไอคอนคนละแบบระหว่าง Chrome/Edge
-      (ใช้ `icon.svg` เพราะ `sizes="any"` ชนะ) กับ Safari (ไม่รองรับ SVG favicon เลย fallback ไป
-      `.ico` เสมอ)
 
 **ดีไซน์ / UI**
 
