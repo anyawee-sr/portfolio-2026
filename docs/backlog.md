@@ -19,7 +19,6 @@ git เก็บประวัติให้แล้ว พอไม่เห
 - [ ] CSP / Permissions-Policy header ที่ CloudFront — เจตนาแยกออกจาก security headers ชุดแรก (ดู
       `docs/adr/0006-cloudfront-cdn-in-front-of-s3.md`) เพราะ CSP ต้องจูนกับ Next.js inline
       style/RSC ก่อน ใส่ตรง ๆ จะพังหน้าเว็บ
-- [ ] Vercel Analytics + Speed Insights
 - [ ] เปิด branch protection บน `main` (require CI status check ก่อน merge) — `.github/workflows/ci.yml`
       รัน `npm run lint` + `npm run format:check` + `npm run build` บน `pull_request` แล้ว
       (2026-09-15) แต่**เปิด required status check ไม่ได้ตอนนี้** เพราะ repo เป็น private บน
