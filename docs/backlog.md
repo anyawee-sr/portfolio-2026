@@ -33,9 +33,6 @@ git เก็บประวัติให้แล้ว พอไม่เห
       ก่อนรัน ไม่ใช่ node test ธรรมดา
 - [ ] ทบทวน `allowedDevOrigins: ["192.168.1.34"]` ใน `next.config.ts:6` — ผูกกับ IP ของเน็ตบ้าน
       ย้ายเน็ต/เปลี่ยน router เมื่อไหร่ dev-on-phone พังเงียบ (หน้าโหลดได้แต่ไม่ hydrate)
-- [ ] แก้ trailing space ท้าย title ของ `buildings-refuse-to-fade` ใน
-      `src/data/caseStudies.ts` — `"When Buildings Refuse to Fade "` มีช่องว่างเกินมา 1 ตัว
-      หลุดไปโผล่ใน `<title>` และ `og:title` เป็นช่องว่างซ้อนก่อนคำว่า "— Anyawee Sr."
 - [ ] พิจารณาทำ script generate `src/app/favicon.ico` จาก `src/app/icon.svg` อัตโนมัติ (เช่น
       npm script ที่รันก่อน `next build`) — ตอนนี้ `favicon.ico` เป็น multi-size ICO (16/32/48px)
       ที่ pack มือจาก `icon.svg` เวอร์ชันปัจจุบันครั้งเดียว **ไม่ sync กันอัตโนมัติ** ถ้าแก้
