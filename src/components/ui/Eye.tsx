@@ -14,17 +14,24 @@ const SIZE_CLASSES: Record<TEyeSize, string> = {
 };
 
 /**
- * Googly eye — purely decorative, never announced by a screen reader.
- * `data-eye` on the root plus `data-pupil` on the direct child is a
- * contract `EyeTracker` (src/components/EyeTracker.tsx) depends on: it
- * queries every `[data-eye]` on the page, measures the root and pupil as
- * circles, and drives the pupil's position by writing `--pupil-x`/
- * `--pupil-y` custom properties (consumed by `surface-pupil` in
- * globals.css) — it never touches this markup. Resting position (no JS,
- * reduced-motion) comes from that utility's fallback values, not from a
- * class here. See docs/adr/0003-cursor-tracking-googly-eyes.md.
+ * Googly eye — purely decorative, aria-hidden. `data-eye` + `data-pupil`
+ * are a DOM contract `EyeTracker` depends on for cursor tracking (see
+ * EyeTracker.tsx, docs/adr/0003-cursor-tracking-googly-eyes.md) —
+ * resting position comes from `surface-pupil`'s CSS fallback, not a
+ * class here.
  *
- * NOTE: will replace with eyes image later
+ * Three image layers, bottom to top: dome and pupil each paint their
+ * own `background-image` (`surface-eye`/`surface-pupil`); the glint is
+ * a separate element pinned to the dome (`absolute inset-0`), not
+ * nested inside the pupil, so it stays fixed while the pupil tracks
+ * underneath and visibly lightens under the glint's alpha.
+ *
+ * The glint's `relative` positioning context lives on an inner wrapper,
+ * not this root — callers (Footer, Hero, WorkDetailHero) override this
+ * root's position via `className` (e.g. `absolute right-24`) to overlap
+ * two Eyes. Tailwind emits `.relative` after `.absolute`, so a
+ * `relative` here would always beat a caller's `absolute` and silently
+ * break that.
  */
 export function Eye({ size, className }: IEyeProps) {
   return (
@@ -32,16 +39,14 @@ export function Eye({ size, className }: IEyeProps) {
       data-eye
       aria-hidden="true"
       className={cn(
-        "surface-eye pointer-events-none rounded-full flex items-center justify-center",
+        "surface-eye pointer-events-none rounded-full",
         SIZE_CLASSES[size],
         className,
       )}
     >
-      <div
-        data-pupil
-        className="surface-pupil relative w-1/2 h-1/2 rounded-full"
-      >
-        <span className="surface-eye-glint absolute top-1 left-1 w-1.5 h-1.5 rounded-full" />
+      <div className="relative flex h-full w-full items-center justify-center">
+        <div data-pupil className="surface-pupil w-1/2 h-1/2 rounded-full" />
+        <div className="surface-eye-glint absolute inset-0 z-10 rounded-full" />
       </div>
     </div>
   );
