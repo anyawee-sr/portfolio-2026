@@ -109,11 +109,15 @@ Server Component ต่อไป ผูกกันด้วยสัญญา a
 ```tsx
 // Eye.tsx — ฝั่งประกาศสัญญา
 <div data-eye aria-hidden="true" className="surface-eye ...">
-  <div data-pupil className="surface-pupil ...">
-    <span className="surface-eye-glint ..." />
-  </div>
+  <div data-pupil className="surface-pupil ..." />
+  <div className="surface-eye-glint ..." />
 </div>
 ```
+
+(อัปเดตหลัง `Eye` เปลี่ยนมาใช้รูปภาพจริงแทน CSS gradient — `surface-eye-glint` ย้ายออกมาเป็น
+sibling ของ `data-pupil` แทนที่จะเป็น child ตั้งใจให้ตำแหน่งเงาสะท้อนคงที่บนตาขาว ไม่เคลื่อนตาม
+`data-pupil` ที่ขยับด้วย `--pupil-x`/`--pupil-y` — `eye.querySelector("[data-pupil]")` ใน
+`EyeTracker` หา descendant ไม่ใช่แค่ direct child อยู่แล้ว จึงไม่กระทบ query เดิม)
 
 `EyeTracker` `querySelectorAll("[data-eye]")` ใหม่ทุกครั้งที่ `usePathname()` เปลี่ยน (client-side
 navigation เปลี่ยนชุดตาบนหน้า — เช่นจากหน้าแรกไป `/work/[slug]`) เขียนแค่ตัวแปร CSS สองตัวต่อเฟรม

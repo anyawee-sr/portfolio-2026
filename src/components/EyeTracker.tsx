@@ -4,13 +4,12 @@ import { useEffect, useSyncExternalStore } from "react";
 import { usePathname } from "next/navigation";
 
 /**
- * TODO: mobile has no mouse pointer to track,
- * so on mobile the pupils should jiggle based on device tilt/shake (`devicemotion`) instead.
+ * TODO: mobile has no mouse pointer — pupils should jiggle via device
+ * tilt/shake (`devicemotion`) instead.
  */
 
-/** How much space to leave between the pupil and the edge of the eye
- * when the pupil is pushed as far as it can go — stops it from looking
- * like it pokes through the white. */
+/** Gap kept between the pupil and the eye's edge at max travel — stops
+ * it from visually poking through the white. */
 const PUPIL_RIM_PADDING_PX = 3;
 
 interface IEyePair {
@@ -21,17 +20,12 @@ interface IEyePair {
 const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
 
 /**
- * We use useSyncExternalStore here instead of useState + useEffect.
- *
- * Reason: matchMedia's value can change outside of React (the user
- * flips an OS setting), and setting state inside an effect body
- * triggers an extra render
- *
- * exactly the pattern the
- * react-hooks/set-state-in-effect lint rule warns about. The server
- * snapshot always assumes reduced motion, so the server and the
- * client's first paint render the same thing; the real value swaps in
- * as soon as the browser confirms it.
+ * useSyncExternalStore instead of useState+useEffect: matchMedia can
+ * change outside of React (an OS-level setting), and setting state
+ * inside an effect body would trigger an extra render — the exact
+ * pattern react-hooks/set-state-in-effect warns about. Server snapshot
+ * always assumes reduced motion, so SSR and first paint match; the real
+ * value swaps in once the browser confirms it.
  */
 function subscribeToReducedMotion(onChange: () => void) {
   const query = window.matchMedia(REDUCED_MOTION_QUERY);
@@ -49,36 +43,24 @@ function getReducedMotionServerSnapshot() {
 }
 
 /**
- * Moves every googly eye's pupil (`[data-eye]` → `[data-pupil]`,
- * see Eye.tsx) so it follows the mouse cursor.
+ * Moves every googly eye's pupil (`[data-eye]` → `[data-pupil]`, see
+ * Eye.tsx) to follow the mouse. Mounted once in layout.tsx instead of
+ * living inside `Eye` itself — pointer position updates every frame, so
+ * per-Eye tracking would (a) force `Eye` into a Client Component for
+ * motion that's `aria-hidden` anyway, and (b) duplicate the same DOM
+ * writes across instances. Full reasoning:
+ * docs/adr/0003-cursor-tracking-googly-eyes.md.
  *
- * Mounted once in layout.tsx instead of living inside `Eye` itself.
- * Reason: cursor position updates on every frame (60fps-scale),
- * which isn't normal application state. If every `Eye` reacted to
- * `pointermove` on its own, it would
- * (a) force `Eye` to become a Client Component just for motion that's `aria-hidden` anyway
- * (b) still end up writing the same DOM properties this component already writes directly.
- * Full reasoning in docs/adr/0003-cursor-tracking-googly-eyes.md.
- *
- * Renders nothing — it's a pure side effect. On purpose, it behaves
- * differently from the design-ref prototype
+ * Renders nothing. Deliberately differs from the design-ref prototype
  * (design-ref/landing-page.dc.html) in four ways:
- *
- * 1. Also re-aims the eyes on scroll and resize, not just
- *    `pointermove` — otherwise the eyes would keep staring at a fixed
- *    screen position while the page (and the eyes themselves) move
- *    underneath the cursor.
- * 2. Pupils go back to their resting position when the pointer leaves
- *    the window (e.g. switching tabs), instead of staying stuck
- *    wherever they last pointed.
- * 3. Skips touch input (`pointerType !== "mouse"`) and respects
- *    `prefers-reduced-motion: reduce`. The reference prototype does
- *    neither, so touch scrolling or reduced-motion users would see
- *    pupils darting around for no reason.
- * 4. Reads the eye/pupil sizes from the DOM every time instead of
- *    using a hardcoded ratio, so it keeps working even if `Eye` is
- *    ever rebuilt with two separately-sized images (iris + white)
- *    instead of nested divs.
+ * 1. Re-aims on scroll/resize too, not just `pointermove` — otherwise
+ *    eyes stare at a fixed screen point while the page moves under them.
+ * 2. Pupils reset to resting position when the pointer leaves the
+ *    window, instead of staying stuck at their last position.
+ * 3. Skips touch (`pointerType !== "mouse"`) and respects
+ *    `prefers-reduced-motion` — the prototype does neither.
+ * 4. Reads eye/pupil sizes from the DOM instead of a hardcoded ratio,
+ *    so it survived `Eye` being rebuilt with real images unchanged.
  */
 export function EyeTracker() {
   const pathname = usePathname();
@@ -89,10 +71,8 @@ export function EyeTracker() {
   );
 
   useEffect(() => {
-    // If reduced motion is on (or we haven't confirmed it's off yet),
-    // don't attach any listeners. The pupils' resting position already
-    // comes from the `surface-pupil` fallback in globals.css, so
-    // there's nothing to reset here either.
+    // Reduced motion (or not yet confirmed off): skip entirely —
+    // resting position already comes from the surface-pupil CSS fallback.
     if (prefersReducedMotion) {
       return;
     }
@@ -122,10 +102,8 @@ export function EyeTracker() {
       }
     }
 
-    // Reads every eye's position first, then writes all the pupil
-    // styles afterward. Keeping reads and writes in separate passes
-    // avoids forcing the browser to recalculate layout over and over,
-    // once per eye.
+    // Read all eye positions first, then write — avoids layout
+    // thrashing from interleaving reads/writes per eye.
     function updatePupils() {
       frame = null;
 
@@ -136,8 +114,7 @@ export function EyeTracker() {
       for (const { eye, pupil } of pairs) {
         const eyeRect = eye.getBoundingClientRect();
 
-        // Hidden by a responsive class (`hidden md:*` / `md:hidden`) —
-        // its size is 0, so there's nothing to aim.
+        // Hidden via responsive class (width 0) — nothing to aim.
         if (eyeRect.width === 0) {
           continue;
         }
@@ -177,10 +154,7 @@ export function EyeTracker() {
     }
 
     function handleReframe() {
-      /**
-       * If the mouse hasn't moved yet,
-       * there's no cursor position to re-aim toward, so skip it.
-       */
+      // No cursor position yet to re-aim toward.
       if (hasPointer) {
         requestUpdate();
       }
