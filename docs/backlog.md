@@ -78,6 +78,11 @@ git เก็บประวัติให้แล้ว พอไม่เห
         devicemotion คือการเติมลูกเล่นให้ device ที่รองรับ ไม่ใช่การแก้บั๊ก
       - threshold/dead-band กันสั่นไหวจาก noise ของ sensor (ต่างจาก mouse ที่นิ่งกว่ามาก) —
         รายละเอียด tuning ไว้ตอนลงมือทำจริง ไม่ใช่ตัดสินใจตอนนี้
+- [ ] พิจารณาเพิ่ม case study เรื่อง "Pupil Vector Math" ใน `src/data/caseStudies.ts` — เนื้อหาคือ
+      ที่มาของสูตรใน `updatePupils()` ของ `EyeTracker.tsx` (เวกเตอร์ dx/dy, การ clamp ด้วย
+      distance/maxOffset/k, ที่มาของสูตร `maxOffset = R − r − padding`) ต้องมี body component
+      ใหม่ใน `src/components/work-detail/bodies/` คู่กันด้วย (ดู `docs/adr/0001` เรื่อง registry
+      แบบ `Record<TCaseStudySlug, ComponentType>`) — `type: "frontend"`
 
 ## เจอหลัง deploy จริง
 
