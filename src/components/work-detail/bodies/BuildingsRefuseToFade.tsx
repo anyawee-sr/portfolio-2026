@@ -1,7 +1,9 @@
 import { WorkCode } from "@/components/work-detail/WorkCode";
+import { WorkImage } from "@/components/work-detail/WorkImage";
 import { WorkList } from "@/components/work-detail/WorkList";
 import { WorkText } from "@/components/work-detail/WorkText";
 import { WorkSection } from "@/components/work-detail/WorkSection";
+import { WorkVideo } from "@/components/work-detail/WorkVideo";
 
 export function BuildingsRefuseToFade() {
   return (
@@ -35,6 +37,15 @@ export function BuildingsRefuseToFade() {
               text: "(high → low): frozen. Nothing. ✗",
             },
           ]}
+        />
+        <WorkVideo
+          src="/videos/work/buildings-refuse-to-fade/zoom-out-stuck-transparent.mp4"
+          poster="/images/work/buildings-refuse-to-fade/zoom-out-stuck-transparent-poster.webp"
+          label="Zooming out from a floor plan: the 3D buildings appear but stay see-through."
+          width={1340}
+          height={1736}
+          caption="Before the fix: zooming out, the buildings stay see-through."
+          className="mx-auto max-w-sm"
         />
       </WorkSection>
 
@@ -99,10 +110,6 @@ export function BuildingsRefuseToFade() {
   marker.setUniform('polygonOpacity', opacity); // dirty → re-render
 }`}
         />
-        {/* <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-          <WorkImage alt="" width={360} height={240} label="linear fade" />
-          <WorkImage alt="" width={360} height={240} label="eased fade" />
-        </div> */}
       </WorkSection>
 
       <WorkSection heading="Free math lesson">
@@ -144,6 +151,33 @@ export function BuildingsRefuseToFade() {
             "Every time the camera stops moving, opacity gets recalculated from the actual current zoom. Zoom in, zoom out, doesn't matter — the building fades exactly when it should, and the floor plan shows up right on cue.",
           ]}
         />
+        <WorkVideo
+          src="/videos/work/buildings-refuse-to-fade/zoom-out-solid-after-fix.mp4"
+          poster="/images/work/buildings-refuse-to-fade/zoom-out-solid-after-fix-poster.webp"
+          label="Zooming out from a floor plan: the 3D buildings return fully solid."
+          width={1340}
+          height={1730}
+          caption="After the fix: zooming out, the buildings turn solid again."
+          className="mx-auto max-w-sm"
+        />
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+          <WorkImage
+            src="/images/work/buildings-refuse-to-fade/building-stuck-transparent.webp"
+            alt="Map zoomed out with the 3D buildings stuck see-through, the streets visible through them."
+            width={1630}
+            height={1734}
+            label="before the fix"
+            caption="Before: stuck see-through."
+          />
+          <WorkImage
+            src="/images/work/buildings-refuse-to-fade/building-solid-after-fix.webp"
+            alt="The same map view with the 3D buildings fully solid."
+            width={1628}
+            height={1734}
+            label="after the fix"
+            caption="After: fully solid."
+          />
+        </div>
       </WorkSection>
     </>
   );
