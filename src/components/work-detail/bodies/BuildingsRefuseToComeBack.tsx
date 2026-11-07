@@ -5,7 +5,7 @@ import { WorkText } from "@/components/work-detail/WorkText";
 import { WorkSection } from "@/components/work-detail/WorkSection";
 import { WorkVideo } from "@/components/work-detail/WorkVideo";
 
-export function BuildingsRefuseToFade() {
+export function BuildingsRefuseToComeBack() {
   return (
     <>
       <WorkSection heading="Overview">
