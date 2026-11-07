@@ -20,14 +20,14 @@ export function WorkImage({
   caption,
 }: IWorkFigureProps) {
   return (
-    <figure className="-rotate-1 bg-surface-card p-2 shadow-xl">
+    <figure className="-rotate-1 rounded-lg bg-white p-2 shadow-xl">
       <ImagePlaceholder
         src={src}
         alt={alt}
         width={width}
         height={height}
         label={label}
-        className="w-full"
+        className="w-full rounded-sm"
       />
       {caption ? (
         <figcaption className="type-caption mt-2 px-1 pb-1 text-text-secondary">
