@@ -11,7 +11,7 @@ export function BuildingsRefuseToFade() {
       <WorkSection heading="Overview">
         <WorkText
           paragraphs={[
-            "So there's this 3D building model that's supposed to fade away when you zoom in close, letting you see the floor plan inside. Cool idea. Except the fade had a mind of its own — sometimes it happened, sometimes nope.",
+            "So there's this 3D building model that's supposed to fade away when you zoom in close, letting you see the floor plan inside, then turn solid again when you zoom back out. Cool idea. Except the way back had a mind of its own — sometimes the building came back, sometimes nope.",
           ]}
         />
       </WorkSection>
@@ -21,7 +21,7 @@ export function BuildingsRefuseToFade() {
           paragraphs={[
             "The setup: below zoom 17.5, building stays solid. Zoom past that toward 18, and it fades out so you can peek at the floor plan inside.",
 
-            "The reality: total coin flip. You'd zoom way in, and the building would just sit there. Solid. Not moving. Blocking the exact thing you came to see.",
+            "The reality: you'd zoom back out, expecting the building to turn solid again, and it would just stay see-through. A ghost of a building, stuck like that.",
 
             "But here's the fun part — it only broke one way:",
           ]}
@@ -34,7 +34,7 @@ export function BuildingsRefuseToFade() {
             },
             {
               term: "Zooming out",
-              text: "(high → low): frozen. Nothing. ✗",
+              text: "(high → low): stuck see-through, never turns solid ✗",
             },
           ]}
         />
@@ -72,7 +72,13 @@ export function BuildingsRefuseToFade() {
           paragraphs={[
             "Sounds like it should just work, right? Well.",
 
-            "Turns out the library evaluates those stops exactly once — when `_prepareSymbol` runs during symbol setup. Not on every zoom change. Once. After that, `getUniforms()` just keeps serving up the same stale number, frozen at whatever zoom the marker (3D model) was born at.",
+            <>
+              Turns out the library evaluates those stops exactly once — when{" "}
+              <code>_prepareSymbol</code> runs during symbol setup. Not on every
+              zoom change. Once. After that, <code>getUniforms()</code> just
+              keeps serving up the same stale number, frozen at whatever zoom
+              the marker (3D model) was born at.
+            </>,
 
             "And that explains the one-way weirdness perfectly:",
           ]}
@@ -80,11 +86,11 @@ export function BuildingsRefuseToFade() {
         <WorkList
           items={[
             {
-              term: "Created at low zoom, then zooming in?",
+              term: "Created at low zoom, then zooming in",
               text: "The marker might get marked dirty along the way and re-evaluate — so it seems fine. Basically working by accident",
             },
             {
-              term: "At high zoom, then zooming out?",
+              term: "At high zoom, then zooming out",
               text: "The value's already locked in, and nothing ever pokes it to recalculate. Stuck forever.",
             },
           ]}
@@ -105,7 +111,7 @@ export function BuildingsRefuseToFade() {
 
   // zoom = 18, opacity = 0
   // zoom = 17.5, opacity = 1
-  const objectOpacity = _.clamp((18 - zoom) / (18 - 17.5), 0, 1)
+  const opacity = _.clamp((18 - zoom) / (18 - 17.5), 0, 1)
 
   marker.setUniform('polygonOpacity', opacity); // dirty → re-render
 }`}
@@ -148,7 +154,7 @@ export function BuildingsRefuseToFade() {
       <WorkSection heading="Result">
         <WorkText
           paragraphs={[
-            "Every time the camera stops moving, opacity gets recalculated from the actual current zoom. Zoom in, zoom out, doesn't matter — the building fades exactly when it should, and the floor plan shows up right on cue.",
+            "Every time the zoom settles, opacity gets recalculated from the actual current zoom. Zoom in, zoom out, doesn't matter — the building fades on the way in and turns solid again on the way out, and the floor plan shows up right on cue.",
           ]}
         />
         <WorkVideo

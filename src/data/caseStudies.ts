@@ -34,9 +34,9 @@ export const caseStudies = [
   {
     slug: "buildings-refuse-to-fade",
     type: "frontend",
-    title: "When Buildings Refuse to Fade",
+    title: "When Buildings Refuse to Come Back",
     subTitle:
-      "A 3D building model was supposed to fade on zoom, revealing the floor plan inside — but the fade fired inconsistently.",
+      "A 3D building model was supposed to fade on zoom, revealing the floor plan inside — but zooming back out left it stuck see-through.",
     imageId: "case-03",
     imageAlt: "",
   },
