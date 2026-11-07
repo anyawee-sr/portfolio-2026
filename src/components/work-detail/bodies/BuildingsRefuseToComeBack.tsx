@@ -181,6 +181,7 @@ export function BuildingsRefuseToComeBack() {
             width={1628}
             height={1734}
             label="after the fix"
+            rotation="rotate-1"
             caption="After: fully solid."
           />
         </div>

@@ -51,12 +51,6 @@ git เก็บประวัติให้แล้ว พอไม่เห
       อย่าลงแรงกับหน้านี้เท่ากับ 404 ที่คนเจอจริงบ่อยกว่ามาก
 - [ ] เพิ่ม element ใน section skills หน้า landing — `src/components/Skills.tsx`
       (asset ปัจจุบันมีแค่ `public/images/skills/background.webp`)
-- [ ] ปรับปรุงกรอบรูปใน `src/components/work-detail/WorkImage.tsx:23` — ตอนนี้เป็น
-      `-rotate-1 bg-surface-card p-2 shadow-xl` เอียงคงที่ทุกใบเท่ากันหมด
-      ⚠️ ถ้าจะเปลี่ยนค่า rotate/padding/shadow ต้องใช้ token ที่มีใน `globals.css` เท่านั้น
-      ห้าม arbitrary value ตามกฎข้อ 1 ของ CLAUDE.md
-      ⚠️ กรอบนี้ครอบ `ImagePlaceholder` ที่ยังเป็นกล่อง placeholder อยู่ (prop `src` เป็น
-      optional) — ควรตัดสินก่อนว่าจะปรับกรอบตอนยังไม่มีรูปจริง หรือรอใส่รูปก่อนแล้วค่อยจูน
 - [ ] เพิ่ม motion บนมือถือให้ `EyeTracker.tsx` ตาม TODO ที่ค้างอยู่แล้วที่บรรทัด 6-9 ของไฟล์
       ("mobile has no mouse pointer to track, so on mobile the pupils should jiggle based on
       device tilt/shake (`devicemotion`) instead") — งานนี้แก้ `EyeTracker.tsx` (ตรรกะการอ่าน

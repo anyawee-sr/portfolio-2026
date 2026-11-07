@@ -1,4 +1,10 @@
+import { cn } from "@/lib/cn";
+
 import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder";
+
+/** Closed set, not a className passthrough — cn() has no tailwind-merge to resolve two rotations. */
+export type TWorkImageRotation =
+  "-rotate-2" | "-rotate-1" | "rotate-0" | "rotate-1" | "rotate-2";
 
 export interface IWorkFigureProps {
   /** Omit to render the placeholder box; pass once a real asset exists. */
@@ -9,6 +15,8 @@ export interface IWorkFigureProps {
   height: number;
   label: string;
   caption?: string;
+  /** Vary it between neighbouring images so a set doesn't tilt in lockstep. */
+  rotation?: TWorkImageRotation;
 }
 
 export function WorkImage({
@@ -18,9 +26,10 @@ export function WorkImage({
   height,
   label,
   caption,
+  rotation = "-rotate-1",
 }: IWorkFigureProps) {
   return (
-    <figure className="-rotate-1 rounded-lg bg-white p-2 shadow-xl">
+    <figure className={cn("rounded-lg bg-white p-2 shadow-xl", rotation)}>
       <ImagePlaceholder
         src={src}
         alt={alt}
