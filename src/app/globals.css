@@ -28,6 +28,8 @@
   /* pattern primitives */
   --dot-tint: rgba(107, 97, 92, 0.35); /* neutral-500 at low opacity — surface-dotted fill */
   --pupil-shadow-tint: rgba(0, 0, 0, 0.45);
+  --emboss-shade: rgba(0, 0, 0, 0.45); /* lower-right edge of a raised letter */
+  --emboss-highlight: rgba(255, 255, 255, 0.35); /* upper-left edge of a raised letter */
 }
 
 /* ============================================================
@@ -161,6 +163,15 @@
   font-weight: 700;
 }
 
+@utility type-tape {
+  /* type-label's size, wider tracking, lighter weight — embossed
+     label-maker letters (EmbossedLabel.tsx) read too heavy at 700 */
+  font-size: 0.75rem; /* 12px */
+  line-height: 1;
+  letter-spacing: 0.3em;
+  font-weight: 500;
+}
+
 @utility type-caption {
   font-size: 0.6875rem; /* 11px */
   line-height: 1;
@@ -266,6 +277,17 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+}
+
+@utility surface-embossed-tape {
+  /* embossed label-maker tape — flat brand-red plastic with letters
+     pressed up out of it (light catches the upper-left edge, shade
+     falls lower-right). Reads as a stuck-on label, not a button: see
+     EmbossedLabel.tsx. */
+  background-color: var(--color-brand);
+  text-shadow:
+    -1px -1px 0 var(--emboss-highlight),
+    1px 1px 1px var(--emboss-shade);
 }
 
 @utility surface-eye {
