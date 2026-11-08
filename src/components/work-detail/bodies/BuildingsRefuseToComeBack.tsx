@@ -166,14 +166,15 @@ export function BuildingsRefuseToComeBack() {
           caption="After the fix: zooming out, the buildings turn solid again."
           className="mx-auto max-w-sm"
         />
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+        <div className="mx-auto grid w-full max-w-135 grid-cols-1 gap-6 px-5 pt-5 md:max-w-none md:grid-cols-2 md:px-0">
           <WorkImage
             src="/images/work/buildings-refuse-to-fade/building-stuck-transparent.webp"
             alt="Map zoomed out with the 3D buildings stuck see-through, the streets visible through them."
             width={1630}
             height={1734}
             label="before the fix"
-            caption="Before: stuck see-through."
+            tag={{ label: "Before", side: "left" }}
+            caption="Stuck see-through."
           />
           <WorkImage
             src="/images/work/buildings-refuse-to-fade/building-solid-after-fix.webp"
@@ -182,7 +183,8 @@ export function BuildingsRefuseToComeBack() {
             height={1734}
             label="after the fix"
             rotation="rotate-1"
-            caption="After: fully solid."
+            tag={{ label: "After", side: "right" }}
+            caption="Fully solid."
           />
         </div>
       </WorkSection>
