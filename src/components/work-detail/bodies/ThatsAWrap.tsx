@@ -3,7 +3,6 @@ import type { Link } from "@/data/types";
 import { Pill } from "@/components/ui/Pill";
 import { ArrowRightIcon } from "@/components/ui/ArrowRightIcon";
 import { WorkEmbed } from "@/components/work-detail/WorkEmbed";
-import { WorkList } from "@/components/work-detail/WorkList";
 import { WorkText } from "@/components/work-detail/WorkText";
 import { WorkSection } from "@/components/work-detail/WorkSection";
 
@@ -49,30 +48,6 @@ export function ThatsAWrap() {
         <WorkText
           paragraphs={[
             "This showreel is two minutes of that. Fair warning: it moves fast — ADHD editing haha. And honestly? Past-me looked pretty hyperactive.",
-          ]}
-        />
-      </WorkSection>
-
-      <WorkSection heading="What carried over">
-        <WorkText
-          paragraphs={[
-            "None of that instinct went away when I switched to writing components. It just changed medium:",
-          ]}
-        />
-        <WorkList
-          items={[
-            {
-              term: "A transition duration",
-              text: "isn't a number I copy from a default — it's the same gut check as a cut point.",
-            },
-            {
-              term: "prefers-reduced-motion",
-              text: "isn't just a media query to satisfy — it's the same respect for a viewer's patience I learned watching people click away the moment a cut ran long.",
-            },
-            {
-              term: "Most of the job",
-              text: "is still deciding what doesn't make it onto the screen.",
-            },
           ]}
         />
       </WorkSection>

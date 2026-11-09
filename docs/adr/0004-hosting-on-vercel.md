@@ -49,7 +49,7 @@ static ล้วน ไม่มี server runtime ที่พฤติกร�
 
 ### ทำไมเก็บ Vercel project เดิมไว้ ไม่ทับ
 
-`src/components/work-detail/bodies/ThatsAWrap.tsx:14` มีลิงก์ไป
+`src/components/work-detail/bodies/ThatsAWrap.tsx:13` มีลิงก์ไป
 `https://portfolio-rho-ten-15.vercel.app/` เป็น archive item ชื่อ "Web portfolio" ของพอร์ต
 เวอร์ชันก่อนหน้า — ถ้าทับ project เดิมด้วยการ deploy ใหม่ ลิงก์ archive นี้จะกลายเป็นลิงก์วนกลับมา
 หาเว็บตัวเองแทนที่จะเป็นของเก่าตามที่ตั้งใจ จึงสร้าง Vercel project ใหม่แยกจาก repo
