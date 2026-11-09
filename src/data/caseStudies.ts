@@ -45,7 +45,7 @@ export const caseStudies = [
     type: "editor",
     title: "That's a Wrap",
     subTitle:
-      "Three years of YouTube vlogs. I lived the dream, then went to explore code.",
+      "Three years of YouTube vlogs. I\u00A0lived the dream, then went to explore code.",
     imageId: "case-04",
     imageAlt: "",
   },
