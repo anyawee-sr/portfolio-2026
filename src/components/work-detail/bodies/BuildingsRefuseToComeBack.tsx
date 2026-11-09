@@ -39,8 +39,8 @@ export function BuildingsRefuseToComeBack() {
           ]}
         />
         <WorkVideo
-          src="/videos/work/buildings-refuse-to-fade/zoom-out-stuck-transparent.mp4"
-          poster="/images/work/buildings-refuse-to-fade/zoom-out-stuck-transparent-poster.webp"
+          src="/videos/work/buildings-refuse-to-come-back/zoom-out-stuck-transparent.mp4"
+          poster="/images/work/buildings-refuse-to-come-back/zoom-out-stuck-transparent-poster.webp"
           label="Zooming out from a floor plan: the 3D buildings appear but stay see-through."
           width={1340}
           height={1736}
@@ -158,8 +158,8 @@ export function BuildingsRefuseToComeBack() {
           ]}
         />
         <WorkVideo
-          src="/videos/work/buildings-refuse-to-fade/zoom-out-solid-after-fix.mp4"
-          poster="/images/work/buildings-refuse-to-fade/zoom-out-solid-after-fix-poster.webp"
+          src="/videos/work/buildings-refuse-to-come-back/zoom-out-solid-after-fix.mp4"
+          poster="/images/work/buildings-refuse-to-come-back/zoom-out-solid-after-fix-poster.webp"
           label="Zooming out from a floor plan: the 3D buildings return fully solid."
           width={1340}
           height={1730}
@@ -168,7 +168,7 @@ export function BuildingsRefuseToComeBack() {
         />
         <div className="mx-auto grid w-full max-w-135 grid-cols-1 gap-6 px-5 pt-5 md:max-w-none md:grid-cols-2 md:px-0">
           <WorkImage
-            src="/images/work/buildings-refuse-to-fade/building-stuck-transparent.webp"
+            src="/images/work/buildings-refuse-to-come-back/building-stuck-transparent.webp"
             alt="Map zoomed out with the 3D buildings stuck see-through, the streets visible through them."
             width={1630}
             height={1734}
@@ -177,7 +177,7 @@ export function BuildingsRefuseToComeBack() {
             caption="Stuck see-through."
           />
           <WorkImage
-            src="/images/work/buildings-refuse-to-fade/building-solid-after-fix.webp"
+            src="/images/work/buildings-refuse-to-come-back/building-solid-after-fix.webp"
             alt="The same map view with the 3D buildings fully solid."
             width={1628}
             height={1734}

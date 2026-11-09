@@ -32,7 +32,7 @@ export const caseStudies = [
     imageAlt: "",
   },
   {
-    slug: "buildings-refuse-to-fade",
+    slug: "buildings-refuse-to-come-back",
     type: "frontend",
     title: "When Buildings Refuse to Come Back",
     subTitle:

@@ -10,6 +10,6 @@ import { NewMemberOnTheMap } from "@/components/work-detail/bodies/NewMemberOnTh
 export const workDetailBodies: Record<TCaseStudySlug, ComponentType> = {
   "data-layer-new-entity": DataLayerNewEntity,
   "new-member-on-the-map": NewMemberOnTheMap,
-  "buildings-refuse-to-fade": BuildingsRefuseToComeBack,
+  "buildings-refuse-to-come-back": BuildingsRefuseToComeBack,
   "thats-a-wrap": ThatsAWrap,
 };

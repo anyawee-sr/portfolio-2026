@@ -10,7 +10,7 @@ Accepted
 
 - `data-layer-new-entity` — การออกแบบ schema สำหรับ entity ใหม่
 - `new-member-on-the-map` — interaction บนแผนที่
-- `buildings-refuse-to-fade` — บั๊ก fade ของโมเดล 3D ที่ทำงานไม่สม่ำเสมอ
+- `buildings-refuse-to-come-back` — บั๊ก fade ของโมเดล 3D ที่ทำงานไม่สม่ำเสมอ
 
 ทั้ง 3 เรื่องเป็น engineering war-story คนละแบบกันจริง
 
@@ -36,14 +36,14 @@ blocks: { heading: string; parts: (ProsePart | CodePart | ImagesPart)[] }[]
 
 ```ts
 // src/components/work-detail/bodies/index.ts
-import { BuildingsRefuseToFade } from "./BuildingsRefuseToFade";
+import { BuildingsRefuseToComeBack } from "./BuildingsRefuseToComeBack";
 import { DataLayerNewEntity } from "./DataLayerNewEntity";
 import { NewMemberOnTheMap } from "./NewMemberOnTheMap";
 
 export const workDetailBodies = {
   "data-layer-new-entity": DataLayerNewEntity,
   "new-member-on-the-map": NewMemberOnTheMap,
-  "buildings-refuse-to-fade": BuildingsRefuseToFade,
+  "buildings-refuse-to-come-back": BuildingsRefuseToComeBack,
 };
 ```
 
