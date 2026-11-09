@@ -139,7 +139,7 @@ export function AboutMe() {
           <div className="absolute right-6 bottom-12 hidden md:block">
             <Image
               src="/images/about-me-tldr/stamp-qr-resume.webp"
-              alt="QR code — scan to open my full resume on Google Drive"
+              alt="QR code — scan to open my full resume (PDF)"
               width={300}
               height={300}
               loading="lazy"
