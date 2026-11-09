@@ -16,7 +16,7 @@ export function CaseStudyCard({ study, className }: ICaseStudyCardProps) {
   return (
     <article
       className={cn(
-        "relative flex max-h-112.5 w-64 flex-col rounded-lg bg-surface-card p-5 shadow-xl transition-transform duration-200 hover:-translate-y-2 has-[a:focus-visible]:outline-2 has-[a:focus-visible]:outline-offset-2 has-[a:focus-visible]:outline-brand",
+        "relative flex max-h-112.5 w-64 flex-col rounded-lg border border-text-secondary/40 bg-surface-card p-5 shadow-xl transition-transform duration-200 hover:-translate-y-2 has-[a:focus-visible]:outline-2 has-[a:focus-visible]:outline-offset-2 has-[a:focus-visible]:outline-brand",
         className,
       )}
     >
