@@ -20,7 +20,7 @@ const archive: Link[] = [
   },
 ];
 
-export function EditingTaughtMeTiming() {
+export function ThatsAWrap() {
   return (
     <>
       <WorkSection heading="Overview">

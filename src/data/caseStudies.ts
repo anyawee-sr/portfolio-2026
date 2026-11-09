@@ -41,7 +41,7 @@ export const caseStudies = [
     imageAlt: "",
   },
   {
-    slug: "editing-taught-me-timing",
+    slug: "thats-a-wrap",
     type: "editor",
     title: "That's a Wrap",
     subTitle:

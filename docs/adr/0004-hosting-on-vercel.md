@@ -49,7 +49,7 @@ static ล้วน ไม่มี server runtime ที่พฤติกร�
 
 ### ทำไมเก็บ Vercel project เดิมไว้ ไม่ทับ
 
-`src/components/work-detail/bodies/EditingTaughtMeTiming.tsx:14` มีลิงก์ไป
+`src/components/work-detail/bodies/ThatsAWrap.tsx:14` มีลิงก์ไป
 `https://portfolio-rho-ten-15.vercel.app/` เป็น archive item ชื่อ "Web portfolio" ของพอร์ต
 เวอร์ชันก่อนหน้า — ถ้าทับ project เดิมด้วยการ deploy ใหม่ ลิงก์ archive นี้จะกลายเป็นลิงก์วนกลับมา
 หาเว็บตัวเองแทนที่จะเป็นของเก่าตามที่ตั้งใจ จึงสร้าง Vercel project ใหม่แยกจาก repo
@@ -77,7 +77,7 @@ custom domain, และไม่ pin Node version ในรอบนี้
 - (+) ไม่ต้องเปลี่ยนสถาปัตยกรรมโค้ดเลยเพื่อ deploy — SSG + `next/image` optimizer ทำงานได้ตรงๆ
   บน Vercel โดยไม่ต้องปิดฟีเจอร์ไหนทิ้งเหมือนถ้าเลือก static export
 - (+) `*.vercel.app` ที่ deploy รอบแรกจะไม่ถูก search engine เก็บไว้แข่งกับโดเมนจริงในอนาคต
-- (+) ลิงก์ archive เก่าใน `EditingTaughtMeTiming.tsx` ยังใช้งานได้ตามเดิม ไม่กลายเป็นลิงก์วนเข้าตัวเอง
+- (+) ลิงก์ archive เก่าใน `ThatsAWrap.tsx` ยังใช้งานได้ตามเดิม ไม่กลายเป็นลิงก์วนเข้าตัวเอง
 - (-) ~~build บน Vercel รันด้วย Node เวอร์ชันที่ไม่ตรงกับเครื่อง dev เสมอไป (22.x vs 20.19.5
   ในเครื่อง)~~ **แก้แล้ว 2026-08-13** — local อัปเป็น 24.x + ตั้ง `engines` ตรงกับ Vercel แล้ว
   (ดู Update ด้านบน)
