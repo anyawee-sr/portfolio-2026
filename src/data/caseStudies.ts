@@ -43,9 +43,9 @@ export const caseStudies = [
   {
     slug: "editing-taught-me-timing",
     type: "editor",
-    title: "What Editing Taught Me About Timing",
+    title: "That's a Wrap",
     subTitle:
-      "Three years of YouTuber vlogs taught me timing — turns out UI runs on the same instinct.",
+      "Three years of YouTube vlogs. I lived the dream, then went to explore code.",
     imageId: "case-04",
     imageAlt: "",
   },
