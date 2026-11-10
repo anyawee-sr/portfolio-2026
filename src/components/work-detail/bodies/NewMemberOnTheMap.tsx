@@ -1,7 +1,9 @@
 import { WorkCode } from "@/components/work-detail/WorkCode";
+import { WorkImage } from "@/components/work-detail/WorkImage";
 import { WorkLink } from "@/components/work-detail/WorkLink";
 import { WorkText } from "@/components/work-detail/WorkText";
 import { WorkSection } from "@/components/work-detail/WorkSection";
+import { WorkVideo } from "@/components/work-detail/WorkVideo";
 
 export function NewMemberOnTheMap() {
   return (
@@ -18,7 +20,19 @@ export function NewMemberOnTheMap() {
         <WorkText
           paragraphs={[
             "Every section starts out backstage and only steps into the light when highlighted — whether the user taps it right on the map, or searches for it and selects it.",
-
+          ]}
+        />
+        <WorkVideo
+          src="/videos/work/new-member-on-the-map/section-highlight-on-tap.mp4"
+          poster="/images/work/new-member-on-the-map/section-highlight-on-tap-poster.webp"
+          label="Tapping an empty spot in a parking lot on the map: a hidden section lights up with a red outline and its detail sheet slides up."
+          width={592}
+          height={832}
+          caption="Tap the map, and the section steps out."
+          className="mx-auto max-w-sm"
+        />
+        <WorkText
+          paragraphs={[
             "Along the way, a couple of unexpected freebies turned up — a little bug and a typo, both hiding in the code: first, a stale-opacity reset using .find, which only ever reset one object, when there could actually be more — swapped in .filter and done.",
 
             "Second, a copy-paste typo in the highlight controller's function name itself. These two bombs had been buried there for ages without anyone knowing — just tiny things, but hey, cleaner code always feels nice.",
@@ -69,6 +83,27 @@ function buildSectionMarker(section: Section) {
             "A section now hits every beat the way it should: lying low until its cue, stepping out through the same highlight mechanism the rest of the platform uses, running on its own renderer, and rocking a look of its own — icon marker or logo card, depending on render type.",
           ]}
         />
+        <div className="mx-auto grid w-full max-w-135 grid-cols-1 gap-6 px-5 pt-5 md:max-w-none md:grid-cols-2 md:px-0">
+          <WorkImage
+            src="/images/work/new-member-on-the-map/section-hidden-by-default.webp"
+            alt="Mall floor plan on mobile with an empty parking lot — the section there is hidden."
+            width={510}
+            height={718}
+            label="section hidden by default"
+            tag={{ label: "Default", side: "left" }}
+            caption="Default: the section stays hidden, leaving only the parking lot."
+          />
+          <WorkImage
+            src="/images/work/new-member-on-the-map/section-highlighted-active.webp"
+            alt="The same parking lot with the section highlighted in a red outline and its detail sheet open, showing section-1 (R)."
+            width={510}
+            height={718}
+            label="section highlighted"
+            rotation="rotate-1"
+            tag={{ label: "Active", side: "right" }}
+            caption="Active: shown when the user selects the section or its marker."
+          />
+        </div>
       </WorkSection>
     </>
   );
