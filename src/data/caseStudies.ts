@@ -10,6 +10,8 @@ export interface ICaseStudy {
   title: string;
   subTitle: string;
   imageId: string;
+  /** Card cover under public/images/work/<slug>/ — omit to keep the placeholder box. */
+  imageSrc?: string;
   imageAlt: string;
 }
 
@@ -38,7 +40,9 @@ export const caseStudies = [
     subTitle:
       "A 3D building model was supposed to fade on zoom, revealing the floor plan inside — but zooming back out left it stuck see-through.",
     imageId: "case-03",
-    imageAlt: "",
+    imageSrc: "/images/work/buildings-refuse-to-come-back/cover.webp",
+    imageAlt:
+      "Isometric 3D model of a city block's high-rise towers, rendered solid over a pale street map.",
   },
   {
     slug: "thats-a-wrap",

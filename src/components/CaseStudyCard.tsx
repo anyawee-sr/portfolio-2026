@@ -33,11 +33,12 @@ export function CaseStudyCard({ study, className }: ICaseStudyCardProps) {
         {study.subTitle}
       </p>
       <ImagePlaceholder
+        src={study.imageSrc}
         alt={study.imageAlt}
         width={216}
         height={151}
         label={`illustration ${study.slug}`}
-        className="mt-auto w-full"
+        className="mt-auto w-full rounded-sm border border-dashed border-text-secondary/40"
       />
     </article>
   );
