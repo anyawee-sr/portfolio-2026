@@ -45,13 +45,15 @@ export const caseStudies = [
       "Isometric 3D model of a city block's high-rise towers, rendered solid over a pale street map.",
   },
   {
-    slug: "thats-a-wrap",
+    slug: "thats-a-wrap-on-my-editing-era",
     type: "editor",
     title: "That's a Wrap on My Editing Era",
     subTitle:
       "Three years of YouTube vlogs. I\u00A0lived the dream, then went to explore code.",
     imageId: "case-04",
-    imageAlt: "",
+    imageSrc: "/images/work/thats-a-wrap-on-my-editing-era/cover.webp",
+    imageAlt:
+      "Red scissors snipping a blue film strip in two, over a pale grid with pink starbursts.",
   },
 ] as const satisfies readonly ICaseStudy[];
 

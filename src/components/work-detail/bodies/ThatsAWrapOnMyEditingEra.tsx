@@ -19,7 +19,7 @@ const archive: Link[] = [
   },
 ];
 
-export function ThatsAWrap() {
+export function ThatsAWrapOnMyEditingEra() {
   return (
     <>
       <WorkSection heading="Overview">
