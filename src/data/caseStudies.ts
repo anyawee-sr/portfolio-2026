@@ -43,7 +43,7 @@ export const caseStudies = [
   {
     slug: "thats-a-wrap",
     type: "editor",
-    title: "That's a Wrap",
+    title: "That's a Wrap on My Editing Era",
     subTitle:
       "Three years of YouTube vlogs. I\u00A0lived the dream, then went to explore code.",
     imageId: "case-04",
