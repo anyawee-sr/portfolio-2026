@@ -31,7 +31,9 @@ export const caseStudies = [
     subTitle:
       "This new entity needed a real life on the map — hidden until its moment, surfacing on highlight, clickable only when the venue allowed.",
     imageId: "case-02",
-    imageAlt: "",
+    imageSrc: "/images/work/new-member-on-the-map/cover.webp",
+    imageAlt:
+      "Isometric parking lot with one section outlined in red and a blue parking pin hovering above it.",
   },
   {
     slug: "buildings-refuse-to-come-back",
