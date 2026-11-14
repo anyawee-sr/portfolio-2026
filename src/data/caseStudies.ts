@@ -22,7 +22,9 @@ export const caseStudies = [
     title: "Designing the Data Layer for a New Entity",
     subTitle: "A new point-of-interest type didn't fit any existing schema.",
     imageId: "case-01",
-    imageAlt: "",
+    imageSrc: "/images/work/data-layer-new-entity/cover.webp",
+    imageAlt:
+      "Blue database cylinder beside a browser window showing a data table with one highlighted row, over a peach dotted backdrop with yellow starbursts.",
   },
   {
     slug: "new-member-on-the-map",
