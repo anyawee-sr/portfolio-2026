@@ -1,3 +1,4 @@
+import { trackAttrs } from "@/lib/analytics";
 import { cn } from "@/lib/cn";
 
 export interface IWorkVideoProps {
@@ -10,6 +11,8 @@ export interface IWorkVideoProps {
   height: number;
   caption?: string;
   className?: string;
+  /** Case-study slug, reported with the `video_play` event. */
+  slug: string;
 }
 
 /**
@@ -25,6 +28,7 @@ export function WorkVideo({
   height,
   caption,
   className,
+  slug,
 }: IWorkVideoProps) {
   return (
     <figure className={cn("rounded-lg bg-white p-4 shadow-2xl", className)}>
@@ -38,6 +42,7 @@ export function WorkVideo({
         playsInline
         preload="metadata"
         className="w-full rounded-sm"
+        {...trackAttrs("video_play", { slug })}
       />
       {caption ? (
         <figcaption className="type-caption mt-2 px-1 pb-1 text-text-secondary">

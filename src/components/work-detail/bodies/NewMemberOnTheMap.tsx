@@ -30,6 +30,7 @@ export function NewMemberOnTheMap() {
           height={832}
           caption="Tap the map, and the section steps out."
           className="mx-auto max-w-sm"
+          slug="new-member-on-the-map"
         />
         <WorkText
           paragraphs={[

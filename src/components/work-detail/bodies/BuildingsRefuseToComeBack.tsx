@@ -46,6 +46,7 @@ export function BuildingsRefuseToComeBack() {
           height={1736}
           caption="Before the fix: zooming out, the buildings stay see-through."
           className="mx-auto max-w-sm"
+          slug="buildings-refuse-to-come-back"
         />
       </WorkSection>
 
@@ -165,6 +166,7 @@ export function BuildingsRefuseToComeBack() {
           height={1730}
           caption="After the fix: zooming out, the buildings turn solid again."
           className="mx-auto max-w-sm"
+          slug="buildings-refuse-to-come-back"
         />
         <div className="mx-auto grid w-full max-w-135 grid-cols-1 gap-6 px-5 pt-5 md:max-w-none md:grid-cols-2 md:px-0">
           <WorkImage
