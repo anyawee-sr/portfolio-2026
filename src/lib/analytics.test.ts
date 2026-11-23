@@ -78,6 +78,18 @@ describe("track", () => {
     });
   });
 
+  it("passes onSent to GA as event_callback", () => {
+    window.gtag = vi.fn();
+    const onSent = vi.fn();
+
+    track("contact_click", { location: "footer" }, { onSent });
+
+    expect(window.gtag).toHaveBeenCalledWith("event", "contact_click", {
+      location: "footer",
+      event_callback: onSent,
+    });
+  });
+
   it("does nothing when GA isn't loaded", () => {
     expect(() => track("contact_click", { location: "footer" })).not.toThrow();
   });

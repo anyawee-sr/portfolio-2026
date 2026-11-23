@@ -60,12 +60,21 @@ export function readTrackAttrs(element: Element) {
   return { event: event as TrackEventName, params };
 }
 
+export interface ITrackOptions {
+  /** Called once GA has sent the hit — never called when GA isn't loaded. */
+  onSent?: () => void;
+}
+
 /** Sends an event to GA4. No-op when GA isn't loaded (env unset, blocked). */
 export function track<E extends TrackEventName>(
   event: E,
   params: ITrackEvents[E],
+  options: ITrackOptions = {},
 ) {
-  window.gtag?.("event", event, params);
+  window.gtag?.("event", event, {
+    ...params,
+    ...(options.onSent ? { event_callback: options.onSent } : {}),
+  });
 }
 
 /**
