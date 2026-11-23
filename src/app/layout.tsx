@@ -5,9 +5,13 @@ import { siteUrl } from "@/data/site";
 import { EyeTracker } from "@/components/EyeTracker";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { AnalyticsListener } from "@/components/AnalyticsListener";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 const title = "Anyawee Sr. — Frontend Engineer";
 const description = "Portfolio of Anyawee Sr., a frontend engineer.";
+
+const gaId = process.env.NEXT_PUBLIC_GA_ID;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -40,6 +44,15 @@ export default function RootLayout({
         {children}
         <Footer />
       </body>
+      {gaId ? (
+        <>
+          <GoogleAnalytics
+            gaId={gaId}
+            debugMode={process.env.NODE_ENV === "development"}
+          />
+          <AnalyticsListener />
+        </>
+      ) : null}
     </html>
   );
 }

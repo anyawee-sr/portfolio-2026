@@ -5,6 +5,7 @@ import { workDetailPath } from "@/data/routes";
 
 import { ArrowLeftIcon } from "@/components/ui/ArrowLeftIcon";
 import { ArrowRightIcon } from "@/components/ui/ArrowRightIcon";
+import { trackAttrs } from "@/lib/analytics";
 
 export interface IWorkDetailNavProps {
   prev: ICaseStudy | undefined;
@@ -19,6 +20,10 @@ export function WorkDetailNav({ prev, next }: IWorkDetailNavProps) {
           <NextLink
             href={workDetailPath(prev.slug)}
             className="group flex min-h-11 min-w-0 w-full flex-col justify-center gap-1 sm:max-w-1/2"
+            {...trackAttrs("case_study_open", {
+              slug: prev.slug,
+              location: "detail_nav",
+            })}
           >
             <span className="type-caption inline-flex items-center gap-1 text-text-secondary">
               <ArrowLeftIcon /> PREVIOUS
@@ -33,6 +38,10 @@ export function WorkDetailNav({ prev, next }: IWorkDetailNavProps) {
           <NextLink
             href={workDetailPath(next.slug)}
             className="group flex min-h-11 min-w-0 w-full flex-col items-end justify-center gap-1 text-right ml-auto sm:max-w-1/2"
+            {...trackAttrs("case_study_open", {
+              slug: next.slug,
+              location: "detail_nav",
+            })}
           >
             <span className="type-caption inline-flex items-center gap-1 text-text-secondary">
               NEXT <ArrowRightIcon />

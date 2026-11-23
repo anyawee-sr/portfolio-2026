@@ -6,6 +6,7 @@ import { cn } from "@/lib/cn";
 
 import { CaseStudyChip } from "@/components/ui/CaseStudyChip";
 import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder";
+import { trackAttrs } from "@/lib/analytics";
 
 export interface ICaseStudyCardProps {
   study: ICaseStudy;
@@ -24,6 +25,10 @@ export function CaseStudyCard({ study, className }: ICaseStudyCardProps) {
       <h3 className="type-h3 line-clamp-4 text-center text-brand">
         <NextLink
           href={workDetailPath(study.slug)}
+          {...trackAttrs("case_study_open", {
+            slug: study.slug,
+            location: "work_grid",
+          })}
           className="after:absolute after:inset-0 focus-visible:outline-none"
         >
           {study.title}

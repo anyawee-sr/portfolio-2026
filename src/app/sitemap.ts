@@ -19,7 +19,11 @@ export const dynamic = "force-static";
  * build-time `new Date()` จะหลอก crawler ว่าทุกหน้าเปลี่ยนทุกครั้งที่ deploy
  */
 export default function sitemap(): MetadataRoute.Sitemap {
-  const paths = ["/", ...caseStudies.map((study) => `/work/${study.slug}/`)];
+  const paths = [
+    "/",
+    ...caseStudies.map((study) => `/work/${study.slug}/`),
+    "/privacy/",
+  ];
 
   return paths.map((path) => ({
     url: new URL(path, siteUrl).href,

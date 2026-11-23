@@ -19,6 +19,7 @@ export const routes = {
   work: "/#work",
   aboutMe: "/#about-me",
   workAll: "/work",
+  privacy: "/privacy",
 } as const;
 
 /**

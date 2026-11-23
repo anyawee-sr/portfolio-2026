@@ -5,6 +5,7 @@ import { routes } from "@/data/routes";
 
 import { BackToTop } from "@/components/BackToTop";
 import { Eye } from "@/components/ui/Eye";
+import { trackAttrs } from "@/lib/analytics";
 
 export function Footer() {
   return (
@@ -71,6 +72,7 @@ export function Footer() {
                     <a
                       href={`mailto:${link.email}`}
                       className="type-body-m text-surface-base uppercase hover:decoration-wavy hover:underline"
+                      {...trackAttrs("contact_click", { location: "footer" })}
                     >
                       {link.label}
                     </a>

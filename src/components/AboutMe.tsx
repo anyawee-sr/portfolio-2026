@@ -3,6 +3,7 @@ import Image from "next/image";
 import { aboutMe } from "@/data/aboutMe";
 import { ArrowRightIcon } from "@/components/ui/ArrowRightIcon";
 import { CheckBox } from "@/components/ui/CheckBox";
+import { trackAttrs } from "@/lib/analytics";
 
 export function AboutMe() {
   return (
@@ -67,6 +68,9 @@ export function AboutMe() {
                       href={row.href}
                       {...(row.external
                         ? { target: "_blank", rel: "noopener noreferrer" }
+                        : {})}
+                      {...(row.href.startsWith("mailto:")
+                        ? trackAttrs("contact_click", { location: "about_me" })
                         : {})}
                       className="type-body-m font-typewriter inline-flex min-h-11 min-w-0 items-center break-all text-text-primary md:min-h-0"
                     >

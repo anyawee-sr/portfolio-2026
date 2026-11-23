@@ -14,6 +14,9 @@ const dirname =
 
 // More info at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon
 export default defineConfig({
+  resolve: {
+    tsconfigPaths: true,
+  },
   server: {
     watch: {
       // Build output, not source — .next/dev/cache alone can hold ~470k files,
@@ -38,6 +41,14 @@ export default defineConfig({
             provider: playwright({}),
             instances: [{ browser: "chromium" }],
           },
+        },
+      },
+      {
+        extends: true,
+        test: {
+          name: "unit",
+          environment: "jsdom",
+          include: ["src/**/*.test.ts"],
         },
       },
     ],
