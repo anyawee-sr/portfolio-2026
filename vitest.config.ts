@@ -14,6 +14,13 @@ const dirname =
 
 // More info at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon
 export default defineConfig({
+  server: {
+    watch: {
+      // Build output, not source — .next/dev/cache alone can hold ~470k files,
+      // and watching it blocks the Vite server past the browser connect timeout.
+      ignored: ["**/.next/**", "**/out/**", "**/storybook-static/**"],
+    },
+  },
   test: {
     projects: [
       {
