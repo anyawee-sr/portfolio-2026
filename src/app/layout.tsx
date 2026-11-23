@@ -5,6 +5,7 @@ import { siteUrl } from "@/data/site";
 import { EyeTracker } from "@/components/EyeTracker";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { AnalyticsListener } from "@/components/AnalyticsListener";
 import { GoogleAnalytics } from "@next/third-parties/google";
 
 const title = "Anyawee Sr. — Frontend Engineer";
@@ -44,10 +45,13 @@ export default function RootLayout({
         <Footer />
       </body>
       {gaId ? (
-        <GoogleAnalytics
-          gaId={gaId}
-          debugMode={process.env.NODE_ENV === "development"}
-        />
+        <>
+          <GoogleAnalytics
+            gaId={gaId}
+            debugMode={process.env.NODE_ENV === "development"}
+          />
+          <AnalyticsListener />
+        </>
       ) : null}
     </html>
   );
