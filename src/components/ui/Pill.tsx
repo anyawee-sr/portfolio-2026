@@ -16,9 +16,10 @@ export interface IPillProps {
   /** Decorative trailing icon, e.g. `<ArrowRightIcon />` — always forced aria-hidden. */
   arrow?: ReactElement<SVGProps<SVGSVGElement>>;
   className?: string;
+  [dataAttr: `data-${string}`]: string;
 }
 
-export function Pill({ link, arrow, className }: IPillProps) {
+export function Pill({ link, arrow, className, ...dataAttr }: IPillProps) {
   const content = (
     <>
       {link.label}
@@ -35,7 +36,7 @@ export function Pill({ link, arrow, className }: IPillProps) {
 
   if (link.type === "internal") {
     return (
-      <NextLink href={routes[link.to]} className={base}>
+      <NextLink href={routes[link.to]} className={base} {...dataAttr}>
         {content}
       </NextLink>
     );
@@ -43,7 +44,7 @@ export function Pill({ link, arrow, className }: IPillProps) {
 
   if (link.type === "email") {
     return (
-      <a href={`mailto:${link.email}`} className={base}>
+      <a href={`mailto:${link.email}`} className={base} {...dataAttr}>
         {content}
       </a>
     );
@@ -55,6 +56,7 @@ export function Pill({ link, arrow, className }: IPillProps) {
       target="_blank"
       rel="noopener noreferrer"
       className={base}
+      {...dataAttr}
     >
       {content}
     </a>
