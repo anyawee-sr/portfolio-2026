@@ -1,13 +1,13 @@
 import NextLink from "next/link";
 import type { ReactNode } from "react";
 
-export interface IWorkLinkProps {
+export interface IProseLinkProps {
   /** Internal paths start with "/" (uses next/link). Anything else is treated as an external http(s) URL. */
   href: string;
   children: ReactNode;
 }
 
-export function WorkLink({ href, children }: IWorkLinkProps) {
+export function ProseLink({ href, children }: IProseLinkProps) {
   const className =
     "text-brand underline underline-offset-2 hover:text-brand-hover";
 

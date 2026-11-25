@@ -1,23 +1,23 @@
 import { WorkCode } from "@/components/work-detail/WorkCode";
 import { WorkImage } from "@/components/work-detail/WorkImage";
-import { WorkList } from "@/components/work-detail/WorkList";
-import { WorkText } from "@/components/work-detail/WorkText";
-import { WorkSection } from "@/components/work-detail/WorkSection";
+import { ProseList } from "@/components/prose/ProseList";
+import { ProseText } from "@/components/prose/ProseText";
+import { ProseSection } from "@/components/prose/ProseSection";
 import { WorkVideo } from "@/components/work-detail/WorkVideo";
 
 export function BuildingsRefuseToComeBack() {
   return (
     <>
-      <WorkSection heading="Overview">
-        <WorkText
+      <ProseSection heading="Overview">
+        <ProseText
           paragraphs={[
             "So there's this 3D building model that's supposed to fade away when you zoom in close, letting you see the floor plan inside, then turn solid again when you zoom back out. Cool idea. Except the way back had a mind of its own — sometimes the building came back, sometimes nope.",
           ]}
         />
-      </WorkSection>
+      </ProseSection>
 
-      <WorkSection heading="The problem">
-        <WorkText
+      <ProseSection heading="The problem">
+        <ProseText
           paragraphs={[
             "The setup: below zoom 17.5, building stays solid. Zoom past that toward 18, and it fades out so you can peek at the floor plan inside.",
 
@@ -26,7 +26,7 @@ export function BuildingsRefuseToComeBack() {
             "But here's the fun part — it only broke one way:",
           ]}
         />
-        <WorkList
+        <ProseList
           items={[
             {
               term: "Zooming in",
@@ -48,10 +48,10 @@ export function BuildingsRefuseToComeBack() {
           className="mx-auto max-w-sm"
           slug="buildings-refuse-to-come-back"
         />
-      </WorkSection>
+      </ProseSection>
 
-      <WorkSection heading="Root cause">
-        <WorkText
+      <ProseSection heading="Root cause">
+        <ProseText
           paragraphs={[
             "The cause: maptalks, the map library, and how it handles stops. I'd set the opacity up declaratively — basically telling the library 'make this number follow the zoom':",
           ]}
@@ -69,7 +69,7 @@ export function BuildingsRefuseToComeBack() {
         />
 
         {/* TODO: maybe remove technical content from this paragraph */}
-        <WorkText
+        <ProseText
           paragraphs={[
             "Sounds like it should just work, right? Well.",
 
@@ -84,7 +84,7 @@ export function BuildingsRefuseToComeBack() {
             "And that explains the one-way weirdness perfectly:",
           ]}
         />
-        <WorkList
+        <ProseList
           items={[
             {
               term: "Created at low zoom, then zooming in",
@@ -96,10 +96,10 @@ export function BuildingsRefuseToComeBack() {
             },
           ]}
         />
-      </WorkSection>
+      </ProseSection>
 
-      <WorkSection heading="The fix">
-        <WorkText
+      <ProseSection heading="The fix">
+        <ProseText
           paragraphs={[
             "Fine. If the library won't recalculate, I'll do it myself.",
 
@@ -117,23 +117,23 @@ export function BuildingsRefuseToComeBack() {
   marker.setUniform('polygonOpacity', opacity); // dirty → re-render
 }`}
         />
-      </WorkSection>
+      </ProseSection>
 
-      <WorkSection heading="Free math lesson">
-        <WorkText
+      <ProseSection heading="Free math lesson">
+        <ProseText
           paragraphs={[
             "The bug wasn't the only thing I walked away with — this task also came with a neat little math trick: turning a zoom level into an opacity, in one line. Here's the fade formula:",
           ]}
         />
         <WorkCode code={`_.clamp((18 - zoom) / (18 - 17.5), 0, 1)`} />
-        <WorkText
+        <ProseText
           paragraphs={[
             "At first glance it looks like a formula that fell out of the sky, but it's really just linear interpolation:",
           ]}
         />
         <WorkCode code={`(hi - zoom) / (hi - lo)`} />
-        <WorkText paragraphs={["Easy way to remember it:"]} />
-        <WorkList
+        <ProseText paragraphs={["Easy way to remember it:"]} />
+        <ProseList
           items={[
             {
               term: "Bottom",
@@ -145,15 +145,15 @@ export function BuildingsRefuseToComeBack() {
             },
           ]}
         />
-        <WorkText
+        <ProseText
           paragraphs={[
             "And clamp just keeps the value from wandering outside 0 – 1.",
           ]}
         />
-      </WorkSection>
+      </ProseSection>
 
-      <WorkSection heading="Result">
-        <WorkText
+      <ProseSection heading="Result">
+        <ProseText
           paragraphs={[
             "Every time the zoom settles, opacity gets recalculated from the actual current zoom. Zoom in, zoom out, doesn't matter — the building fades on the way in and turns solid again on the way out, and the floor plan shows up right on cue.",
           ]}
@@ -189,7 +189,7 @@ export function BuildingsRefuseToComeBack() {
             caption="Fully solid."
           />
         </div>
-      </WorkSection>
+      </ProseSection>
     </>
   );
 }
