@@ -1,3 +1,5 @@
+import type { ReactNode } from "react";
+
 import { email } from "@/data/links";
 import type { Link } from "@/data/types";
 
@@ -9,7 +11,7 @@ import type { Link } from "@/data/types";
 export interface IPrivacySection {
   id: string;
   heading: string;
-  paragraphs: string[];
+  paragraphs: ReactNode[];
   list?: string[];
   links?: Link[];
 }
@@ -28,20 +30,21 @@ export const privacy: IPrivacyContent = {
   description:
     "What this portfolio measures with Google Analytics, and how to opt out.",
   heading: "Privacy",
-  updated: "Last updated: November 23, 2026",
+  updated: "Last updated: November 25, 2026",
   intro:
     "This is a personal portfolio. It uses Google Analytics 4 to count visits and see which work people read — that's the only analytics on the site.",
   sections: [
     {
       id: "collect",
       heading: "What this site collects",
-      paragraphs: ["Google Analytics records anonymous usage data, including:"],
+      paragraphs: ["Google Analytics records usage data, including:"],
       list: [
         "Pages you visit and how far you scroll",
         "Approximate location (country or city) — Google Analytics doesn't store IP addresses",
         "Device type, browser, and screen size",
         "The site that linked you here",
         "Clicks on email links, case studies, outbound links, and the resume PDF, and when you play a video",
+        "When you open the resume through the QR code, and which QR code it was",
       ],
     },
     {
@@ -55,13 +58,17 @@ export const privacy: IPrivacyContent = {
       id: "cookies",
       heading: "Cookies",
       paragraphs: [
-        "Google Analytics sets two first-party cookies, _ga and _ga_<ID>, to tell visits apart. They expire after up to 2 years.",
+        <>
+          Google Analytics sets two first-party cookies, <code>_ga</code> and{" "}
+          <code>{"_ga_<ID>"}</code>, to tell visits apart. They expire after up
+          to 2 years.
+        </>,
         "There are no advertising cookies. Google Signals and ad personalization are turned off.",
       ],
     },
     {
       id: "why",
-      heading: "Why",
+      heading: "Why?",
       paragraphs: [
         "To learn which work people read and whether the site is easy to use. There are no ads, and the data is never sold.",
       ],
@@ -78,7 +85,11 @@ export const privacy: IPrivacyContent = {
       heading: "Third parties",
       paragraphs: [
         "Google processes the analytics data on this site's behalf.",
-        "One case study embeds a YouTube video in privacy-enhanced mode (youtube-nocookie.com), which doesn't store information about you unless you play the video.",
+        <>
+          One case study embeds a YouTube video using privacy-enhanced mode (
+          <code>youtube-nocookie.com</code>). Loading that page connects your
+          browser to YouTube.
+        </>,
       ],
       links: [
         {

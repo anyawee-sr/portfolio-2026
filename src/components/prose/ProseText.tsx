@@ -1,11 +1,11 @@
 import type { ReactNode } from "react";
 
 // TODO: will refactor for stronger type safety in the future
-export interface IWorkTextProps {
+export interface IProseTextProps {
   paragraphs: readonly ReactNode[];
 }
 
-export function WorkText({ paragraphs }: IWorkTextProps) {
+export function ProseText({ paragraphs }: IProseTextProps) {
   return (
     <div className="flex flex-col gap-4">
       {paragraphs.map((paragraph, i) => (

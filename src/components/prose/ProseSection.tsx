@@ -1,13 +1,13 @@
 import type { ReactNode } from "react";
 import { slugify } from "@/lib/slugify";
 
-export interface IWorkSectionProps {
+export interface IProseSectionProps {
   heading: string;
   children: ReactNode;
 }
 
-export function WorkSection({ heading, children }: IWorkSectionProps) {
-  const headingId = `work-section-${slugify(heading)}`;
+export function ProseSection({ heading, children }: IProseSectionProps) {
+  const headingId = `section-${slugify(heading)}`;
 
   return (
     <section

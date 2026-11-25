@@ -1,15 +1,15 @@
-export interface IWorkListTerm {
+export interface IProseListTerm {
   term: string;
   text: string;
 }
 
-export type TWorkListItem = string | IWorkListTerm;
+export type TProseListItem = string | IProseListTerm;
 
-export interface IWorkListProps {
-  items: readonly TWorkListItem[];
+export interface IProseListProps {
+  items: readonly TProseListItem[];
 }
 
-export function WorkList({ items }: IWorkListProps) {
+export function ProseList({ items }: IProseListProps) {
   return (
     <ul className="flex flex-col gap-2 ps-5">
       {items.map((item, i) => (

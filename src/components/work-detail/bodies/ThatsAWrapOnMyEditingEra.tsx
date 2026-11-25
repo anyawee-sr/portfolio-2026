@@ -3,8 +3,8 @@ import type { Link } from "@/data/types";
 import { Pill } from "@/components/ui/Pill";
 import { ArrowRightIcon } from "@/components/ui/ArrowRightIcon";
 import { WorkEmbed } from "@/components/work-detail/WorkEmbed";
-import { WorkText } from "@/components/work-detail/WorkText";
-import { WorkSection } from "@/components/work-detail/WorkSection";
+import { ProseText } from "@/components/prose/ProseText";
+import { ProseSection } from "@/components/prose/ProseSection";
 
 const archive: Link[] = [
   {
@@ -22,8 +22,8 @@ const archive: Link[] = [
 export function ThatsAWrapOnMyEditingEra() {
   return (
     <>
-      <WorkSection heading="Overview">
-        <WorkText
+      <ProseSection heading="Overview">
+        <ProseText
           paragraphs={[
             "Video editing was never a means to an end — I've loved movies, shooting footage, and telling stories since school, and editing was just where that love went first.",
 
@@ -32,10 +32,10 @@ export function ThatsAWrapOnMyEditingEra() {
             "Somewhere in there I picked up a second dream — frontend development — not because one led to the other, but because I wanted both :)",
           ]}
         />
-      </WorkSection>
+      </ProseSection>
 
-      <WorkSection heading="The craft">
-        <WorkText
+      <ProseSection heading="The craft">
+        <ProseText
           paragraphs={[
             "Editing is mostly a timing problem. Every cut is a bet on how long a viewer's attention holds before the shot needs to change — hold too long and it drags, cut too soon and nothing registers. You don't learn that from a rulebook, you learn it by scrubbing the same ten seconds a hundred times until the rhythm feels right.",
           ]}
@@ -45,15 +45,15 @@ export function ThatsAWrapOnMyEditingEra() {
           title="Video editing showreel, 2019–2022"
           caption="Showreel — 2:00"
         />
-        <WorkText
+        <ProseText
           paragraphs={[
             "This showreel is two minutes of that. Fair warning: it moves fast — ADHD editing haha. And honestly? Past-me looked pretty hyperactive.",
           ]}
         />
-      </WorkSection>
+      </ProseSection>
 
-      <WorkSection heading="The archive">
-        <WorkText
+      <ProseSection heading="The archive">
+        <ProseText
           paragraphs={[
             "The rest of that era lives in two places — a site built to walk through the cuts individually, and a PDF for anyone who'd rather flip through it than click.",
             "The web version doubles as something else, too: it's the very first thing I ever coded and shipped myself, back when I was teaching myself just enough to get a portfolio online. Still a little proud of it.",
@@ -69,7 +69,7 @@ export function ThatsAWrapOnMyEditingEra() {
             />
           ))}
         </div>
-      </WorkSection>
+      </ProseSection>
     </>
   );
 }
