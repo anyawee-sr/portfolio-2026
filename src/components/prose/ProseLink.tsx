@@ -2,7 +2,7 @@ import NextLink from "next/link";
 import type { ReactNode } from "react";
 
 export interface IProseLinkProps {
-  /** Internal paths start with "/" (uses next/link). Anything else is treated as an external http(s) URL. */
+  /** Internal paths start with "/" (uses next/link), "mailto:" stays in the same tab. Anything else is treated as an external http(s) URL. */
   href: string;
   children: ReactNode;
 }
@@ -16,6 +16,14 @@ export function ProseLink({ href, children }: IProseLinkProps) {
       <NextLink href={href} className={className}>
         {children}
       </NextLink>
+    );
+  }
+
+  if (href.startsWith("mailto:")) {
+    return (
+      <a href={href} className={className}>
+        {children}
+      </a>
     );
   }
 

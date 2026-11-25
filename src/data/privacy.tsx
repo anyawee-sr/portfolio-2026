@@ -1,3 +1,5 @@
+import type { ReactNode } from "react";
+
 import { email } from "@/data/links";
 import type { Link } from "@/data/types";
 
@@ -9,7 +11,7 @@ import type { Link } from "@/data/types";
 export interface IPrivacySection {
   id: string;
   heading: string;
-  paragraphs: string[];
+  paragraphs: ReactNode[];
   list?: string[];
   links?: Link[];
 }
@@ -56,13 +58,17 @@ export const privacy: IPrivacyContent = {
       id: "cookies",
       heading: "Cookies",
       paragraphs: [
-        "Google Analytics sets two first-party cookies, _ga and _ga_<ID>, to tell visits apart. They expire after up to 2 years.",
+        <>
+          Google Analytics sets two first-party cookies, <code>_ga</code> and{" "}
+          <code>{"_ga_<ID>"}</code>, to tell visits apart. They expire after up
+          to 2 years.
+        </>,
         "There are no advertising cookies. Google Signals and ad personalization are turned off.",
       ],
     },
     {
       id: "why",
-      heading: "Why",
+      heading: "Why?",
       paragraphs: [
         "To learn which work people read and whether the site is easy to use. There are no ads, and the data is never sold.",
       ],
@@ -79,7 +85,11 @@ export const privacy: IPrivacyContent = {
       heading: "Third parties",
       paragraphs: [
         "Google processes the analytics data on this site's behalf.",
-        "One case study embeds a YouTube video using privacy-enhanced mode (youtube-nocookie.com). Loading that page connects your browser to YouTube.",
+        <>
+          One case study embeds a YouTube video using privacy-enhanced mode (
+          <code>youtube-nocookie.com</code>). Loading that page connects your
+          browser to YouTube.
+        </>,
       ],
       links: [
         {
