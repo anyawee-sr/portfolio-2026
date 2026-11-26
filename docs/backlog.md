@@ -44,7 +44,7 @@ git เก็บประวัติให้แล้ว พอไม่เห
       ⚠️ `loading.tsx`/`error.tsx` จะ render เป็นลูกของ root layout เดียวกับที่ `not-found.tsx`
       ใช้ (Header/Footer อยู่ที่ root layout จุดเดียว ไม่มี route group แยก) จึงได้ Footer
       พร้อม `BackToTop` ติดมาด้วยเสมอ — ถ้าอยากปิด `BackToTop` แบบหน้า 404 ต้องใส่
-      `data-notfound` ให้ `<main>` ของหน้านั้นด้วย (ดู rule ใน `globals.css` ที่คุม
+      `data-no-back-to-top` ให้ `<main>` ของหน้านั้นด้วย (ดู rule ใน `globals.css` ที่คุม
       `[data-back-to-top]`) แต่ปกติหน้าพวกนี้ยัง scroll ได้จริง ไม่น่าต้องปิด
       ⚠️ `loading.tsx` จะแทบไม่โผล่ เพราะทุกหน้าเป็น SSG ที่ prerender ไว้หมดแล้ว
       (`generateStaticParams()`) — เห็นได้แค่ตอน client-side navigation ที่เน็ตช้า
