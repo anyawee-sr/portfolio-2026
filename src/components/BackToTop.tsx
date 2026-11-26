@@ -16,13 +16,12 @@ import { BubbleTail } from "@/components/ui/BubbleTail";
  * hydrates.
  *
  * The `data-back-to-top` attribute is a CSS hook, not a component
- * prop: it lets `globals.css` hide this bubble specifically on the
- * 404 page (see the rule near `NotFoundSection`'s `data-notfound`)
- * regardless of viewport height — a short screen still makes that
- * page scroll, and a scroll-height check alone would let the bubble
- * back in there. Footer can't do this with a prop instead because
+ * prop: it lets `globals.css` hide this bubble on short pages whose
+ * `<main>` has `data-no-back-to-top` (404, `/resume/`), regardless
+ * of viewport height — a short screen still makes those pages scroll,
+ * and a scroll-height check alone would let the bubble back in there. Footer can't do this with a prop instead because
  * it's rendered by the root layout (`src/app/layout.tsx`) before the
- * layout can know `children` resolved to `src/app/not-found.tsx`. */
+ * layout can know which page `children` is. */
 export function BackToTop() {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);

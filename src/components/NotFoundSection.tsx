@@ -58,7 +58,7 @@ const TAPES = [
  * sections that `page.tsx` composes, rather than being inlined into
  * the route file.
  *
- * The `<main>`'s `data-notfound` attribute is load-bearing — see the
+ * The `<main>`'s `data-no-back-to-top` attribute is load-bearing — see the
  * sibling-selector rule in `globals.css` that hides BackToTop's
  * bubble (`[data-back-to-top]`) whenever it follows this element.
  *
@@ -99,7 +99,7 @@ const TAPES = [
 export function NotFoundSection() {
   return (
     <main
-      data-notfound
+      data-no-back-to-top
       className="flex flex-1 items-center justify-center overflow-x-clip bg-surface-accent surface-dotted px-4 md:px-11"
     >
       <div className="relative z-1 w-135 shrink-0 -rotate-12 lg:w-180 lg:-rotate-6">

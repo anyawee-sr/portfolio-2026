@@ -544,15 +544,15 @@
   outline: none;
 }
 
-/* Hide the footer's "back to top?" bubble on the 404 page, however
-   short the viewport is. Footer is shared by every route through the
-   root layout, which renders <Footer/> before it can know `children`
-   resolved to `src/app/not-found.tsx` — so this can't be a component
-   prop. `<main>` (NotFoundSection.tsx) and `<footer>` (Footer.tsx)
-   always end up as DOM siblings, so a sibling selector reaches across
+/* Hide the footer's "back to top?" bubble on pages too short to
+   need it (404, /resume/), however short the viewport is. Footer is
+   shared by every route through the root layout, which renders
+   <Footer/> without knowing which page `children` is — so this can't
+   be a component prop. `<main data-no-back-to-top>` and `<footer>`
+   (Footer.tsx) always end up as DOM siblings, so a sibling selector reaches across
    that gap instead. See BackToTop.tsx / NotFoundSection.tsx doc
    comments. */
-main[data-notfound] ~ footer [data-back-to-top] {
+main[data-no-back-to-top] ~ footer [data-back-to-top] {
   display: none;
 }
 
