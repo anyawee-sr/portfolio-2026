@@ -19,7 +19,10 @@ export const metadata: Metadata = {
  */
 export default function ResumePage() {
   return (
-    <main className="flex flex-1 flex-col items-center justify-center gap-4 bg-surface-base px-4 py-24 text-center">
+    <main
+      data-no-back-to-top
+      className="flex flex-1 flex-col items-center justify-center gap-1 bg-surface-accent surface-dotted px-4 py-24 text-center"
+    >
       <ResumeRedirect />
       <h1 className="type-h2 text-text-primary">{resumeRedirect.heading}</h1>
       <p className="type-body-l text-text-secondary">
